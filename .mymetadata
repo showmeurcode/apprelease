@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="apprelease"
+  id="myeclipse.1509946608695"
+  context-root="/apprelease"
+  j2ee-spec="6.0"
+  archive="apprelease.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
