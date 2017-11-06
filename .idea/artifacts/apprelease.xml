@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="exploded-war" build-on-make="true" name="apprelease">
-    <output-path>D:/Tomcat 7.0/webapps/apprelease</output-path>
-    <root id="root">
-      <element id="dir-copy" path="$PROJECT_DIR$/WebRoot" />
-    </root>
-  </artifact>
-</component>
