@@ -13,7 +13,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<!--配置扫描controller组件把加@controller注解的注册为controller-->
-	<context:component-scan base-package="cn.supermarket.controller"/>
+	<context:component-scan base-package="cn.apprelease.controller"/>
 	<!--配置<mvc:annotation-driven>添加对注解支持（同时包括两个消息转换器处理中文和时间显示错误）-->
 	<mvc:annotation-driven>
 
@@ -72,7 +72,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/**" />
-			<bean class="cn.supermarket.interceptor.SysInterceptor"/>
+			<bean class="cn.apprelease.interceptor.SysInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
 

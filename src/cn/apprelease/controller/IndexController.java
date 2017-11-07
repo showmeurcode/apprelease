@@ -5,4 +5,5 @@ package cn.apprelease.controller;
  * 2017/11/6 18:46
  */
 public class IndexController {
+
 }
