@@ -59,7 +59,7 @@
 
                     <div class="separator">
                         <p class="change_link">新用户?
-                            <a href="#signup" class="to_register"> 现在注册</a>
+                            <a href="###" id="showregister"class="to_register"> 现在注册</a>
                         </p>
 
                         <div class="clearfix"></div>
@@ -111,6 +111,19 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#showregister").click(function () {
+            alert("抱歉！测试阶段暂不支持注册！");
+            $("#register").show();
+        })
+
+
+    })
+</script>
+
 </body>
 </html>
 
