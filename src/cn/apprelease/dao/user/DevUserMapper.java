@@ -1,4 +1,4 @@
-package cn.apprelease.dao.promotion;
+package cn.apprelease.dao.user;
 
 import cn.apprelease.pojo.DevUser;
 import org.apache.ibatis.annotations.Param;
