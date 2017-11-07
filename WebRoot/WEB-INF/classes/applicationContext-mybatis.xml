@@ -72,7 +72,7 @@
            <!-- <tx:method name="*"  propagation="REQUIRED" rollback-for="Exception"  />-->
         </tx:attributes>
     </tx:advice>
-    <!-- AOP 事务处理  -->
+    <!-- AOP 事务处理    -->
     <aop:config  proxy-target-class="true">
         <aop:pointcut expression="execution(* cn.apprelease.service..*.*(..))" id="transService"/>
         <aop:advisor pointcut-ref="transService" advice-ref="txAdvice" />
