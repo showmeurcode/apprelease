@@ -1,4 +1,4 @@
-package cn.apprelease.dao.user;
+package cn.apprelease.dao.backenduser;
 
 import cn.apprelease.pojo.BackendUser;
 import org.apache.ibatis.annotations.Param;
