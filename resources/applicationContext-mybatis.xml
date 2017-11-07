@@ -13,7 +13,7 @@
             http://www.springframework.org/schema/context/spring-context.xsd">
     <!--配置service，将加注了@service注解的实现类注册为service组件-->
 
-    <context:component-scan base-package="cn.supermarket.service"/>
+    <context:component-scan base-package="cn.apprelease.service"/>
 
 
     <!-- 1读取数据库配置文件 -->
