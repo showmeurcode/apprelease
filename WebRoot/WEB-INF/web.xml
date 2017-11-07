@@ -3,7 +3,7 @@
   <display-name>springMVC</display-name>
   <!--设置起始访问页面-->
   <welcome-file-list>
-    <welcome-file>/index.jsp</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
     <welcome-file>/WEB-INF/jsp/login.jsp</welcome-file>
   </welcome-file-list>
   <!--指定spring配置文件所在位置，并配置contextloaderlistener监听-->
@@ -54,7 +54,7 @@
     <param-value>apprelease.root</param-value>
   </context-param>
   <!--设置log4j实现（注意更改log文件输出路径和修改的rootkey对应）-->
-  <context-param>
+<!--  <context-param>
     <param-name>log4jConfigLocation</param-name>
     <param-value>classpath:log4j.properties</param-value>
   </context-param>
@@ -62,7 +62,7 @@
     <listener-class>
       org.springframework.web.util.Log4jConfigListener
     </listener-class>
-  </listener>
+  </listener>-->
 
 
 </web-app>
