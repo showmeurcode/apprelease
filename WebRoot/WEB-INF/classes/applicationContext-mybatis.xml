@@ -51,7 +51,7 @@
 
     <!--配置dao，利用MapperScannerConfigurer自动注册dao组件-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="cn.supermarket.dao" />
+        <property name="basePackage" value="cn.apprelease.dao" />
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
@@ -69,12 +69,12 @@
             <tx:method name="add*"  propagation="REQUIRED" rollback-for="Exception"  />
             <tx:method name="del*"  propagation="REQUIRED" rollback-for="Exception"  />
             <tx:method name="update*"  propagation="REQUIRED" rollback-for="Exception"  />
-            <tx:method name="*"  propagation="REQUIRED" rollback-for="Exception"  />
+           <!-- <tx:method name="*"  propagation="REQUIRED" rollback-for="Exception"  />-->
         </tx:attributes>
     </tx:advice>
-    <!-- AOP 事务处理  -->
+    <!-- AOP 事务处理    -->
     <aop:config  proxy-target-class="true">
-        <aop:pointcut expression="execution(* cn.supermarket.service..*.*(..))" id="transService"/>
+        <aop:pointcut expression="execution(* cn.apprelease.service..*.*(..))" id="transService"/>
         <aop:advisor pointcut-ref="transService" advice-ref="txAdvice" />
     </aop:config>
 
