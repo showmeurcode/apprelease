@@ -11,7 +11,7 @@ public class DevUser {
     private  int id; //主键Id
     private  String devCode; //开发者账号
     private  String devName; //开发者名称
-    private  String devPassword;  //开发者密码
+    private  String devPassword;   //开发者密码
     private  String devEmail; //开发者电子邮箱
     private  String devInfo; //开发者简介
     private  int createdBy; //创建者

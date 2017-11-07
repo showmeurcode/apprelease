@@ -11,7 +11,7 @@ public class BackendUser {
 
     private int id;//主键id
     private String userCode; //用户编码
-    private String userName;  //用户名称
+    private String userName;   //用户名称
     private String userType; //用户角色类型
     private int createdBy; //创建者
     private Date creationDate; //创建时间
