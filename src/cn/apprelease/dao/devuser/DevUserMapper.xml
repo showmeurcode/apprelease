@@ -47,10 +47,10 @@
 
     </select>
 
-    <select id="userLogin" parameterType="DevUser">
+    <!-- 确认用户登录-->
+    <select id="userLogin" parameterType="BackendUser" resultMap="">
 
-
-
+        SELECT * FROM  dev_user WHERE devName=#{devName} AND devPassword=#{devPassword}
 
     </select>
 
