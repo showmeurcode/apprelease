@@ -116,11 +116,11 @@ public class DevUserServiceImpl implements DevUserService {
     }
 
     @Override
-    public List<DevUser> findAllBackendUser(DevUser devUser) throws SQLException {
+    public List<DevUser> findAllDevUser(DevUser devUser) throws SQLException {
         Connection connection = null;
         List<DevUser> devUserList = new ArrayList<>();
         try {
-            devUser = devUserMapper.getfindAllBackendUser(devUser);
+            devUser = devUserMapper.getfindAllDevUser(devUser);
             devUserList.add(devUser);
         } catch (SQLException e) {
             e.printStackTrace();

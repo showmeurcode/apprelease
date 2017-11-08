@@ -24,6 +24,6 @@ public interface DevUserService {
     //根据用户名称和密码确认用户登录
     DevUser userLogin(String devName, String devPassword) throws SQLException;
     //获取所有用户信息
-    List<DevUser> findAllBackendUser(DevUser devUser)throws SQLException;
+    List<DevUser> findAllDevUser(DevUser devUser)throws SQLException;
 
 }

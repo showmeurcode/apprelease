@@ -24,6 +24,6 @@ public interface DevUserMapper {
     //通过userCode获取User
     DevUser getLoginUser(@Param("userCode")String userCode)throws Exception;
 
-    DevUser getfindAllBackendUser(DevUser devUser)throws SQLException;
+    DevUser getfindAllDevUser(DevUser devUser)throws SQLException;
 
 }

@@ -47,14 +47,28 @@
 
     </select>
 
-    <select id="userLogin" parameterType="DevUser">
+    <!-- 确认用户登录-->
+    <select id="userLogin" parameterType="DevUser" resultMap="">
 
-
-
+        SELECT * FROM  dev_user WHERE devName=#{devName} AND devPassword=#{devPassword}
 
     </select>
 
+    <!-- 通过userCode获取User-->
+    <select id="getLoginUser" resultType="DevUser">
+        select * from dev_user u
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="userCode != null">
+                and u.userCode = #{userCode}
+            </if>
+        </trim>
+    </select>
 
+    <select id="getfindAllDevUser" parameterType="DevUser">
+
+        SELECT * FROM backend_user
+
+    </select>
 
 
 
