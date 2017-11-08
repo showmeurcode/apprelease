@@ -12,11 +12,11 @@ import java.sql.SQLException;
 public interface BackendUserService {
 
     //添加新用户
-    Boolean addUser(BackendUser backendUser) throws SQLException;
+    boolean addUser(BackendUser backendUser) throws SQLException;
     //删除用户
-    int deleteUser(@Param("id")Integer id) throws SQLException;
+    boolean deleteUser(@Param("id")Integer id) throws SQLException;
     //更新用户信息
-    int updateUser(BackendUser backendUser)throws SQLException;
+    boolean updateUser(BackendUser backendUser)throws SQLException;
     //根据用户名称查找用户是否存在
     BackendUser findUserByname(String userName) throws SQLException;
     //根据用户名称和密码确认用户登录

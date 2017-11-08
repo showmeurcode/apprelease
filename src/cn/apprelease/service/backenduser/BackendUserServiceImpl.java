@@ -17,7 +17,7 @@ public class BackendUserServiceImpl implements BackendUserService {
      private BackendUserMapper backendUserMapper;
 
     @Override
-    public Boolean addUser(BackendUser backendUser) throws SQLException {
+    public boolean addUser(BackendUser backendUser) throws SQLException {
 
        boolean flag = false;
 
@@ -49,13 +49,33 @@ public class BackendUserServiceImpl implements BackendUserService {
     }
 
     @Override
-    public int deleteUser(Integer id) throws SQLException {
-        return 0;
+    public boolean deleteUser(Integer id) throws SQLException {
+        boolean flag = false;
+        Connection connection = null;
+        try {
+            if(backendUserMapper.deleteUser(id) > 0)
+                flag = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
     }
 
     @Override
-    public int updateUser(BackendUser backendUser) throws SQLException {
-        return 0;
+    public boolean updateUser(BackendUser backendUser) throws SQLException {
+        boolean flag = false;
+        Connection connection = null;
+        try{
+
+            if(backendUserMapper.updateUser(backendUser) > 0)
+                flag = true;
+        }catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        }finally{
+
+        }
+        return flag;
     }
 
     @Override
