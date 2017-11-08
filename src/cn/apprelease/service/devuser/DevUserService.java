@@ -22,7 +22,7 @@ public interface DevUserService {
     //根据用户名称查找用户是否存在
     DevUser findUserByname(String devName) throws SQLException;
     //根据用户名称和密码确认用户登录
-    DevUser userLogin(String devName, String devPassword) throws SQLException;
+    DevUser userLogin(String devCode, String devPassword) throws SQLException;
     //获取所有用户信息
     List<DevUser> findAllDevUser(DevUser devUser)throws SQLException;
 

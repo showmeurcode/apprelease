@@ -100,7 +100,7 @@ public class DevUserServiceImpl implements DevUserService {
     }
 
     @Override
-    public DevUser userLogin(String devName, String devPassword) throws SQLException {
+    public DevUser userLogin(String devCode, String devPassword) throws SQLException {
         DevUser devUser = null;
         try {
             devUser = devUserMapper.getLoginUser("userCode");
