@@ -57,7 +57,7 @@
             <ul class="nav side-menu">
               <li><a><i class="fa fa-home"></i>APP应用管理<span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="###" id="showAllApps">个人APP维护</a></li>
+                  <li><a href="javascript:;" id="showAllApps">个人APP维护</a></li>
                   <li><a href="###">上传新APP</a></li>
                 </ul>
               </li>
@@ -256,7 +256,7 @@
             
         }
         $("#showAllApps").click(function () {
-          alert("sds")
+
            $content.load("applist.jsp  #content>*")
 
         })
