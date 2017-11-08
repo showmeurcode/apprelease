@@ -22,6 +22,7 @@ public class BackendUserServiceImpl implements BackendUserService {
        boolean flag = false;
 
         Connection connection = null;
+
         try {
 
             connection.setAutoCommit(false);//开启JDBC事务管理
@@ -84,9 +85,20 @@ public class BackendUserServiceImpl implements BackendUserService {
     }
 
     @Override
-    public BackendUser userLogin(String userName, String userPassword) throws SQLException {
+    public BackendUser userLogin(String userCode, String userPassword) throws SQLException {
 
-        return null;
+        BackendUser backendUser = null;
+        try {
+            backendUser = backendUserMapper.getLoginUser("userCode");
+            //匹配密码
+            if(null != backendUser){
+                if(!backendUser.getUserPassword().equals(userPassword))
+                    backendUser = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return backendUser;
     }
 
     @Override

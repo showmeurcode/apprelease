@@ -20,7 +20,7 @@ public interface BackendUserService {
     //根据用户名称查找用户是否存在
     BackendUser findUserByname(String userName) throws SQLException;
     //根据用户名称和密码确认用户登录
-    BackendUser userLogin(String userName,String userPassword) throws SQLException;
+    BackendUser userLogin(String userCode,String userPassword) throws SQLException;
     //获取所有用户信息
     BackendUser getBackendUser(BackendUser backendUser)throws SQLException;
 
