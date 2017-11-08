@@ -5,5 +5,5 @@ package cn.apprelease.pojo;
  * 2017/11/6 19:03
  */
 public class   Promotion {
-    /*sdsdsd*/
+    /*修改东西*/
 }
