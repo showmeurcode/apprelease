@@ -23,4 +23,7 @@ public interface BackendUserMapper {
     //通过userCode获取User
     BackendUser getLoginUser(@Param("userCode")String userCode)throws Exception;
 
+    BackendUser getfindAllBackendUser(BackendUser backendUser)throws SQLException;
+
+
 }
