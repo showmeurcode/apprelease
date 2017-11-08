@@ -256,8 +256,8 @@
             
         }
         $("#showAllApps").click(function () {
-
-           $content.load("applist.jsp  #content>*" )
+          alert("sds")
+           $content.load("applist.jsp  #content>*")
 
         })
 
