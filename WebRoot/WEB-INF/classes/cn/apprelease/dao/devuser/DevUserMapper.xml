@@ -48,7 +48,7 @@
     </select>
 
     <!-- 确认用户登录-->
-    <select id="userLogin" parameterType="DevUser" resultMap="">
+    <select id="userLogin" parameterType="DevUser" >
 
         SELECT * FROM  dev_user WHERE devName=#{devName} AND devPassword=#{devPassword}
 
