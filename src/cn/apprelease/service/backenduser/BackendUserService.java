@@ -4,6 +4,7 @@ import cn.apprelease.pojo.BackendUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**后台用户接口
  * @author kongxiangzhong
@@ -20,9 +21,9 @@ public interface BackendUserService {
     //根据用户名称查找用户是否存在
     BackendUser findUserByname(String userName) throws SQLException;
     //根据用户名称和密码确认用户登录
-    BackendUser userLogin(String userName,String userPassword) throws SQLException;
+    BackendUser userLogin(String userCode,String userPassword) throws SQLException;
     //获取所有用户信息
-    BackendUser getBackendUser(BackendUser backendUser)throws SQLException;
+    List<BackendUser> findAllBackendUser(BackendUser backendUser)throws SQLException;
 
 
 }

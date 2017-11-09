@@ -6,6 +6,8 @@ import cn.apprelease.pojo.BackendUser;
 import javax.annotation.Resource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**后台用户接口实现类
  * @author kongxiangzhong
@@ -22,6 +24,7 @@ public class BackendUserServiceImpl implements BackendUserService {
        boolean flag = false;
 
         Connection connection = null;
+
         try {
 
             connection.setAutoCommit(false);//开启JDBC事务管理
@@ -80,17 +83,46 @@ public class BackendUserServiceImpl implements BackendUserService {
 
     @Override
     public BackendUser findUserByname(String userName) throws SQLException {
-        return null;
+        BackendUser  backendUser = null;
+
+
+        if(backendUserMapper.findUserByname(userName) != null){
+
+            if(!backendUserMapper.findUserByname(userName).equals(userName)){
+                backendUser = null;
+            }
+        }
+
+        return backendUser;
     }
 
     @Override
-    public BackendUser userLogin(String userName, String userPassword) throws SQLException {
+    public BackendUser userLogin(String userCode, String userPassword) throws SQLException {
 
-        return null;
+        BackendUser backendUser = null;
+        try {
+            backendUser = backendUserMapper.getLoginUser("userCode");
+            //匹配密码
+            if(null != backendUser){
+                if(!backendUser.getUserPassword().equals(userPassword))
+                    backendUser = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return backendUser;
     }
 
     @Override
-    public BackendUser getBackendUser(BackendUser backendUser) throws SQLException {
-        return null;
+    public List<BackendUser> findAllBackendUser(BackendUser backendUser) throws SQLException {
+        Connection connection = null;
+        List<BackendUser> backendUserList = new ArrayList<>();
+        try {
+            backendUser = backendUserMapper.getfindAllBackendUser(backendUser);
+            backendUserList.add(backendUser);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return backendUserList;
     }
 }
