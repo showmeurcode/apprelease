@@ -225,10 +225,15 @@
 
 
         <%--————————————————————————————————————————————————————主内容区↓———————————————————————————————————————————————————————————--%>
-        <div>
+
+
+
+
+
+
 
             <!-- 欢迎页内容区 -->
-            <div id="welcomeContent" class="right_col" role="main">
+            <div id="Content" class="right_col" role="main">
 
                 <h3>欢迎登录app发布系统
                     <small>xxxxxxxxxx</small>
@@ -240,272 +245,13 @@
             <!-- /page content -->
 
 
-            <!-- app列表内容区 -->
-            <div id="showAllAppsContent" class="right_col" role="main" hidden>
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="x_panel">
-                            <div class="x_title">
-                                <h2>APP列表
-                                    <small>Users</small>
-                                </h2>
-
-                            </div>
-                            <div class="x_content">
-
-                                <table id="listTable" class="table table-striped table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 5%">软件名称</th>
-                                        <th style="width: 5%">apk名称</th>
-                                        <th style="width: 5%">软件大小</th>
-                                        <th style="width: 5%">所属平台</th>
-                                        <th style="width: 10%">所属分类</th>
-                                        <th style="width: 5%">状态</th>
-                                        <th style="width: 10%">下载次数</th>
-                                        <th style="width: 10%">最新版本号 </th>
-                                        <th style="width: 40%">操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>关屏锁定</td>
-                                        <td>
-                                            <a>guanpingsuoding</a>
-
-                                        </td>
-                                        <td>
-                                            3.00m
-                                        </td>
-                                        <td class="project_progress">
-                                            手机
-                                        </td>
-                                        <td>
-                                           全部应用》》撒大声地》盛世嫡妃
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-success btn-xs">审核通过</button>
-                                        </td>
-                                        <td>
-                                            30
-                                        </td>
-                                        <td>
-                                            v1.1.2
-                                        </td>
-                                        <td>
-
-
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                                                    点击操作
-                                                    <span class="caret"></span>
-                                                </button>
-                                                <ul class="dropdown-menu" role="menu">
-
-                                                    <li><a href="#">下架</a> </li>
-                                                    <li><a href="#">新增版本</a> </li>
-                                                    <li><a href="#">修改版本</a> </li>
-                                                    <li><a href="#">查看</a> </li>
-                                                    <li><a href="#">修改</a> </li>
-                                                    <li><a href="#">删除</a> </li>
-
-                                                </ul>
-                                            </div>
-
-                                        </td>
-                                    </tr>
-
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!--新增app内容区 -->
-            <div id="addNewAppContent" class="right_col" role="main" hidden>
-
-                <div class="">
-                    <div class="page-title">
-
-
-
-                    </div>
-                    <div class="clearfix"></div>
-
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>新增APP基础信息
-                                        <small>sub title</small>
-                                    </h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                               role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="#">Settings 1</a>
-                                                </li>
-                                                <li><a href="#">Settings 2</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <div class="x_content">
-
-                                    <form class="form-horizontal form-label-left" novalidate>
-
-                                        <p>请填写信息
-
-                                        </p>
-                                        <span class="section"> </span>
-
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">软件名称
-                                                <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="name" class="form-control col-md-7 col-xs-12"
-                                                       data-validate-length-range="6" data-validate-words="2"
-                                                       name="name" placeholder="both name(s) e.g Jon Doe"
-                                                       required="required" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                                   for="email">APK名称<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="email" id="email" name="email" required="required"
-                                                       class="form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                                   for="email">支持ROM<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="email" id="email2" name="confirm_email"
-                                                       data-validate-linked="email" required="required"
-                                                       class="form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                                   for="number">界面语言<span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="number" id="number" name="number"
-                                                       required="required" data-validate-minmax="10,100"
-                                                       class="form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                                   for="website">软件大小 <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="url" id="website" name="website"
-                                                       required="required" placeholder="www.website.com"
-                                                       class="form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                                   for="occupation">下载次数 <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="occupation" type="text" name="occupation"
-                                                       data-validate-length-range="5,20"
-                                                       class="optional form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label for="password"
-                                                   class="control-label col-md-3">所属平台</label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="password" type="password" name="password"
-                                                       data-validate-length="6,8"
-                                                       class="form-control col-md-7 col-xs-12"
-                                                       required="required">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label for="password2"
-                                                   class="control-label col-md-3 col-sm-3 col-xs-12">一级分类</label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="password2" type="password" name="password2"
-                                                       data-validate-linked="password"
-                                                       class="form-control col-md-7 col-xs-12"
-                                                       required="required">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                                   for="telephone">Telephone <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="tel" id="telephone" name="phone"
-                                                       required="required" data-validate-length-range="8,20"
-                                                       class="form-control col-md-7 col-xs-12">
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                                   for="textarea">Textarea <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <textarea id="textarea" required="required" name="textarea"
-                                                                  class="form-control col-md-7 col-xs-12"></textarea>
-                                            </div> 
-                                        </div>
-                                        <div class="ln_solid"></div>
-                                        <div class="form-group">
-                                            <div class="col-md-6 col-md-offset-3">
-                                                <button type="submit" class="btn btn-primary">Cancel</button>
-                                                <button id="send" type="submit" class="btn btn-success">Submit
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /page content -->
-
-
-
-                <!--单按钮下拉菜单-->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                        按钮式下拉菜单
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">1</a> </li>
-                        <li><a href="#">2</a> </li>
-                        <li><a href="#">3</a> </li>
-                        <li><a href="#">4</a> </li>
-                    </ul>
-                </div>
 
 
 
 
-        </div>
+
+
+
         <%--————————————————————————————————————————————————————主内容区↑———————————————————————————————————————————————————————————--%>
 
         <!-- footer content -->
@@ -560,28 +306,12 @@
 
 <script type="text/javascript">
     $(function () {
-        $("#listTable").dataTable({
-            keys: true
-        });
-
-        $("#showAllApps").click(function () {
-
-            $("#showAllAppsContent").show();
-            $("#welcomeContent").hide();
-            $("#addNewAppContent").hide();
-        })
-
-
-        $("#addNewApp").click(function () {
-
-            $("#showAllAppsContent").hide();
-            $("#welcomeContent").hide();
-            $("#addNewAppContent").show();
-        })
 
 
     })
 
 </script>
+
+
 </body>
 </html>
