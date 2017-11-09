@@ -2,10 +2,9 @@ package cn.apprelease.service.devuser;
 
 import cn.apprelease.dao.devuser.DevUserMapper;
 import cn.apprelease.pojo.DevUser;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +13,7 @@ import java.util.List;
  * @author kongxiangzhong
  * 2017/11/7 14:22
  */
+@Service
 public class DevUserServiceImpl implements DevUserService {
 
     @Resource
@@ -21,109 +21,47 @@ public class DevUserServiceImpl implements DevUserService {
 
 
     @Override
-    public boolean addUser(DevUser devUser) throws SQLException {
-        boolean flag = false;
+    public int addUser(DevUser devUser) throws Exception {
+        int result=-1;
+        result=devUserMapper.addUser(devUser);
 
-        Connection connection = null;
-        try {
-
-            connection.setAutoCommit(false);//开启JDBC事务管理
-            int updateRows = devUserMapper.addUser(devUser);
-            connection.commit();
-            if(updateRows > 0){
-                flag = true;
-                System.out.println("add success!");
-            }else{
-                System.out.println("add failed!");
-            }
-
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            try {
-                System.out.println("rollback==================");
-                connection.rollback();
-            } catch (SQLException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
-
-
-        }
-        return flag;
+        return result;
     }
 
     @Override
-    public boolean deleteUser(Integer id) throws SQLException {
-
-        boolean flag = false;
-        Connection connection = null;
-        try {
-            if(devUserMapper.deleteUser(id) > 0)
-                flag = true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return flag;
+    public int deleteUser(Integer id) throws Exception {
+        int result = 0;
+        result = devUserMapper.deleteUser(id);
+        return result;
     }
 
     @Override
-    public boolean updateUser(DevUser devUser) throws SQLException {
-        boolean flag = false;
-        Connection connection = null;
-        try{
+    public int updateUser(DevUser devUser) throws Exception {
+        int result = 0;
+        result = devUserMapper.updateUser(devUser);
 
-            if(devUserMapper.updateUser(devUser) > 0)
-                flag = true;
-        }catch (Exception e) {
-            // TODO: handle exception
-            e.printStackTrace();
-        }finally{
-
-        }
-        return flag;
+        return result;
     }
 
     @Override
-    public DevUser findUserByname(String devName) throws SQLException {
-        DevUser  devUser = null;
+    public DevUser findUserByname(String devName) throws Exception {
 
-
-        if(devUserMapper.findUserByname(devName) != null){
-
-            if(!devUserMapper.findUserByname(devName).equals(devName)){
-                devUser = null;
-            }
-        }
-
-        return devUser;
+        return devUserMapper.findUserByname(devName);
     }
 
     @Override
-    public DevUser userLogin(String devCode, String devPassword) throws SQLException {
-        DevUser devUser = null;
-        try {
-            devUser = devUserMapper.getLoginUser("userCode");
-            //匹配密码
-            if(null != devUser){
-                if(!devUser.getDevPassword().equals(devPassword))
-                    devUser = null;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return devUser;
+    public DevUser userLogin(String devCode, String devPassword) throws Exception {
+
+        return  devUserMapper.getLoginUser(devCode,devPassword);
     }
 
     @Override
-    public List<DevUser> findAllDevUser(DevUser devUser) throws SQLException {
-        Connection connection = null;
+    public List<DevUser> findAllDevUser(DevUser devUser) throws Exception {
         List<DevUser> devUserList = new ArrayList<>();
-        try {
-            devUser = devUserMapper.getfindAllDevUser(devUser);
-            devUserList.add(devUser);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        devUserList= devUserMapper.getfindAllDevUser();
+        if(devUserList.size()==0){
+
+            devUserList=null;
         }
         return devUserList;
     }

@@ -32,6 +32,8 @@
 
     <!-- Custom Theme Style -->
     <link href="${pageContext.request.contextPath }/statics/css/custom.min.css" rel="stylesheet">
+
+
 </head>
 
 <body class="login">
@@ -42,7 +44,7 @@
     <div class="login_wrapper">
         <div class="animate form login_form">
             <section class="login_content">
-                <form>
+                <form  action="backenduser/login">
                     <h1>管理员登录</h1>
                     <div>
                         <input type="text" class="form-control" placeholder="用户名" required="" />

@@ -58,8 +58,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="textThis">
                 <h2 style="font-size: 23px">欢迎使用APP发布系统</h2>
                 <p><span>请选择您的身份</span></p>
-                <p><span><a id="href1" href="${pageContext.request.contextPath }/login?href=backendlogin"  style="text-decoration-line: none">我是管理员</a></span></p>
-                <p><span><a id="href2" href="${pageContext.request.contextPath }/login?href=developerlogin" style="text-decoration-line: none">我是开发者</a></span></p>
+                <p><span><a id="href2" href="${pageContext.request.contextPath }/showlogin?href=developerlogin" style="text-decoration-line: none">我是开发者</a></span></p>
+                <p><span><a id="href1" href="${pageContext.request.contextPath }/showlogin?href=backendlogin"  style="text-decoration-line: none">我是管理员</a></span></p>
+
             </div>
         </div>
     </div>

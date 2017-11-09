@@ -3,7 +3,7 @@ package cn.apprelease.dao.devuser;
 import cn.apprelease.pojo.DevUser;
 import org.apache.ibatis.annotations.Param;
 
-import java.sql.SQLException;
+import java.util.List;
 
 /**前台用户接口
  * @author kongxiangzhong
@@ -12,17 +12,17 @@ import java.sql.SQLException;
 public interface DevUserMapper {
 
     //添加新用户
-    int addUser(DevUser devUser) throws SQLException;
+    int addUser(DevUser devUser) throws Exception;
     //删除用户
-    int deleteUser(@Param("id")Integer id) throws SQLException;
+    int deleteUser(@Param("id")Integer id) throws Exception;
     //更新用户信息
     int updateUser(DevUser devUser);
     //根据用户名称查找用户是否存在
-    DevUser findUserByname(String devName) throws SQLException;
+    DevUser findUserByname(String devName) throws Exception;
     
     //通过userCode获取User
-    DevUser getLoginUser(@Param("userCode")String userCode)throws Exception;
+    DevUser getLoginUser(@Param("devCode")String userCode,@Param("devPassword")String devPassword)throws Exception;
 
-    DevUser getfindAllDevUser(DevUser devUser)throws SQLException;
+    List<DevUser> getfindAllDevUser()throws Exception;
 
 }

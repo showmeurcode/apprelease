@@ -225,10 +225,15 @@
 
 
         <%--————————————————————————————————————————————————————主内容区↓———————————————————————————————————————————————————————————--%>
-        <div>
+
+
+
+
+
+
 
             <!-- 欢迎页内容区 -->
-            <div id="welcomeContent" class="right_col" role="main">
+            <div id="Content" class="right_col" role="main">
 
                 <h3>欢迎登录app发布系统
                     <small>xxxxxxxxxx</small>
@@ -240,6 +245,7 @@
             <!-- /page content -->
 
 
+<<<<<<< HEAD
             <!-- app列表内容区 -->
             <div id="showAllAppsContent" class="right_col" role="main" hidden>
                 <div class="row">
@@ -529,27 +535,15 @@
                 </div>
             </div>
             <!-- /page content -->
-
-
-
-                <!--单按钮下拉菜单-->
-                <div class="btn-group">
-                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                        按钮式下拉菜单
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">1</a> </li>
-                        <li><a href="#">2</a> </li>
-                        <li><a href="#">3</a> </li>
-                        <li><a href="#">4</a> </li>
-                    </ul>
-                </div>
+=======
+>>>>>>> d1f015fe1a5c87c109dede29ca11e9120036eada
 
 
 
 
-        </div>
+
+
+
         <%--————————————————————————————————————————————————————主内容区↑———————————————————————————————————————————————————————————--%>
 
         <!-- footer content -->
@@ -604,33 +598,12 @@
 
 <script type="text/javascript">
     $(function () {
-        $("#listTable").dataTable({
-            keys: true
-        });
 
-        $("#showAllApps").click(function () {
-
-            $("#showAllAppsContent").show();
-            $("#welcomeContent").hide();
-            $("#addNewAppContent").hide();
-        })
-
-
-        $("#addNewApp").click(function () {
-
-            $("#showAllAppsContent").hide();
-            $("#welcomeContent").hide();
-            $("#addNewAppContent").show();
-        })
-
-        $(".btn-primary").click(function () {
-            $("#showAllAppsContent").show();
-            $("#welcomeContent").hide();
-            $("#addNewAppContent").hide();
-        })
 
     })
 
 </script>
+
+
 </body>
 </html>
