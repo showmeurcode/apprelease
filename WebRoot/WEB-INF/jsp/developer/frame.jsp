@@ -467,7 +467,7 @@
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                         <textarea id="textarea" required="required" name="textarea"
                                                                   class="form-control col-md-7 col-xs-12"></textarea>
-                                            </div>
+                                            </div> 
                                         </div>
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
