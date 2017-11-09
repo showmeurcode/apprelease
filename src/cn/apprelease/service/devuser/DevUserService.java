@@ -1,9 +1,7 @@
 package cn.apprelease.service.devuser;
 
 import cn.apprelease.pojo.DevUser;
-import org.apache.ibatis.annotations.Param;
 
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -14,16 +12,16 @@ import java.util.List;
 public interface DevUserService {
 
     //添加新用户
-    boolean addUser(DevUser devUser) throws SQLException;
+    int addUser(DevUser devUser) throws Exception;
     //删除用户
-    boolean deleteUser(@Param("id")Integer id) throws SQLException;
+    int deleteUser(Integer id) throws Exception;
     //更新用户信息
-    boolean updateUser(DevUser devUser)throws SQLException;
+    int  updateUser(DevUser devUser)throws Exception;
     //根据用户名称查找用户是否存在
-    DevUser findUserByname(String devName) throws SQLException;
+    DevUser findUserByname(String devName) throws Exception;
     //根据用户名称和密码确认用户登录
-    DevUser userLogin(String devCode, String devPassword) throws SQLException;
+    DevUser userLogin(String devCode, String devPassword) throws Exception;
     //获取所有用户信息
-    List<DevUser> findAllDevUser(DevUser devUser)throws SQLException;
+    List<DevUser> findAllDevUser(DevUser devUser)throws Exception;
 
 }

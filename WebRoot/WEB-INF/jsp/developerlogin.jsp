@@ -45,21 +45,22 @@
     <div class="login_wrapper">
         <div class="animate form login_form">
             <section class="login_content">
-                <form>
+                <form action="devuser/login">
                     <h1>开发人员登录</h1>
                     <div>
-                        <input type="text" class="form-control" placeholder="用户名" id="name" aria-placeholder="请输入用户名" required="" />
+                        <input  name="devCode" value="${devUser.devCode}" type="text" class="form-control" placeholder="用户名" aria-placeholder="请输入用户名" required="" />
                     </div>
                     <font color="#c00fff">*</font>
                     <div id="nameDiv" style="display: inline; color:red"></div>
 
                     <div>
-                        <input type="password" class="form-control" placeholder="密码" id="password" aria-placeholder="请输入密码" required="" />
+                        <input name="devPassword" type="password" class="form-control" placeholder="密码" i aria-placeholder="请输入密码" required="" />
                     </div>
                     <font color="#c00fff">*</font>
                     <div id="passwordDiv" style="display: inline; color:red"></div>
                     <div>
-                        <a class="btn btn-default submit" href="index.html">登录</a>
+
+                        <input type="submit" value="登录">
                         <a class="reset_pass" href="#">忘记密码?</a>
                     </div>
 

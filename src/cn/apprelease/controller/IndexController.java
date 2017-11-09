@@ -11,12 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class IndexController {
 
-    @RequestMapping("/login")
-    public String chooseIdentity ( @RequestParam("href") String href){
+    @RequestMapping("/showlogin")
+    public String chooseIdentity(@RequestParam("href") String href) {
 
+            return href;
 
-
-        return  "developer/frame";
     }
-
 }

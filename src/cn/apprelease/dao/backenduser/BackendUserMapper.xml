@@ -55,14 +55,10 @@
 
 
 
-    <!-- 通过userCode获取User-->
+    <!-- 验证登录-->
     <select id="getLoginUser" resultType="BackendUser">
         select * from backend_user u
-        <trim prefix="where" prefixOverrides="and | or">
-            <if test="userCode != null">
-                and u.userCode = #{userCode}
-            </if>
-        </trim>
+        WHERE u.userCode=#{userCode}  and u.userPassword = #{userPassword}
     </select>
 
     <select id="getfindAllBackendUser" parameterType="BackendUser">

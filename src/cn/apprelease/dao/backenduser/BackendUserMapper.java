@@ -3,7 +3,7 @@ package cn.apprelease.dao.backenduser;
 import cn.apprelease.pojo.BackendUser;
 import org.apache.ibatis.annotations.Param;
 
-import java.sql.SQLException;
+import java.util.List;
 
 /**
  * 后台用户接口
@@ -13,18 +13,18 @@ import java.sql.SQLException;
 public interface BackendUserMapper {
 
     //添加新用户
-    int addUser(BackendUser backendUser) throws SQLException;
+    int addUser(BackendUser backendUser) throws Exception;
     //删除用户
-    int deleteUser(@Param("id")Integer id) throws SQLException;
+    int deleteUser(@Param("id")Integer id) throws Exception;
     //更新用户信息
     int updateUser(BackendUser backendUser);
     //根据用户名称查找用户是否存在
-    BackendUser findUserByname(String userName) throws SQLException;
+    BackendUser findUserByname(String userName) throws Exception;
 
     //通过userCode获取User
-    BackendUser getLoginUser(@Param("userCode")String userCode)throws Exception;
+    BackendUser getLoginUser(@Param("userCode")String userCode,@Param("userPassword")String userPassword)throws Exception;
 
-    BackendUser getfindAllBackendUser(BackendUser backendUser)throws SQLException;
+    List<BackendUser> getfindAllBackendUser()throws Exception;
 
 
 }
