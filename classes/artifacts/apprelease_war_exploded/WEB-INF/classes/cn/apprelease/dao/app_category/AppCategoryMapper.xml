@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.apprelease.dao.app_category.AppCategoryMapper">
+
+	<!-- ————————————————————————————————resultMap区————————————————————————————  -->
+	
+	<!--——————————————————————————————————增 ———————————————————————————————————————————————— -->
+	<!-- 添加分类 -->
+	<insert id="addAppCategory" parameterType="AppCategory">
+		INSERT INTO `app_category` (`categoryCode`, `categoryName`, `parentId`, `createdBy`, `creationTime`)
+		VALUES (#{categoryCode}, #{categoryName}, #{parentId}, #{createdBy}, #{creationTime})
+	</insert>
+	
+	<!--——————————————————————————————————删 ———————————————————————————————————————————————— -->
+	<!-- 删除分类 -->
+	<delete id="delAppCategory" parameterType="Integer">
+		DELETE FROM `app_category` WHERE `id`=#{id}
+	</delete>
+	
+	<!--——————————————————————————————————改 ———————————————————————————————————————————————— -->
+	<!-- 修改分类 -->
+	<update id="updateAppCategory" parameterType="AppCategory">
+		UPDATE `app_category` SET `categoryCode`=#{categoryCode},`categoryName`=#{categoryName},
+			`parentId`=#{parentId}, `modifyBy`=#{modifyBy}, `modifyDate`=#{modifyDate}
+		WHERE `id`=#{id}
+	</update>
+	
+	<!--——————————————————————————————————查 ———————————————————————————————————————————————— -->
+
+	<!-- 根据分类信息查找分类 -->
+ 	<select id="findAppcategoryByAppCategoryInfo" parameterType="AppCategory" resultType="AppCategory">
+		SELECT * FROM `app_category`
+		<where>
+			<if test="id != null and id != ''">AND `id`=#{id}</if>
+			<if test="parentId != null and parentId != ''">AND `parentId`=#{parentId}</if>
+			<if test="categoryName != null and categoryName != ''">AND `categoryName` LIKE CONCAT('%',#{categoryName},'%')</if>
+		</where>
+	</select>
+	
+	
+	
+	<!-- ————————————————————————————————cache配置————————————————————————————  -->
+	<cache eviction="FIFO" flushInterval="60000" size="512"  readOnly="true"/>
+	
+
+</mapper>
