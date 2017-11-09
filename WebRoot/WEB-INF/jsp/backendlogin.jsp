@@ -32,6 +32,8 @@
 
     <!-- Custom Theme Style -->
     <link href="${pageContext.request.contextPath }/statics/css/custom.min.css" rel="stylesheet">
+
+
 </head>
 
 <body class="login">
