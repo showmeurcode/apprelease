@@ -12,7 +12,7 @@
 
       INSERT  INTO backend_user (`userCode`,`userName`,`userType`,`createdBy`,`creationDate`,`modifyBy`,`modifyDate`,`userPassword`)
 
-              VALUE (#{userCode},#{userName},#{userType},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate},#{userPassword})
+              VALUES (#{userCode},#{userName},#{userType},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate},#{userPassword})
 
     </insert>
 

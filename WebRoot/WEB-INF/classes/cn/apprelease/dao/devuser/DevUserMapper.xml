@@ -10,7 +10,7 @@
     <insert id="addUser" parameterType="DevUser">
       INSERT  INTO  dev_user(devCode,devName,devPassword,devEmail,devInfo,createdBy,creationDate,modifyBy,modifyDate)
 
-              VALUE (#{devCode},#{devName},#{devPassword},#{devEmail},#{devInfo},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate})
+              VALUES (#{devCode},#{devName},#{devPassword},#{devEmail},#{devInfo},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate})
 
 
     </insert>
@@ -61,7 +61,7 @@
 
     <select id="getfindAllDevUser" parameterType="DevUser">
 
-        SELECT * FROM backend_user
+        SELECT * FROM dev_user
 
     </select>
 
