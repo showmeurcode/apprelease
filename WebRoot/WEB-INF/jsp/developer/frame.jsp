@@ -371,110 +371,153 @@
                                         <span class="section"> </span>
 
                                         <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">软件名称
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="softwareName">软件名称
                                                 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="name" class="form-control col-md-7 col-xs-12"
-                                                       data-validate-length-range="6" data-validate-words="2"
-                                                       name="name" placeholder="both name(s) e.g Jon Doe"
+                                                <input id="softwareName" class="form-control col-md-7 col-xs-12"
+                                                       name="softwareName" placeholder="请输入文件名称"
                                                        required="required" type="text">
                                             </div>
                                         </div>
                                         <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                                   for="email">APK名称<span class="required">*</span>
+                                                   for="APKName">APK名称<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="email" id="email" name="email" required="required"
+                                                <input type="text" id="APKName" name="APKName" required="required"
+                                                       placeholder="请输入APK名称"
                                                        class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                                   for="email">支持ROM<span class="required">*</span>
+                                                   for="supportROM">支持ROM<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="email" id="email2" name="confirm_email"
-                                                       data-validate-linked="email" required="required"
+                                                <input type="text" id="supportROM" name="supportROM"
+                                                       required="required" placeholder="请输入支持的ROM"
                                                        class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                                   for="number">界面语言<span class="required">*</span>
+                                                   for="interfaceLanguage">界面语言<span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="number" id="number" name="number"
-                                                       required="required" data-validate-minmax="10,100"
+                                                <input type="text" id="interfaceLanguage" name="interfaceLanguage"
+                                                       required="required" placeholder="请输入软件支持的界面语言"
                                                        class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                                   for="website">软件大小 <span class="required">*</span>
+                                                   for="softwareSize">软件大小 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="url" id="website" name="website"
-                                                       required="required" placeholder="www.website.com"
+                                                <input type="text" id="softwareSize" name="softwareSize"
+                                                       required="required" placeholder="请输入软件大小，单位是Mb"
                                                        class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                                   for="occupation">下载次数 <span class="required">*</span>
+                                                   for="downloads">下载次数 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="occupation" type="text" name="occupation"
-                                                       data-validate-length-range="5,20"
+                                                <input id="downloads" type="text" name="downloads"
+                                                       placeholder="请输入下载次数" required="required"
                                                        class="optional form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="item form-group">
-                                            <label for="password"
+                                            <label for="flatformId"
                                                    class="control-label col-md-3">所属平台</label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="password" type="password" name="password"
-                                                       data-validate-length="6,8"
-                                                       class="form-control col-md-7 col-xs-12"
-                                                       required="required">
+                                                <select name="flatformId" id="flatformId"
+                                                        class="form-control col-md-7 col-xs-12" required="required">
+                                                    <option value="0" selected>请选择</option> 
+                                                    <option value="1">手机</option> 
+                                                    <option value="2">平板</option> 
+                                                    <option value="3">通用</option> 
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="item form-group">
-                                            <label for="password2"
+                                            <label for="categoryLevel1"
                                                    class="control-label col-md-3 col-sm-3 col-xs-12">一级分类</label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="password2" type="password" name="password2"
-                                                       data-validate-linked="password"
-                                                       class="form-control col-md-7 col-xs-12"
-                                                       required="required">
+                                                <select name="categoryLevel1" id="categoryLevel1"
+                                                        class="form-control col-md-7 col-xs-12" required="required">
+                                                    <option value="0" selected>请选择</option> 
+                                                    <option value="1">手机</option> 
+                                                    <option value="2">平板</option> 
+                                                    <option value="3">通用</option> 
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label for="categoryLevel2"
+                                                   class="control-label col-md-3 col-sm-3 col-xs-12">二级分类</label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select name="categoryLevel2" id="categoryLevel2"
+                                                        class="form-control col-md-7 col-xs-12" required="required">
+                                                    <option value="0" selected>请选择</option> 
+                                                    <option value="1">手机</option> 
+                                                    <option value="2">平板</option> 
+                                                    <option value="3">通用</option> 
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label for="categoryLevel3"
+                                                   class="control-label col-md-3 col-sm-3 col-xs-12">三级分类</label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select name="categoryLevel3" id="categoryLevel3"
+                                                        class="form-control col-md-7 col-xs-12" required="required">
+                                                    <option value="0" selected>请选择</option> 
+                                                    <option value="1">手机</option> 
+                                                    <option value="2">平板</option> 
+                                                    <option value="3">通用</option> 
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                                   for="telephone">Telephone <span class="required">*</span>
+                                                   for="status">APP状态 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="tel" id="telephone" name="phone"
-                                                       required="required" data-validate-length-range="8,20"
+                                                <input type="text" id="status" name="status"
+                                                       readonly value="待审核"
                                                        class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                                   for="textarea">Textarea <span class="required">*</span>
+                                                   for="appInfo">应用简介 <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                        <textarea id="textarea" required="required" name="textarea"
-                                                                  class="form-control col-md-7 col-xs-12"></textarea>
+                                                        <textarea id="appInfo" required="required" name="appInfo"
+                                                                  class="form-control col-md-7 col-xs-12"
+                                                                  placeholder="请输入本软件的相关信息，本信息作为软件的详细信息进行软件介绍。">
+                                                        </textarea>
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                                   for="logoPicPath">LOGO图片 <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input id="logoPicPath" type="file" name="logoPicPath" required="required"
+                                                       class="optional form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
                                             <div class="col-md-6 col-md-offset-3">
-                                                <button type="submit" class="btn btn-primary">Cancel</button>
-                                                <button id="send" type="submit" class="btn btn-success">Submit
+                                                <button id="send" type="submit" class="btn btn-success">保存
                                                 </button>
+                                                <button type="button" class="btn btn-primary">返回</button>
                                             </div>
                                         </div>
                                     </form>
@@ -579,6 +622,11 @@
             $("#addNewAppContent").show();
         })
 
+        $(".btn-primary").click(function () {
+            $("#showAllAppsContent").show();
+            $("#welcomeContent").hide();
+            $("#addNewAppContent").hide();
+        })
 
     })
 
