@@ -6,6 +6,8 @@ import cn.apprelease.pojo.BackendUser;
 import javax.annotation.Resource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**后台用户接口实现类
  * @author kongxiangzhong
@@ -81,7 +83,17 @@ public class BackendUserServiceImpl implements BackendUserService {
 
     @Override
     public BackendUser findUserByname(String userName) throws SQLException {
-        return null;
+        BackendUser  backendUser = null;
+
+
+        if(backendUserMapper.findUserByname(userName) != null){
+
+            if(!backendUserMapper.findUserByname(userName).equals(userName)){
+                backendUser = null;
+            }
+        }
+
+        return backendUser;
     }
 
     @Override
@@ -102,7 +114,15 @@ public class BackendUserServiceImpl implements BackendUserService {
     }
 
     @Override
-    public BackendUser getBackendUser(BackendUser backendUser) throws SQLException {
-        return null;
+    public List<BackendUser> findAllBackendUser(BackendUser backendUser) throws SQLException {
+        Connection connection = null;
+        List<BackendUser> backendUserList = new ArrayList<>();
+        try {
+            backendUser = backendUserMapper.getfindAllBackendUser(backendUser);
+            backendUserList.add(backendUser);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return backendUserList;
     }
 }

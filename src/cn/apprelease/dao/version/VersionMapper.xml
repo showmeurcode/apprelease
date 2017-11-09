@@ -2,68 +2,48 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.apprelease.dao.devuser.DevUserMapper">
+<mapper namespace="cn.apprelease.dao.version.VersionMapper">
 
     <!-- ————————————————————————————————resultMap区————————————————————————————  -->
 
     <!--——————————————————————————————————增 ———————————————————————————————————————————————— -->
-    <insert id="addUser" parameterType="DevUser">
-      INSERT  INTO  dev_user(devCode,devName,devPassword,devEmail,devInfo,createdBy,creationDate,modifyBy,modifyDate)
-
-              VALUES (#{devCode},#{devName},#{devPassword},#{devEmail},#{devInfo},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate})
-
-
+    <insert id="addVersion" parameterType="AppVersion">
+        INSERT INTO app_version(appId, versionNo, versionInfo, publishStatus, downloadLink,
+                                versionSize, createdBy, creationDate, apkLocPath, apkFileName)
+            VALUES(#{appId},#{versionNo},#{versionInfo},#{publishStatus},#{downloadLink},
+                           #{versionSize},#{createdBy},#{creationDate},#{apkLocPath},#{apkFileName})
     </insert>
 
     <!--——————————————————————————————————删 ———————————————————————————————————————————————— -->
-    <delete id="deleteUser" parameterType="DevUser">
-
-      DELETE FROM dev_user WHERE  id=#{id}
-
-
+    <delete id="deleteVersionById" parameterType="Integer">
+      DELETE FROM app_version
+        <where>
+            <if test="id != null and id != ''">AND id=#{id}</if>
+            <if test="appId != null and appId != ''">AND appId=#{appId}</if>
+        </where>
     </delete>
 
     <!--——————————————————————————————————改 ———————————————————————————————————————————————— -->
-    <update id="updateUser" parameterType="DevUser">
-        UPDATE dev_user
-        <set>
-            <if test="devCode != null">devCode=#{devCode},</if>
-            <if test="devName != null">devName=#{devName},</if>
-            <if test="devPassword != null">devPassword=#{devPassword},</if>
-            <if test="devEmail != null">devEmail=#{devEmail},</if>
-            <if test="devInfo != null">devInfo=#{devInfo},</if>
-            <if test="createdBy != null">createdBy=#{createdBy},</if>
-            <if test="creationDate != null">creationDate=#{creationDate},</if>
-            <if test="modifyBy != null">modifyBy=#{modifyBy},</if>
-            <if test="modifyDate != null">modifyDate=#{modifyDate},</if>
-
-        </set>
-
+    <update id="updateVersion" parameterType="AppVersion">
+        UPDATE app_version SET appId=#{appId}, versionNo=#{versionNo}, versionInfo=#{versionInfo},
+            publishStatus=#{publishStatus}, downloadLink=#{downloadLink},versionSize=#{versionSize},
+            modifyBy=#{modifyBy}, modifyDate=#{modifyDate}, apkLocPath=#{apkLocPath}, apkFileName=#{apkFileName}
+        WHERE id=#{id}
     </update>
     <!--——————————————————————————————————查 ———————————————————————————————————————————————— -->
-    <select id="findUserByname" parameterType="DevUser">
-
-        SELECT * FROM  dev_user WHERE devName=#{devName};
-
+    <select id="findAllAppVersions" parameterType="AppVersion">
+        SELECT * FROM  app_version
+        <where>
+            <if test="id != null and id != ''">AND id=#{id}</if>
+            <if test="appId != null and appId != ''">AND appId=#{appId}</if>
+            <if test="versionNo != null and versionNo != ''">AND versionNo=#{versionNo}</if>
+            <if test="publishStatus != null and publishStatus != ''">AND publishStatus=#{publishStatus}</if>
+        </where>
     </select>
 
 
 
-    <!-- 通过userCode获取User-->
-    <select id="getLoginUser" resultType="DevUser">
-        select * from dev_user u
-        <trim prefix="where" prefixOverrides="and | or">
-            <if test="userCode != null">
-                and u.userCode = #{userCode}
-            </if>
-        </trim>
-    </select>
 
-    <select id="getfindAllDevUser" parameterType="DevUser">
-
-        SELECT * FROM dev_user
-
-    </select>
 
 
 

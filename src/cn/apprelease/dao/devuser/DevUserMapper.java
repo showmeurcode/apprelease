@@ -18,8 +18,11 @@ public interface DevUserMapper {
     //更新用户信息
     int updateUser(DevUser devUser);
     //根据用户名称查找用户是否存在
-    DevUserMapper findUserByname(String devName) throws SQLException;
-    //根据用户名称和密码确认用户登录
-    DevUserMapper userLogin(String devName, String devPassword) throws SQLException;
+    DevUser findUserByname(String devName) throws SQLException;
+    
+    //通过userCode获取User
+    DevUser getLoginUser(@Param("userCode")String userCode)throws Exception;
+
+    DevUser getfindAllDevUser(DevUser devUser)throws SQLException;
 
 }

@@ -20,7 +20,11 @@ public interface BackendUserMapper {
     int updateUser(BackendUser backendUser);
     //根据用户名称查找用户是否存在
     BackendUser findUserByname(String userName) throws SQLException;
+
     //通过userCode获取User
     BackendUser getLoginUser(@Param("userCode")String userCode)throws Exception;
+
+    BackendUser getfindAllBackendUser(BackendUser backendUser)throws SQLException;
+
 
 }
