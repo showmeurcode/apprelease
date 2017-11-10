@@ -13,8 +13,9 @@ import java.util.List;
  */
 @Service("appInfoService")
 public class AppInfoServiceImpl implements AppInfoService {
+
     @Resource
-    AppInfoMapper appInfoMapper;
+    private AppInfoMapper appInfoMapper;
 
     @Override
     public int addAppInfo(AppInfo appInfo) {

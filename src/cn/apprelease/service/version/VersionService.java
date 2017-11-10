@@ -1,4 +1,4 @@
-package cn.apprelease.seivice.version;
+package cn.apprelease.service.version;
 
 import cn.apprelease.pojo.AppVersion;
 
