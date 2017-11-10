@@ -98,7 +98,7 @@
                       <li><a href="#">新增版本</a> </li>
                       <li><a href="#">修改版本</a> </li>
                       <li><a href="#">查看</a> </li>
-                      <li><a href="#">修改</a> </li>
+                      <li id="changeApp"><a href="#">修改</a> </li>
                       <li><a href="#">删除</a> </li>
 
                     </ul>
