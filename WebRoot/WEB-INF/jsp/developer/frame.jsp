@@ -261,7 +261,7 @@
 
 
 <!-- jQuery -->
-<script src="${pageContext.request.contextPath }/statics/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath }/statics/js/jquery-3.2.1.js"></script>
 <!-- Bootstrap -->
 <script src="${pageContext.request.contextPath }/statics/js/bootstrap.min.js"></script>
 <!-- FastClick -->
@@ -298,21 +298,40 @@
 
 <input type="hidden" id="rootpath" value="${pageContext.request.contextPath}">
 
-<script type="text/javascript">
-    $(function () {
 
-
-    })
-
-</script>
 
 
 <script type="text/javascript">
     $(function () {
-//        ============================================================尹晓晨================================================================        var $Content =$("#Content");
+//        ============================================================尹晓晨================================================================
+        var rootpath=$("#rootpath").val();
+        function init (pageNo) {
+            var data;
+            if(pageNo&&pageNo>0){
+                data="curPageNo="+pageNo;
+            }else{
+                data="curPageNo=1";
+            }
+            $.ajax({
+                type:"get",
+                url:rootpath+"/appInfo/showAllApps",
+                data:data,
+                dataType:"json",
+                success:function (data) {
+
+                }
+
+
+            });
+
+        }
+        
+
         $("#showAllApps").click(function () {
 
-            $Content.load("${pageContext.request.contextPath}/statics/templet/applist.jsp  #Content>*")
+            $("#Content").load("${pageContext.request.contextPath}/statics/templet/applist.jsp  #Content>*");
+
+            init();
         })
 
 

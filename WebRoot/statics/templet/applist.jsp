@@ -34,6 +34,79 @@
 
   <!-- app列表内容区 -->
   <div id="Content" class="right_col" role="main" >
+
+
+
+
+
+    <form id="findform"class="form-horizontal form-label-left" style="float: left">
+
+
+      <div class="form-group"style="float: left">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">软件名称</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <input type="text" name="country" id="autocomplete-custom-append" class="form-control col-md-10"/>
+        </div>
+      </div>
+      <div class="form-group"style="float: left">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">APP状态</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <select class="form-control">
+            <option>Choose option</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"style="float: left">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">所属平台</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <select class="form-control">
+            <option>--请选择--</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"style="float: left">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">一级分类</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <select class="form-control">
+            <option>--请选择--</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"style="float: left">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">二级分类</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <select class="form-control">
+            <option>--请选择--</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"style="float: left">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">三级分类</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <select class="form-control">
+            <option>--请选择--</option>
+          </select>
+        </div>
+      </div>
+
+
+
+      <div class="ln_solid"></div>
+      <div class="form-group">
+        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+
+          <button type="submit" class="btn btn-success">查询</button>
+        </div>
+      </div>
+
+    </form>
+
+
+
+
+
+
+
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -48,15 +121,15 @@
             <table id="listTable" class="table table-striped table-bordered">
               <thead>
               <tr>
-                <th style="width: 5%">软件名称</th>
+                <th style="width: 8%">软件名称</th>
                 <th style="width: 5%">apk名称</th>
                 <th style="width: 5%">软件大小</th>
-                <th style="width: 5%">所属平台</th>
-                <th style="width: 10%">所属分类</th>
+                <th style="width: 3%">所属平台</th>
+                <th style="width: 14%">所属分类</th>
                 <th style="width: 5%">状态</th>
-                <th style="width: 10%">下载次数</th>
-                <th style="width: 10%">最新版本号 </th>
-                <th style="width: 40%">操作</th>
+                <th style="width: 5%">下载次数</th>
+                <th style="width: 5%">最新版本号 </th>
+                <th style="width: 5%">操作</th>
               </tr>
               </thead>
               <tbody>
