@@ -9,7 +9,7 @@ import java.util.List;
  * @author zwy
  * 2017/11/8 下午 1:33
  */
-public interface VersionMapper {
+public interface AppVersionMapper {
     //添加版本信息
     int addVersion(@Param("appVersion") AppVersion appVersion);
     //修改版本信息
