@@ -5,6 +5,7 @@ import cn.apprelease.pojo.AppVersion;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +30,8 @@ public class VersionServiceImpl implements VersionService{
 
     @Override
     public List<AppVersion> findAllAppVersions(AppVersion appVersion) {
+        List<AppVersion> list  = null;
+        list
         return versionMapper.findAllAppVersions(appVersion);
     }
 
