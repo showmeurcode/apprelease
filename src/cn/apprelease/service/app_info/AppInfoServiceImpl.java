@@ -2,6 +2,7 @@ package cn.apprelease.service.app_info;
 
 import cn.apprelease.dao.app_info.AppInfoMapper;
 import cn.apprelease.pojo.AppInfo;
+import cn.apprelease.tools.PageSupport;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,9 +35,15 @@ public class AppInfoServiceImpl implements AppInfoService {
     }
 
     @Override
-    public List<AppInfo> findAppInfoByAppInfo(AppInfo appInfo) {
+    public List<AppInfo> findAppInfoByAppInfo(AppInfo appInfo,PageSupport pageSupport)throws Exception {
+
+
+            int totalCount=appInfoMapper.findAppinfoCounts();
+
+
+
         List<AppInfo> list = new ArrayList<AppInfo>();
-        list = appInfoMapper.findAppInfoByAppInfo(appInfo);
+       /* list = appInfoMapper.findAppInfoByAppInfo(appInfo);*/
         if(list.size() == 0){
             list = null;
         }

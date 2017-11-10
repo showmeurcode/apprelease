@@ -8,7 +8,7 @@ import java.util.List;
  * @author zwy
  * 2017/11/9 上午 8:48
  */
-public interface VersionService {
+public interface AppVersionService {
     //添加版本信息
     int addVersion(AppVersion appVersion);
     //修改版本信息

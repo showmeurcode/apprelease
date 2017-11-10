@@ -1,6 +1,7 @@
 package cn.apprelease.service.app_info;
 
 import cn.apprelease.pojo.AppInfo;
+import cn.apprelease.tools.PageSupport;
 
 import java.util.List;
 
@@ -36,7 +37,7 @@ public interface AppInfoService {
      * @param appInfo
      * @return
      */
-    List<AppInfo> findAppInfoByAppInfo(AppInfo appInfo);
+    List<AppInfo> findAppInfoByAppInfo(AppInfo appInfo,PageSupport pageSupport) throws Exception;
 
 
 }

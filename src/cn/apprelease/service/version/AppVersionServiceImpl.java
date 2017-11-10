@@ -1,6 +1,6 @@
 package cn.apprelease.service.version;
 
-import cn.apprelease.dao.version.VersionMapper;
+import cn.apprelease.dao.version.AppVersionMapper;
 import cn.apprelease.pojo.AppVersion;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,10 @@ import java.util.List;
  * 2017/11/9 上午 8:48
  */
 @Service("versionService")
-public class VersionServiceImpl implements VersionService{
+public class AppVersionServiceImpl implements AppVersionService {
 
     @Resource
-    private VersionMapper versionMapper;
+    private AppVersionMapper versionMapper;
 
     @Override
     public int addVersion(AppVersion appVersion) {
