@@ -2,6 +2,7 @@ package cn.apprelease.service.backenduser;
 
 import cn.apprelease.dao.backenduser.BackendUserMapper;
 import cn.apprelease.pojo.BackendUser;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
  * @author kongxiangzhong
  * 2017/11/7 14:18
  */
+@Service
 public class BackendUserServiceImpl implements BackendUserService {
 
      @Resource
