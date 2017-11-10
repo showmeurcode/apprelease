@@ -312,13 +312,16 @@
 //        ============================================================尹晓晨================================================================        var $Content =$("#Content");
         $("#showAllApps").click(function () {
 
-            $Content.load("${pageContext.request.contextPath}/statics/templet/applist.jsp  #Content>*")
+            $("#Content").load("${pageContext.request.contextPath}/statics/templet/applist.jsp  #Content>*")
         })
 
 
 //        ==========================================================张玮钰==================================================================
 
+        $("#addNewApp").click(function () {
 
+            $("#Content").load("${pageContext.request.contextPath}/statics/templet/appadd.jsp  #Content>*")
+        })
 
 
 

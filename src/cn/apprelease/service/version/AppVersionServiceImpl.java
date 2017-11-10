@@ -13,7 +13,7 @@ import java.util.List;
  * 2017/11/9 上午 8:48
  */
 @Service("versionService")
-public class VersionServiceImpl implements AppVersionService {
+public class AppVersionServiceImpl implements AppVersionService {
 
     @Resource
     private AppVersionMapper versionMapper;
