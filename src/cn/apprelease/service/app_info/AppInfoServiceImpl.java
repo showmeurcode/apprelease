@@ -2,15 +2,18 @@ package cn.apprelease.service.app_info;
 
 import cn.apprelease.dao.app_info.AppInfoMapper;
 import cn.apprelease.pojo.AppInfo;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
  * @author ligaoshan
  * 2017/11/8 14:57
  */
+@Service("appInfoService")
 public class AppInfoServiceImpl implements AppInfoService {
-
+    @Resource
     AppInfoMapper appInfoMapper;
 
     @Override
