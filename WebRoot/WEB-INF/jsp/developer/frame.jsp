@@ -296,7 +296,7 @@
 <script src="../build/js/custom.min.js"></script>
 
 
-<input type="hidden" id="rootpath" value="${pageContext.request.contextPath }">
+<input type="hidden" id="rootpath" value="${pageContext.request.contextPath}">
 
 <script type="text/javascript">
     $(function () {
@@ -312,9 +312,8 @@
         /*尹晓晨工作区*/
         var $Content =$("#Content");
         $("#showAllApps").click(function () {
-            alert("sdedede")
-            $Content.empty();
-            $Content.load("applist.jsp  #Content>*")
+
+            $Content.load("${pageContext.request.contextPath}/statics/templet/applist.jsp  #Content>*")
         })
 
 

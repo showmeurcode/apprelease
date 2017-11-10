@@ -30,9 +30,13 @@ public class VersionServiceImpl implements VersionService{
 
     @Override
     public List<AppVersion> findAllAppVersions(AppVersion appVersion) {
-        List<AppVersion> list  = null;
-        list
-        return versionMapper.findAllAppVersions(appVersion);
+        List<AppVersion> list  = new ArrayList<>();
+        list=versionMapper.findAllAppVersions(appVersion);
+        if(list.size()==0){
+
+            list=null;
+        }
+        return list;
     }
 
     @Override
