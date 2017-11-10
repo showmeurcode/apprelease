@@ -328,9 +328,15 @@
 
         $("#changeApp").click(function () {
 
-            $("#Content").load("${pageContext.request.contextPath}/statics/templet/appchage.jsp  #Content>*")
+            $("#Content").load("${pageContext.request.contextPath}/statics/templet/appchage.jsp  #Content>*");
 
-        })
+            var appid = this.attr("appid");
+
+            $.getJSON("/appInfo/change","id="+appid);
+
+        });
+
+
 
 
 
