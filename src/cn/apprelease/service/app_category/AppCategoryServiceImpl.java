@@ -5,6 +5,7 @@ import cn.apprelease.pojo.AppCategory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,7 +35,12 @@ public class AppCategoryServiceImpl implements AppCategoryService {
 
     @Override
     public List<AppCategory> findAppcategoryByAppCategoryInfo(AppCategory appCategory) {
-        return appCategoryMapper.findAppcategoryByAppCategoryInfo(appCategory);
+        List<AppCategory> list = new ArrayList<AppCategory>();
+        list = appCategoryMapper.findAppcategoryByAppCategoryInfo(appCategory);
+        if(list.size() == 0){
+            list = null;
+        }
+        return list;
     }
 
 

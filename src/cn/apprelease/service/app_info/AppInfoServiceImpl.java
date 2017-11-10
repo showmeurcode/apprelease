@@ -5,6 +5,7 @@ import cn.apprelease.pojo.AppInfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,6 +35,11 @@ public class AppInfoServiceImpl implements AppInfoService {
 
     @Override
     public List<AppInfo> findAppInfoByAppInfo(AppInfo appInfo) {
-        return appInfoMapper.findAppInfoByAppInfo(appInfo);
+        List<AppInfo> list = new ArrayList<AppInfo>();
+        list = appInfoMapper.findAppInfoByAppInfo(appInfo);
+        if(list.size() == 0){
+            list = null;
+        }
+        return list;
     }
 }
