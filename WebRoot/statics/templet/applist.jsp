@@ -39,35 +39,31 @@
 
 
 
-    <form id="findform"class="form-horizontal form-label-left" style="float: left">
+    <form id="queryform" class="form-horizontal form-label-left" style="float: left">
 
 
       <div class="form-group"style="float: left">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">软件名称</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
-          <input type="text" name="country" id="autocomplete-custom-append" class="form-control col-md-10"/>
+          <input type="text" name="softwareName" id="autocomplete-custom-append" class="form-control col-md-10"/>
         </div>
       </div>
-      <div class="form-group"style="float: left">
-        <label class="control-label col-md-3 col-sm-3 col-xs-12">APP状态</label>
-        <div class="col-md-9 col-sm-9 col-xs-12">
-          <select name="" class="form-control">
-            <option>--请选择--</option>
-          </select>
-        </div>
-      </div>
+
       <div class="form-group"style="float: left">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">所属平台</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
-          <select class="form-control">
+          <select name="flatformId" class="form-control">
             <option>--请选择--</option>
+            <option value="1">手机</option>
+            <option value="2">平板</option>
+            <option value="3">通用</option>
           </select>
         </div>
       </div>
       <div class="form-group"style="float: left">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">一级分类</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
-          <select class="form-control">
+          <select name="categoryLevel1"id="categoryLevel1" class="form-control">
             <option>--请选择--</option>
           </select>
         </div>
@@ -75,7 +71,7 @@
       <div class="form-group"style="float: left">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">二级分类</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
-          <select class="form-control">
+          <select name="categoryLevel2"id="categoryLevel2"  class="form-control">
             <option>--请选择--</option>
           </select>
         </div>
@@ -83,8 +79,23 @@
       <div class="form-group"style="float: left">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">三级分类</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
-          <select class="form-control">
+          <select name="categoryLevel3" id="categoryLevel3" class="form-control">
             <option>--请选择--</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group"style="float: left">
+        <label class="control-label col-md-3 col-sm-3 col-xs-12">APP状态</label>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <select name="status" class="form-control">
+            <option>--请选择--</option>
+            <option value="1">待审核</option>
+            <option value="2">审核通过</option>
+            <option value="3">审核未通过</option>
+            <option value="4">已上架</option>
+            <option value="5">已下架</option>
+
           </select>
         </div>
       </div>
@@ -112,7 +123,7 @@
         <div class="x_panel">
           <div class="x_title">
             <h2>APP列表
-              <small>Users</small>
+              <small></small>
             </h2>
 
           </div>
@@ -171,7 +182,7 @@
                       <li><a href="#">新增版本</a> </li>
                       <li><a href="#">修改版本</a> </li>
                       <li><a href="#">查看</a> </li>
-                      <li id="changeApp"><a href="#">修改</a> </li>
+                      <li><a href="#">修改</a> </li>
                       <li><a href="#">删除</a> </li>
 
                     </ul>

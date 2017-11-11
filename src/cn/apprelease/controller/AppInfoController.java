@@ -59,7 +59,6 @@ public class AppInfoController {
                         "                <td>"+info.getSoftwareName()+"</td>" +
                         "                <td>" +
                         "                  <a>"+info.getAPKName()+"</a>" +
-                        "\n" +
                         "                </td>" +
                         "                <td>" +
                         "                  "+((appVersion==null)?"":appVersion.getVersionSize())+"" +
@@ -90,8 +89,8 @@ public class AppInfoController {
                         "                    </button>" +
                         "                    <ul class='dropdown-menu' role='menu'>"+
                         "<li><a href='#'>新增版本</a> </li>"+
-                        "<li><a href='#'>修改版本</a> </li>"+
-                        "<li><a href='#'>修改</a> </li>"+
+                        "<li><a href='#' >修改版本</a> </li>"+
+                        "<li><a href='###' class='changeApp'>修改</a> </li>"+
                         "<li><a href='#'>删除</a> </li>"+
                         "<li><a href='#'>查看</a> </li>"
                 );
