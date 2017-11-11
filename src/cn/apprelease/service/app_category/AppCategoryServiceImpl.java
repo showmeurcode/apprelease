@@ -48,5 +48,25 @@ public class AppCategoryServiceImpl implements AppCategoryService {
         return  appCategoryMapper.findAppCategoryByid(id);
     }
 
+    @Override
+    public List<AppCategory> findAppCategorysByParentId(Integer parentId) throws Exception {
+        List<AppCategory> list = new ArrayList<AppCategory>();
+        list = appCategoryMapper.findAppCategorysByParentId(parentId);
+        if(list.size() == 0){
+            list = null;
+        }
+        return list;
+    }
+
+    @Override
+    public List<AppCategory> findAppCategorysBylevel(Integer level) throws Exception {
+        List<AppCategory> list = new ArrayList<AppCategory>();
+        list = appCategoryMapper.findAppCategorysBylevel(level);
+        if(list.size() == 0){
+            list = null;
+        }
+        return list;
+    }
+
 
 }

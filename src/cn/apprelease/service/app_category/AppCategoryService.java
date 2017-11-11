@@ -42,6 +42,11 @@ public interface AppCategoryService {
 
     AppCategory findAppCategoryByid(@Param("id") Integer id) throws  Exception;
 
+    //查找父级id为某id的分类列表
+    List<AppCategory> findAppCategorysByParentId( Integer parentId) throws  Exception;
+    //查找某个等级的分类列表
+    List<AppCategory> findAppCategorysBylevel(  Integer level) throws  Exception;
+
 
 
 }

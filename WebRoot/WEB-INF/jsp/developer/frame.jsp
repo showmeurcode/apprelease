@@ -308,8 +308,15 @@
 
 
         var params="";//声明关联查询条件的全局变量
-        function  showOptions() {//显示查询选项的方法
+        function  showOptionsmethod1() {//显示查询选项的方法（只需要显示一级分类，二三级分类通过注册jquery事件实现）
+            // 解析json法
 
+        }
+        function  showOptionsmethod2() {//显示查询选项的方法（只需要显示一级分类，二三级分类通过注册jquery事件实现）
+            //加载视图法
+            $("#queryform").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2",function () {
+                
+            })
 
         }
         function showApps () {//根据页码显示app列表
@@ -363,18 +370,19 @@
 
 
         $("#showAllApps").click(function () {
-            params="";// 全局变量初始化
+            params="";// 全局变量归0
             $("#Content").load("${pageContext.request.contextPath}/statics/templet/applist.jsp  #Content>*");//加载显示区
-            showOptions();//显示查询选项
+            showOptionsmethod2();//显示一级分类选项
             showApps ();//显示所有app列表
 
 
 
             // 查询按钮点击时，赋予全局变量param新的值（关联查询条件），紧接着进行查询获取数据
 
-
-
-        })
+        });
+     /*   $("body").on("click", ".changeApp",function () {
+            alert("dsds");    李高珊看这里
+        })*/
 
 
 //        ==========================================================张玮钰==================================================================
