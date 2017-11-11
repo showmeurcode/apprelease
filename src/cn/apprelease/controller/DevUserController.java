@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -19,8 +20,8 @@ public class DevUserController {
     @Resource
     DevUserService devUserService;
 
-    @RequestMapping("/login")
-    public String login(@ModelAttribute("devUser") DevUser devUser , HttpSession session){
+    @RequestMapping(value="/login")//登录
+    public String login(@ModelAttribute("devUser") DevUser devUser , HttpSession session, HttpServletRequest request){
         DevUser devUser1=null;
         try {
             devUser1=devUserService.userLogin(devUser.getDevCode(),devUser.getDevPassword());
@@ -30,14 +31,29 @@ public class DevUserController {
         if(devUser1 != null){
             //放入session
             session.setAttribute("devUserSession", devUser1);
+
+
             return "developer/frame";
         }else{
-
+            request.setAttribute("error","用户名或密码不正确！");
             return "developerlogin";
         }
 
+    }
 
 
+    @RequestMapping("/loginout")
+    public String loginout(HttpServletRequest request){//登出
+        //    注销用户，使session失效。
+        request.getSession().removeAttribute("devUserSession");
+
+       return "developerlogin";
+    }
+
+    @RequestMapping(value="/devuser/main")//拦截器  吧
+    public String main(){
+
+        return "developer/frame";
     }
 
 }

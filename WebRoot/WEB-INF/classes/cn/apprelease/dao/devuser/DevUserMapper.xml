@@ -51,9 +51,9 @@
 
     <!-- 验证登录-->
     <select id="getLoginUser" resultType="DevUser">
-        select * from dev_user u
+        SELECT * FROM dev_user u
 
-           WHERE u.devPassword=#{devPassword}  and u.devCode = #{devCode}
+           WHERE u.devCode = #{devCode} and u.devPassword=#{devPassword}
 
     </select>
 

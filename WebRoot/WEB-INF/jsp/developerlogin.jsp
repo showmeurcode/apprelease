@@ -54,7 +54,7 @@
                     <div id="nameDiv" style="display: inline; color:red"></div>
 
                     <div>
-                        <input name="devPassword" type="password" class="form-control" placeholder="密码" i aria-placeholder="请输入密码" required="" />
+                        <input name="devPassword" value="${devUser.devPassword}" type="password" class="form-control" placeholder="密码"  aria-placeholder="请输入密码" required="" />
                     </div>
                     <font color="#c00fff">*</font>
                     <div id="passwordDiv" style="display: inline; color:red"></div>
