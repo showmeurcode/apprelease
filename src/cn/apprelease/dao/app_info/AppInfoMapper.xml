@@ -40,19 +40,22 @@
  	<select id="findAppInfoByAppInfo"  resultType="AppInfo">
 		SELECT * FROM `app_info`
 		<where>
-			<if test="id != null and id != ''">AND `id`=#{id}</if>
-			<if test="softwareName != null and softwareName != ''">AND `softwareName` LIKE CONCAT('%',#{softwareName},'%')</if>
+			<if test="id != null and id != ''"> AND `id`=#{id} </if>
+			<if test="softwareName != null and softwareName != ''">AND `softwareName` LIKE CONCAT('%',#{softwareName},'%') </if>
 			<if test="status != null and status != ''">AND `status`=#{status}</if>
-			<if test="flatformId != null and flatformId != ''">AND `flatformId`=#{flatformId}</if>
-			<if test="categoryLevel1 != null and categoryLevel1 != ''">AND `categoryLevel1`=#{categoryLevel1}</if>
-			<if test="categoryLevel2 != null and categoryLevel2 != ''">AND `categoryLevel2`=#{categoryLevel2}</if>
-			<if test="categoryLevel3 != null and categoryLevel3 != ''">AND `categoryLevel3`=#{categoryLevel3}</if>
-		  	order by   creationDate
-			<if test="from!= null and from!= ''"> limit #{from},#{num} </if>
+			<if test="flatformId != null and flatformId != ''">AND `flatformId`=#{flatformId} </if>
+			<if test="categoryLevel1 != null and categoryLevel1 != ''">AND `categoryLevel1`=#{categoryLevel1} </if>
+			<if test="categoryLevel2 != null and categoryLevel2 != ''">AND `categoryLevel2`=#{categoryLevel2} </if>
+			<if test="categoryLevel3 != null and categoryLevel3 != ''">AND `categoryLevel3`=#{categoryLevel3} </if>
+
 		</where>
+		ORDER BY  creationDate DESC
+
+
+
 	</select>
 	<select id="findAppinfoCounts" resultType="java.lang.Integer">
-		SELECT count(*)FROM app_info
+		SELECT count(*) FROM app_info
 	</select>
 
 

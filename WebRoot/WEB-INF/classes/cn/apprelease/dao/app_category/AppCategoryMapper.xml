@@ -38,10 +38,12 @@
 			<if test="categoryName != null and categoryName != ''">AND `categoryName` LIKE CONCAT('%',#{categoryName},'%')</if>
 		</where>
 	</select>
-	
-	
-	
-	<!-- ————————————————————————————————cache配置————————————————————————————  -->
+    <select id="findAppCategoryByid" resultType="cn.apprelease.pojo.AppCategory">
+		SELECT  *FROM app_category WHERE  id=#{id}
+	</select>
+
+
+    <!-- ————————————————————————————————cache配置————————————————————————————  -->
 	<cache eviction="FIFO" flushInterval="60000" size="512"  readOnly="true"/>
 	
 

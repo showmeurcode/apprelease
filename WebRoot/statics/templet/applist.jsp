@@ -51,8 +51,8 @@
       <div class="form-group"style="float: left">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">APP状态</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
-          <select class="form-control">
-            <option>Choose option</option>
+          <select name="" class="form-control">
+            <option>--请选择--</option>
           </select>
         </div>
       </div>
@@ -132,7 +132,7 @@
                 <th style="width: 5%">操作</th>
               </tr>
               </thead>
-              <tbody>
+              <tbody  id="apptobody">
               <tr>
                 <td>关屏锁定</td>
                 <td>
@@ -157,9 +157,9 @@
                 <td>
                   v1.1.2
                 </td>
+
+
                 <td>
-
-
                   <div class="btn-group">
                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
                       点击操作
@@ -176,8 +176,9 @@
 
                     </ul>
                   </div>
-
                 </td>
+
+
               </tr>
 
 
@@ -188,8 +189,6 @@
       </div>
     </div>
   </div>
-
-
 
 
 

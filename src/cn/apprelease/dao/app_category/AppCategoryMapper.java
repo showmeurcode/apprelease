@@ -17,27 +17,30 @@ public interface AppCategoryMapper {
      * @param appCategory
      * @return
      */
-    int addAppCategory(@Param("appCategory") AppCategory appCategory);
+    int addAppCategory(@Param("appCategory") AppCategory appCategory)throws  Exception;
 
     /**
      * 删除分类
      * @param id
      * @return
      */
-    int delAppCategory(@Param("id") Integer id);
+    int delAppCategory(@Param("id") Integer id)throws  Exception;
 
     /**
      * 修改分类
      * @param appCategory
      * @return
      */
-    int updateAppCategory(@Param("appCategory") AppCategory appCategory);
+    int updateAppCategory(@Param("appCategory") AppCategory appCategory)throws  Exception;
 
     /**
      * 根据分类信息查找分类
      * @param appCategory
      * @return
      */
-    List<AppCategory> findAppcategoryByAppCategoryInfo(@Param("appCategory") AppCategory appCategory);
+    List<AppCategory> findAppcategoryByAppCategoryInfo(@Param("appCategory") AppCategory appCategory)throws  Exception;
+
+    AppCategory findAppCategoryByid(@Param("id") Integer id) throws  Exception;
+
 
 }

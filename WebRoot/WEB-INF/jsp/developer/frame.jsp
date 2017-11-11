@@ -232,17 +232,17 @@
 
 
 
-            <!-- 欢迎页内容区 -->
-            <div id="Content" class="right_col" role="main">
+        <!-- 欢迎页内容区 -->
+        <div id="Content" class="right_col" role="main">
 
-                <h3>欢迎登录app发布系统
-                    <small>xxxxxxxxxx</small>
-                    ，请在左侧选择操作
-                </h3>
+            <h3>欢迎登录app发布系统
+                <small>xxxxxxxxxx</small>
+                ，请在左侧选择操作
+            </h3>
 
 
-            </div>
-            <!-- /page content -->
+        </div>
+        <!-- /page content -->
 
 
 
@@ -261,7 +261,7 @@
 
 
 <!-- jQuery -->
-<script src="${pageContext.request.contextPath }/statics/js/jquery-3.2.1.js"></script>
+<script src="${pageContext.request.contextPath }/statics/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="${pageContext.request.contextPath }/statics/js/bootstrap.min.js"></script>
 <!-- FastClick -->
@@ -303,35 +303,77 @@
 
 <script type="text/javascript">
     $(function () {
-//        ============================================================尹晓晨================================================================
-        var rootpath=$("#rootpath").val();
-        function init (pageNo) {
-            var data;
-            if(pageNo&&pageNo>0){
-                data="curPageNo="+pageNo;
-            }else{
-                data="curPageNo=1";
+//        ===============================尹晓晨 分页显示app列表，按级显示查询条件，并按条件查询app================================================================
+        var rootpath=$("#rootpath").val();//获取根路径
+
+
+        var params="";//声明关联查询条件的全局变量
+        function  showOptions() {//显示查询选项的方法
+
+
+        }
+        function showApps () {//根据页码显示app列表
+            var data="";
+
+            if(params!=""){
+                data=params;
             }
             $.ajax({
-                type:"get",
+                type:"GET",
                 url:rootpath+"/appInfo/showAllApps",
                 data:data,
-                dataType:"json",
+                dataType:"html",
                 success:function (data) {
-
+                   $("#apptobody").html(data)
+                    $('#listTable').DataTable({
+                        "bLengthChange": false, //是否显示修改显示数据数量的菜单
+                        "iDisplayLength": 5,//设置每页默认显示多少数据
+                        searching : false, //去掉搜索框方法一：百度上的方法，但是我用这没管用
+                        language: {
+                            "sProcessing": "处理中...",
+                            "sLengthMenu": "显示 _MENU_ 项结果",
+                            "sZeroRecords": "没有匹配结果",
+                            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                            "sInfoPostFix": "",
+                            "sSearch": "搜索:",
+                            "sUrl": "",
+                            "sEmptyTable": "表中数据为空",
+                            "sLoadingRecords": "载入中...",
+                            "sInfoThousands": ",",
+                            "oPaginate": {
+                                "sFirst": "首页",
+                                "sPrevious": "上页",
+                                "sNext": "下页",
+                                "sLast": "末页"
+                            },
+                            "oAria": {
+                                "sSortAscending": ": 以升序排列此列",
+                                "sSortDescending": ": 以降序排列此列"
+                            }
+                        }
+                    });
                 }
 
 
             });
 
         }
-        
+
 
         $("#showAllApps").click(function () {
+            params="";// 全局变量初始化
+            $("#Content").load("${pageContext.request.contextPath}/statics/templet/applist.jsp  #Content>*");//加载显示区
+            showOptions();//显示查询选项
+            showApps ();//显示所有app列表
 
-            $("#Content").load("${pageContext.request.contextPath}/statics/templet/applist.jsp  #Content>*");
 
-            init();
+
+            // 查询按钮点击时，赋予全局变量param新的值（关联查询条件），紧接着进行查询获取数据
+
+
+
         })
 
 
