@@ -306,6 +306,7 @@
 //        ===============================尹晓晨 分页显示app列表，按级显示查询条件，并按条件查询app================================================================
         var rootpath=$("#rootpath").val();//获取根路径
         var params="";//声明关联查询条件的全局变量
+        var table;
         function showApps () {//根据页码显示app列表
             var data="";
             if(params!=""){
@@ -318,7 +319,7 @@
                 dataType:"html",
                 success:function (data) {
                     $("#apptobody").html(data)
-                    $('#listTable').DataTable({
+                  table=$('#listTable').DataTable({
                         "bLengthChange": false, //是否显示修改显示数据数量的菜单
                         "iDisplayLength": 5,//设置每页默认显示多少数据
                         searching : false, //去掉搜索框方法一：百度上的方法，但是我用这没管用
@@ -369,8 +370,7 @@
                 dataType:"json",
                 success:function (data) {
                     $nextselect.empty();
-                    $nextselect.append("<option>--请选择--</option>");
-
+                    $nextselect.append("<option value=''>--请选择--</option>");
                     if(data!=null&&data.length!=0){
                         $.each(data,function (index,category) {
                             /*  alert(category.categoryName);*/
@@ -384,9 +384,12 @@
         });
 
         // 查询按钮点击时，赋予全局变量param新的值（关联查询条件），紧接着进行查询获取数据
-        /*   $("body").on("click", ".changeApp",function () {
-               alert("dsds");    李高珊看这里
-           })*/
+         $("body").on("click", "#querysubmit",function () {
+                params=$("#queryform").serialize();
+                alert(params)
+             table.destroy();
+                showApps ();
+           })
 
 
 //        ==========================================================张玮钰==================================================================
