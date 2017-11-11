@@ -305,23 +305,9 @@
     $(function () {
 //        ===============================尹晓晨 分页显示app列表，按级显示查询条件，并按条件查询app================================================================
         var rootpath=$("#rootpath").val();//获取根路径
-
-
         var params="";//声明关联查询条件的全局变量
-        function  showOptionsmethod1() {//显示查询选项的方法（只需要显示一级分类，二三级分类通过注册jquery事件实现）
-            // 解析json法
-
-        }
-        function  showOptionsmethod2() {//显示查询选项的方法（只需要显示一级分类，二三级分类通过注册jquery事件实现）
-            //加载视图法
-            $("#queryform").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2",function () {
-                
-            })
-
-        }
         function showApps () {//根据页码显示app列表
             var data="";
-
             if(params!=""){
                 data=params;
             }
@@ -331,7 +317,7 @@
                 data:data,
                 dataType:"html",
                 success:function (data) {
-                   $("#apptobody").html(data)
+                    $("#apptobody").html(data)
                     $('#listTable').DataTable({
                         "bLengthChange": false, //是否显示修改显示数据数量的菜单
                         "iDisplayLength": 5,//设置每页默认显示多少数据
@@ -362,27 +348,45 @@
                         }
                     });
                 }
-
-
             });
 
         }
-
-
         $("#showAllApps").click(function () {
             params="";// 全局变量归0
-            $("#Content").load("${pageContext.request.contextPath}/statics/templet/applist.jsp  #Content>*");//加载显示区
-            showOptionsmethod2();//显示一级分类选项
-            showApps ();//显示所有app列表
+            $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*")
+            showApps ();//显示所有app列表(后台拼接html法)
+        });
 
+        // 注册点击的多级联动事件
+        $("body").on("change", ".levels",function () {//select选项改变使用.change（）事件
+            var value=$(this).find("option:checked").attr("value");
+            var $nowselect=$(this);
+            var $nextselect= $nowselect.parents(".form-group").next().find(".levels");
+            $.ajax({
+                type:"GET",
+                url:rootpath+"/appCategory/showsonlevel.json",
+                data:"parentId="+value,
+                dataType:"json",
+                success:function (data) {
+                    $nextselect.empty();
+                    $nextselect.append("<option>--请选择--</option>");
 
+                    if(data!=null&&data.length!=0){
+                        $.each(data,function (index,category) {
+                            /*  alert(category.categoryName);*/
+                            $nextselect.append(" <option value='"+category.id+"'>"+category.categoryName+"</option>")
 
-            // 查询按钮点击时，赋予全局变量param新的值（关联查询条件），紧接着进行查询获取数据
+                        })
+                    }
+                }
+            });
 
         });
-     /*   $("body").on("click", ".changeApp",function () {
-            alert("dsds");    李高珊看这里
-        })*/
+
+        // 查询按钮点击时，赋予全局变量param新的值（关联查询条件），紧接着进行查询获取数据
+        /*   $("body").on("click", ".changeApp",function () {
+               alert("dsds");    李高珊看这里
+           })*/
 
 
 //        ==========================================================张玮钰==================================================================
