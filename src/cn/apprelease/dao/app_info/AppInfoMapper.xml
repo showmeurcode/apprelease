@@ -41,7 +41,7 @@
 		SELECT * FROM `app_info`
 		<where>
 			<if test="id != 0 and id != ''"> AND `id`=#{id} </if>
-			<if test="devId != 0 and id != ''"> AND devId=#{devId} </if>
+			<if test="devId != 0 and devId!= ''"> AND `devId`=#{devId} </if>
 			<if test="softwareName != null and softwareName != ''">AND `softwareName` LIKE CONCAT('%',#{softwareName},'%') </if>
 			<if test="status != 0 and status != ''">AND `status`=#{status}</if>
 			<if test="flatformId != 0 and flatformId != ''">AND `flatformId`=#{flatformId} </if>

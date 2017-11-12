@@ -35,6 +35,7 @@ public class AppInfoController {
     @ResponseBody
     public Object showAllApps(AppInfo appInfo){
         StringBuffer html=new StringBuffer("");
+       /* html.append("开发者id是"+appInfo.getDevId());*/
         List <AppInfo> appInfoList =new ArrayList<>();
         try {
             appInfoList=appInfoService.findAppInfoByAppInfo(appInfo);

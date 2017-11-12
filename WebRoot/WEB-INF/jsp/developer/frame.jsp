@@ -241,6 +241,7 @@
         var table;
         function showApps () {//根据页码显示app列表
             var data="devId="+devUserId;
+            alert(data)
             if(params!=""){
                 data+="&"+params;
             }
