@@ -294,13 +294,7 @@
 
 <!-- Custom Theme Scripts -->
 <script src="../build/js/custom.min.js"></script>
-
-
 <input type="hidden" id="rootpath" value="${pageContext.request.contextPath}">
-
-
-
-
 <script type="text/javascript">
     $(function () {
 //        ===============================尹晓晨 分页显示app列表，按级显示查询条件，并按条件查询app================================================================
@@ -319,7 +313,8 @@
                 dataType:"html",
                 success:function (data) {
                     $("#apptobody").html(data)
-                  table=$('#listTable').DataTable({
+
+                    table=$('#listTable').DataTable({
                         "bLengthChange": false, //是否显示修改显示数据数量的菜单
                         "iDisplayLength": 5,//设置每页默认显示多少数据
                         searching : false, //去掉搜索框方法一：百度上的方法，但是我用这没管用
@@ -370,7 +365,7 @@
                 dataType:"json",
                 success:function (data) {
                     $nextselect.empty();
-                    $nextselect.append("<option value=''>--请选择--</option>");
+                    $nextselect.append("<option value='0'>--请选择--</option>");
                     if(data!=null&&data.length!=0){
                         $.each(data,function (index,category) {
                             /*  alert(category.categoryName);*/
@@ -382,14 +377,12 @@
             });
 
         });
-
         // 查询按钮点击时，赋予全局变量param新的值（关联查询条件），紧接着进行查询获取数据
-         $("body").on("click", "#querysubmit",function () {
-                params=$("#queryform").serialize();
-                alert(params)
-             table.destroy();
-                showApps ();
-           })
+        $("body").on("click", "#querysubmit",function () {
+            params=$("#queryform").serialize();
+            table.destroy();
+            showApps ();
+        })
 
 
 //        ==========================================================张玮钰==================================================================

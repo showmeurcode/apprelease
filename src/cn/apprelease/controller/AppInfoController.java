@@ -8,10 +8,12 @@ import cn.apprelease.service.app_info.AppInfoService;
 import cn.apprelease.service.version.AppVersionService;
 import cn.apprelease.tools.PageSupport;
 import cn.apprelease.tools.DictionaryUtil;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,15 +35,15 @@ public class AppInfoController {
     @RequestMapping("/showAllApps")
     @ResponseBody
     public Object showAllApps(AppInfo appInfo){
-
-
         StringBuffer html=new StringBuffer("");
-
         List <AppInfo> appInfoList =new ArrayList<>();
         try {
             appInfoList=appInfoService.findAppInfoByAppInfo(appInfo);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        if(appInfoList==null){
+            appInfoList=new ArrayList<>();
         }
         AppCategory appCategory1=null;
         AppCategory appCategory2=null;
@@ -55,7 +57,7 @@ public class AppInfoController {
                 appCategory3=appCategoryService.findAppCategoryByid(info.getCategoryLevel3());
                 appVersion =appVersionService.findAppVersionByid(info.getVersionId());
                 //拼接html
-                html.append("<tr>\n" +
+                html.append("<tr>" +
                         "                <td>"+info.getSoftwareName()+"</td>" +
                         "                <td>" +
                         "                  <a>"+info.getAPKName()+"</a>" +
@@ -113,8 +115,6 @@ public class AppInfoController {
 
 
         }
-
-
 
         return  html.toString();
     }

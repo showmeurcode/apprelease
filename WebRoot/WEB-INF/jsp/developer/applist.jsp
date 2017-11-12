@@ -40,7 +40,8 @@
 
 
 
-    <form id="queryform" class="form-horizontal form-label-left" style="float: left">
+    <form  onkeydown="if(event.keyCode==13)return false;" action="###" id="queryform" class="form-horizontal form-label-left" style="float: left">
+
 
 
       <div class="form-group"style="float: left">
@@ -50,11 +51,13 @@
         </div>
       </div>
 
+
+
       <div class="form-group"style="float: left">
         <label class="control-label col-md-3 col-sm-3 col-xs-12">所属平台</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
           <select name="flatformId" class="form-control">
-            <option value="">--请选择--</option>
+            <option value="0">--请选择--</option>
             <option value="1">手机</option>
             <option value="2">平板</option>
             <option value="3">通用</option>
@@ -65,7 +68,7 @@
         <label class="control-label col-md-3 col-sm-3 col-xs-12">一级分类</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
           <select name="categoryLevel1"id="categoryLevel1" class="form-control  levels">
-            <option value="">--请选择--</option>
+            <option value="0">--请选择--</option>
           <c:forEach items="${appCategory1List}" var="appCategory1">
             <option value="${appCategory1.id}">${appCategory1.categoryName}</option>
           </c:forEach>
@@ -78,7 +81,7 @@
         <label class="control-label col-md-3 col-sm-3 col-xs-12">二级分类</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
           <select name="categoryLevel2"id="categoryLevel2"  class="form-control levels">
-            <option value="">--请选择--</option>
+            <option value="0">--请选择--</option>
           </select>
         </div>
       </div>
@@ -86,7 +89,7 @@
         <label class="control-label col-md-3 col-sm-3 col-xs-12">三级分类</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
           <select name="categoryLevel3" id="categoryLevel3" class="form-control  levels">
-            <option value="">--请选择--</option>
+            <option value="0">--请选择--</option>
           </select>
         </div>
       </div>
@@ -95,7 +98,7 @@
         <label class="control-label col-md-3 col-sm-3 col-xs-12">APP状态</label>
         <div class="col-md-9 col-sm-9 col-xs-12">
           <select name="status" class="form-control">
-            <option value="">--请选择--</option>
+            <option value="0">--请选择--</option>
             <option value="1" class="option">待审核</option>
             <option value="2">审核通过</option>
             <option value="3">审核未通过</option>
@@ -111,7 +114,7 @@
       <div class="ln_solid"></div>
       <div class="form-group">
         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-          <button type="button" href="###" id ="querysubmit"class="btn btn-success">查询</button>
+          <button type="button" id ="querysubmit"class="btn btn-success">查询</button>
         </div>
       </div>
 
