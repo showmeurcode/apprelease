@@ -90,11 +90,11 @@ public class AppInfoController {
                         "                      <span class='caret'></span>" +
                         "                    </button>" +
                         "                    <ul class='dropdown-menu' role='menu'>"+
-                        "<li><a href='#'>新增版本</a> </li>"+
-                        "<li><a href='#' >修改版本</a> </li>"+
-                        "<li><a href='###' class='changeApp'>修改</a> </li>"+
-                        "<li><a href='#'>删除</a> </li>"+
-                        "<li><a href='#'>查看</a> </li>"
+                        "<li><a href='###' id='"+info.getId()+"' class='addAppVersion'>新增版本</a> </li>"+
+                        "<li><a href='###' id='"+info.getId()+"' class='changeAppVersion'>修改版本</a> </li>"+
+                        "<li><a href='###' id='"+info.getId()+"' class='changeApp'>修改</a> </li>"+
+                        "<li><a href='###' id='"+info.getId()+"' class='deleteApp'>删除</a> </li>"+
+                        "<li><a href='###' id='"+info.getId()+"' class='viewApp'>查看</a> </li>"
                 );
                 if (info.getStatus()==5){
                     html.append("<li><a href='#'>上架</a> </li>");
