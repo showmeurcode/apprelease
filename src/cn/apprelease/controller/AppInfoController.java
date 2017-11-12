@@ -6,7 +6,6 @@ import cn.apprelease.pojo.AppVersion;
 import cn.apprelease.service.app_category.AppCategoryService;
 import cn.apprelease.service.app_info.AppInfoService;
 import cn.apprelease.service.version.AppVersionService;
-import cn.apprelease.tools.PageSupport;
 import cn.apprelease.tools.DictionaryUtil;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;

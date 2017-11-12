@@ -23,7 +23,7 @@
 	<delete id="delAppInfo" parameterType="Integer">
 		DELETE FROM `app_info` WHERE `id`=#{id}
 	</delete>
-	
+
 	<!--——————————————————————————————————改 ———————————————————————————————————————————————— -->
 	<!-- 修改分类 -->
 	<update id="updateAppInfo" parameterType="AppInfo">
