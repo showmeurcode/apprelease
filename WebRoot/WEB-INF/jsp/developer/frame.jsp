@@ -56,7 +56,7 @@
                     </div>
                     <div class="profile_info">
                         <span>欢迎,</span>
-                        <h2>某某某</h2>
+                        <h2>${sessionScope.devUserSession.devName}</h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -136,7 +136,7 @@
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
-                                <img src="images/img.jpg" alt="">John Doe
+                                <img src="images/img.jpg" alt="">${sessionScope.devUserSession.devName}
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
