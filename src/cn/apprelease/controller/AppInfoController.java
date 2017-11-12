@@ -96,7 +96,7 @@ public class AppInfoController {
                         "<li><a href='###' id='"+info.getId()+"' class='deleteApp'>删除</a> </li>"+
                         "<li><a href='###' id='"+info.getId()+"' class='viewApp'>查看</a> </li>"
                 );
-                if (info.getStatus()==5){
+                if (info.getStatus()==5||info.getStatus()==2){
                     html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>上架</a> </li>");
                 }
                 if (info.getStatus()==4){

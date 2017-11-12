@@ -295,16 +295,18 @@
 <!-- Custom Theme Scripts -->
 <script src="../build/js/custom.min.js"></script>
 <input type="hidden" id="rootpath" value="${pageContext.request.contextPath}">
+<input type="hidden" id="devUserId" value="${sessionScope.devUserSession.id}">
 <script type="text/javascript">
     $(function () {
 //        ===============================尹晓晨 分页显示app列表，按级显示查询条件，并按条件查询app================================================================
         var rootpath=$("#rootpath").val();//获取根路径
+        var devUserId=$("#devUserId").val();//获取根路径
         var params="";//声明关联查询条件的全局变量
         var table;
         function showApps () {//根据页码显示app列表
-            var data="";
+            var data="devId="+devUserId;
             if(params!=""){
-                data=params;
+                data+="&"+params;
             }
             $.ajax({
                 type:"GET",
@@ -382,7 +384,12 @@
             params=$("#queryform").serialize();
             table.destroy();
             showApps ();
-        })
+        });
+        //        ====================================尹晓晨APP上下架操作==================================================================
+
+
+
+
 
 
 //        ==========================================================张玮钰==================================================================
