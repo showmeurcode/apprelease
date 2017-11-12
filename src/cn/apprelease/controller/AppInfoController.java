@@ -97,10 +97,10 @@ public class AppInfoController {
                         "<li><a href='###' id='"+info.getId()+"' class='viewApp'>查看</a> </li>"
                 );
                 if (info.getStatus()==5){
-                    html.append("<li><a href='#'>上架</a> </li>");
+                    html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>上架</a> </li>");
                 }
                 if (info.getStatus()==4){
-                    html.append("<li><a href='#'>下架</a> </li>");
+                    html.append("<li><a href='###' id='"+info.getId()+"' class='putoffApp'>下架</a> </li>");
                 }
                 html.append("</ul>" +
                         "                  </div>" +
