@@ -10,6 +10,7 @@ import cn.apprelease.tools.PageSupport;
 import cn.apprelease.tools.DictionaryUtil;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -119,10 +120,31 @@ public class AppInfoController {
         return  html.toString();
     }
 
+//===================================================================李高珊工作区==============================================================\\
 
+    @RequestMapping(value = "/changeApp")
+    public String changeApp(Model model, Integer id){
 
+        AppInfo appInfo = new AppInfo();
+        appInfo.setId(id);
+        List<AppInfo> list = new ArrayList<AppInfo>();
 
+        try {
+            list = appInfoService.findAppInfoByAppInfo(appInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (list !=null && list.size() != 0) {
+            appInfo = list.get(0);
+        } else {
+            appInfo = null;
+        }
 
+        model.addAttribute("appInfo",appInfo);
+
+        return "developer/appchange";
+
+    }
 
 
 

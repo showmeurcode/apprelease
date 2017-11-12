@@ -402,13 +402,27 @@
 
 //        ==============================================================李高珊==============================================================
 
-        $("#changeApp").click(function () {
 
-            $("#Content").load("${pageContext.request.contextPath}/statics/templet/appchage.jsp  #Content>*");
+        $(".changeApp").click(function () {
 
-            var appid = this.attr("appid");
+            alert("adkjf");
 
-            $.getJSON("/appInfo/change","id="+appid);
+            <%--$("#Content").load("${pageContext.request.contextPath}/appInfo//changeApp  #Content>*");--%>
+
+            <%--var appId=$(".changeApp").attr("id");--%>
+
+            <%--var data="appId="+appId;--%>
+
+            <%--$.ajax({--%>
+                <%--type:"GET",--%>
+                <%--url:rootpath+"/appInfo/changeApp",--%>
+                <%--data:data,--%>
+                <%--dataType:"html",--%>
+                <%--success:function (data) {--%>
+                    <%--$("#Content").html(data)--%>
+
+                <%--}--%>
+            <%--});--%>
 
         });
 
