@@ -84,6 +84,7 @@
                     <input id="softwareName" class="form-control col-md-7 col-xs-12"
                            name="softwareName" placeholder="请输入文件名称"
                            required="required" type="text">
+                    <span id="yzname"></span>
                   </div>
                 </div>
                 <div class="item form-group">
@@ -94,6 +95,7 @@
                     <input type="text" id="APKName" name="APKName" required="required"
                            placeholder="请输入APK名称"
                            class="form-control col-md-7 col-xs-12">
+                    <span id=""></span>
                   </div>
                 </div>
                 <div class="item form-group">
@@ -104,6 +106,7 @@
                     <input type="text" id="supportROM" name="supportROM"
                            required="required" placeholder="请输入支持的ROM"
                            class="form-control col-md-7 col-xs-12">
+                    <span id="yzROM"></span>
                   </div>
                 </div>
                 <div class="item form-group">
@@ -114,6 +117,7 @@
                     <input type="text" id="interfaceLanguage" name="interfaceLanguage"
                            required="required" placeholder="请输入软件支持的界面语言"
                            class="form-control col-md-7 col-xs-12">
+                    <span id="yzlanguage"></span>
                   </div>
                 </div>
                 <div class="item form-group">
@@ -124,6 +128,7 @@
                     <input type="text" id="softwareSize" name="softwareSize"
                            required="required" placeholder="请输入软件大小，单位是Mb"
                            class="form-control col-md-7 col-xs-12">
+                    <span id="yzSize"></span>
                   </div>
                 </div>
                 <div class="item form-group">
