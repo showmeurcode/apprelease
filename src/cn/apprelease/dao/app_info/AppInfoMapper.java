@@ -19,7 +19,7 @@ public interface AppInfoMapper {
      * @param appInfo
      * @return
      */
-    int addAppInfo(@Param("appInfo") AppInfo appInfo)throws  Exception;
+    int addAppInfo( AppInfo appInfo)throws  Exception;
 
     /**
      * 删除app信息
@@ -33,7 +33,7 @@ public interface AppInfoMapper {
      * @param appInfo
      * @return
      */
-    int updateAppInfo(@Param("appInfo") AppInfo appInfo)throws  Exception;
+    int updateAppInfo(AppInfo appInfo)throws  Exception;
 
     /**
      * 根据app信息查找app

@@ -52,7 +52,7 @@ public class AppCategoryController {
 
     @RequestMapping("/showsonlevel.json")
     @ResponseBody
-    public List<AppCategory> showSonLevel(@RequestParam("parentId")String parentId){//显示所有的一级分类
+    public List<AppCategory> showSonLevel(@RequestParam("parentId")String parentId){//显示子分类
         List<AppCategory> sonappCategoryList=null;
         try {
             sonappCategoryList = appCategoryService.findAppCategorysByParentId(Integer.parseInt(parentId));

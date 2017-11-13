@@ -39,7 +39,7 @@ public interface AppCategoryMapper {
      * @param appCategory
      * @return
      */
-    List<AppCategory> findAppcategoryByAppCategoryInfo(@Param("appCategory") AppCategory appCategory)throws  Exception;
+    List<AppCategory> findAppcategoryByAppCategoryInfo(AppCategory appCategory)throws  Exception;
 
     AppCategory findAppCategoryByid(@Param("id") Integer id) throws  Exception;
     //查找父级id为某id的分类列表

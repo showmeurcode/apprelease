@@ -44,7 +44,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>APP发布系统</span></a>
+                    <a href="###" class="site_title"><i class="fa fa-paw"></i> <span>APP发布系统</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -215,6 +215,7 @@
 
 <!-- Datatables -->
 <script src="${pageContext.request.contextPath }/statics/js/jquery.dataTables.js"></script>
+<script src="${pageContext.request.contextPath }/statics/js/jquery.pjax.js"></script>
 <script src="${pageContext.request.contextPath }/statics/js/dataTables.bootstrap.js"></script>
 <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
 <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
@@ -254,7 +255,6 @@
                 dataType:"html",
                 success:function (data) {
                     $("#apptobody").html(data)
-
                     table=$('#listTable').DataTable({
                         "bLengthChange": false, //是否显示修改显示数据数量的菜单
                         "iDisplayLength": 5,//设置每页默认显示多少数据
@@ -290,7 +290,15 @@
         }
         $("#showAllApps").click(function () {
             params="";// 全局变量归0
-            $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*")
+            $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
+            /*$.pjax({
+                url: '${pageContext.request.contextPath}/appCategory/showlevelmethod2',
+                container: '#Content',//本网页的容器
+                maxCacheLength:20,//缓存历史页面数
+                cache: true,
+                fragment: "#Content",//目标网页的容器
+                timeout: 8000
+            });*/
             showApps ();//显示所有app列表(后台拼接html法)
         });
 
@@ -316,7 +324,6 @@
                     }
                 }
             });
-
         });
         // 查询按钮点击时，赋予全局变量param新的值（关联查询条件），紧接着进行查询获取数据
         $("body").on("click", "#querysubmit",function () {
@@ -325,7 +332,24 @@
             showApps ();
         });
         //        ====================================尹晓晨APP上下架操作==================================================================
+        $("body").on("click", ".putonApp,.putoffApp",function () {
+            var className= $(this).attr("class");
+            var appInfoId= $(this).attr("id");
+            var $this=$(this);
+            var data="className="+className+"&id="+appInfoId;
+            $.ajax({
+                type:"GET",
+                url:rootpath+"/appInfo/putonandoff",
+                data:data,
+                dataType:"json",
+                success:function (data) {
+                    $this.html(data.option);//修改上架或下架选项
+                    $this.attr("class",data.className);//修改类名
+                    $this.parents("tr").find(".btn-success").html(data.statusName);//修改状态
 
+                }
+            });
+        });
 
 
 
