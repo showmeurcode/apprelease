@@ -21,4 +21,7 @@ public interface AppVersionMapper {
 
     //根据verionid查找version对象
     AppVersion findAppVersionByid(@Param("id")Integer id);
+
+    //根据appId 查找对应的版本信息列表
+    List<AppVersion> findAppVersionsByappId(@Param("appId") Integer appId)throws  Exception;
 }
