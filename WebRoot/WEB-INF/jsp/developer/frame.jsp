@@ -368,25 +368,11 @@
 
         $("body").on("click",".changeApp",function () {
 
-            alert("adkjf");
+            var appId=$(this).attr("id");
 
-            <%--$("#Content").load("${pageContext.request.contextPath}/appInfo//changeApp  #Content>*");--%>
+            $("#Content").load("${pageContext.request.contextPath}/appInfo/changeApp?id="+appId+"  #Content>*");
 
-            <%--var appId=$(".changeApp").attr("id");--%>
 
-            <%--var data="appId="+appId;--%>
-
-            <%--$.ajax({--%>
-            <%--type:"GET",--%>
-            <%--url:rootpath+"/appInfo/changeApp",--%>
-            <%--data:data,--%>
-            <%--dataType:"html",--%>
-            <%--success:function (data) {--%>
-            <%--$("#Content").html(data)--%>
-
-            <%--}--%>
-            <%--});--%>
-            
         })
 
 
