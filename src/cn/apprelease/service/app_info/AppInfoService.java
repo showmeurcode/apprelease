@@ -1,7 +1,6 @@
 package cn.apprelease.service.app_info;
 
 import cn.apprelease.pojo.AppInfo;
-import cn.apprelease.tools.PageSupport;
 
 import java.util.List;
 

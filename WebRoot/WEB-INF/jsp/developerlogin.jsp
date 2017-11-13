@@ -45,7 +45,7 @@
     <div class="login_wrapper">
         <div class="animate form login_form">
             <section class="login_content">
-                <form action="devuser/login" method="post">
+                <form action="${pageContext.request.contextPath }/devuser/login" method="post">
                     <h1>开发人员登录</h1>
                     <div>
                         <input  name="devCode" value="${devUser.devCode}" type="text" class="form-control" placeholder="用户名" aria-placeholder="请输入用户名" required="" />

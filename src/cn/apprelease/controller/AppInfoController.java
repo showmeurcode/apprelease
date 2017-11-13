@@ -6,7 +6,6 @@ import cn.apprelease.pojo.AppVersion;
 import cn.apprelease.service.app_category.AppCategoryService;
 import cn.apprelease.service.app_info.AppInfoService;
 import cn.apprelease.service.version.AppVersionService;
-import cn.apprelease.tools.PageSupport;
 import cn.apprelease.tools.DictionaryUtil;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -37,6 +36,7 @@ public class AppInfoController {
     @ResponseBody
     public Object showAllApps(AppInfo appInfo){
         StringBuffer html=new StringBuffer("");
+       /* html.append("开发者id是"+appInfo.getDevId());*/
         List <AppInfo> appInfoList =new ArrayList<>();
         try {
             appInfoList=appInfoService.findAppInfoByAppInfo(appInfo);

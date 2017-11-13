@@ -114,7 +114,7 @@
       <div class="ln_solid"></div>
       <div class="form-group">
         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-          <button type="button" id ="querysubmit"class="btn btn-success">查询</button>
+          <a type="button" href="##" id ="querysubmit"class="btn btn-success">查询</a>
         </div>
       </div>
 

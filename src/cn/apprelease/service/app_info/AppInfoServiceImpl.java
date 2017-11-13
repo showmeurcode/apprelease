@@ -2,7 +2,7 @@ package cn.apprelease.service.app_info;
 
 import cn.apprelease.dao.app_info.AppInfoMapper;
 import cn.apprelease.pojo.AppInfo;
-import cn.apprelease.tools.PageSupport;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
