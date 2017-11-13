@@ -5,6 +5,7 @@ import cn.apprelease.pojo.AppCategory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,23 +19,53 @@ public class AppCategoryServiceImpl implements AppCategoryService {
     private AppCategoryMapper appCategoryMapper;
 
     @Override
-    public int addAppCategory(AppCategory appCategory) {
+    public int addAppCategory(AppCategory appCategory)throws  Exception {
         return appCategoryMapper.addAppCategory(appCategory);
     }
 
     @Override
-    public int delAppCategory(Integer id) {
+    public int delAppCategory(Integer id)throws  Exception {
         return appCategoryMapper.delAppCategory(id);
     }
 
     @Override
-    public int updateAppCategory(AppCategory appCategory) {
+    public int updateAppCategory(AppCategory appCategory)throws  Exception {
         return appCategoryMapper.updateAppCategory(appCategory);
     }
 
     @Override
-    public List<AppCategory> findAppcategoryByAppCategoryInfo(AppCategory appCategory) {
-        return appCategoryMapper.findAppcategoryByAppCategoryInfo(appCategory);
+    public List<AppCategory> findAppcategoryByAppCategoryInfo(AppCategory appCategory)throws  Exception {
+        List<AppCategory> list = new ArrayList<AppCategory>();
+        list = appCategoryMapper.findAppcategoryByAppCategoryInfo(appCategory);
+        if(list.size() == 0){
+            list = null;
+        }
+        return list;
+    }
+
+    @Override
+    public AppCategory findAppCategoryByid(Integer id) throws Exception {
+        return  appCategoryMapper.findAppCategoryByid(id);
+    }
+
+    @Override
+    public List<AppCategory> findAppCategorysByParentId(Integer parentId) throws Exception {
+        List<AppCategory> list = new ArrayList<AppCategory>();
+        list = appCategoryMapper.findAppCategorysByParentId(parentId);
+        if(list.size() == 0){
+            list = null;
+        }
+        return list;
+    }
+
+    @Override
+    public List<AppCategory> findAppCategorysBylevel(Integer level) throws Exception {
+        List<AppCategory> list = new ArrayList<AppCategory>();
+        list = appCategoryMapper.findAppCategorysBylevel(level);
+        if(list.size() == 0){
+            list = null;
+        }
+        return list;
     }
 
 

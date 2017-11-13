@@ -1,26 +1,35 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+  String path = request.getContextPath();
+  String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentellela Alela! | </title>
+  <title>Gentellela Alela! | </title>
+  <!-- Bootstrap -->
+  <link href="${pageContext.request.contextPath }/statics/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="${pageContext.request.contextPath }/statics/css/font-awesome.min.css" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="${pageContext.request.contextPath }/statics/css/nprogress.css" rel="stylesheet">
+  <!-- iCheck -->
+  <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
 
-    <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    
-    <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
-  </head>
+  <!-- Datatables -->
+  <link href="${pageContext.request.contextPath }/statics/css/dataTables.bootstrap.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath }/statics/css/jquery.dataTables.min.css" rel="stylesheet">
 
-  <body>
+</head>
+
+
+<body>
 
   <!--新增app内容区 -->
   <div id="Content" class="right_col" role="main" hidden>
@@ -60,7 +69,7 @@
             </div>
             <div class="x_content">
 
-              <form class="form-horizontal form-label-left" novalidate>
+              <form class="form-horizontal form-label-left" novalidate action="">
 
                 <p>请填写信息
 
@@ -193,18 +202,14 @@
                   <label class="control-label col-md-3 col-sm-3 col-xs-12"
                          for="appInfo">应用简介 <span class="required">*</span>
                   </label>
+
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <<<<<<< HEAD
-                    <textarea id="textarea" required="required" name="textarea"
-                              class="form-control col-md-7 col-xs-12"></textarea>
+                    <textarea id="appInfo" required="required" name="appInfo"
+                              class="form-control col-md-7 col-xs-12"
+                              placeholder="请输入本软件的相关信息，本信息作为软件的详细信息进行软件介绍。"></textarea>
                   </div>
-                  =======
-                  <textarea id="appInfo" required="required" name="appInfo"
-                            class="form-control col-md-7 col-xs-12"
-                            placeholder="请输入本软件的相关信息，本信息作为软件的详细信息进行软件介绍。">
-                                                        </textarea>
                 </div>
-            </div>
+
             <div class="item form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12"
                      for="logoPicPath">LOGO图片 <span class="required">*</span>
@@ -213,7 +218,7 @@
                 <input id="logoPicPath" type="file" name="logoPicPath" required="required"
                        class="optional form-control col-md-7 col-xs-12">
               </div>
-              >>>>>>> a65930d8b152914f21408164bde437a618351015
+
             </div>
             <div class="ln_solid"></div>
             <div class="form-group">

@@ -1,6 +1,7 @@
 package cn.apprelease.service.app_category;
 
 import cn.apprelease.pojo.AppCategory;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,28 +17,35 @@ public interface AppCategoryService {
      * @param appCategory
      * @return
      */
-    int addAppCategory(AppCategory appCategory);
+    int addAppCategory(AppCategory appCategory)throws  Exception;
 
     /**
      * 删除分类
      * @param id
      * @return
      */
-    int delAppCategory(Integer id);
+    int delAppCategory(Integer id)throws  Exception;
 
     /**
      * 修改分类
      * @param appCategory
      * @return
      */
-    int updateAppCategory(AppCategory appCategory);
+    int updateAppCategory(AppCategory appCategory)throws  Exception;
 
     /**
      * 根据分类信息查找分类
      * @param appCategory
      * @return
      */
-    List<AppCategory> findAppcategoryByAppCategoryInfo(AppCategory appCategory);
+    List<AppCategory> findAppcategoryByAppCategoryInfo(AppCategory appCategory)throws  Exception;
+
+    AppCategory findAppCategoryByid(@Param("id") Integer id) throws  Exception;
+
+    //查找父级id为某id的分类列表
+    List<AppCategory> findAppCategorysByParentId( Integer parentId) throws  Exception;
+    //查找某个等级的分类列表
+    List<AppCategory> findAppCategorysBylevel(  Integer level) throws  Exception;
 
 
 

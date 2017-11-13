@@ -50,10 +50,10 @@ public class DevUserController {
        return "developerlogin";
     }
 
-    @RequestMapping(value="/devuser/main")//拦截器  吧
-    public String main(){
-
-        return "developer/frame";
-    }
+//    @RequestMapping(value="/devuser/main")//拦截器
+//    public String main(){
+//
+//        return "developer/frame";
+//    }
 
 }
