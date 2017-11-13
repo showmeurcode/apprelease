@@ -95,7 +95,7 @@
                     <input type="text" id="APKName" name="APKName" required="required"
                            placeholder="请输入APK名称"
                            class="form-control col-md-7 col-xs-12">
-                    <span id=""></span>
+                    <span id="yzAPK"></span>
                   </div>
                 </div>
                 <div class="item form-group">
@@ -139,6 +139,7 @@
                     <input id="downloads" type="text" name="downloads"
                            placeholder="请输入下载次数" required="required"
                            class="optional form-control col-md-7 col-xs-12">
+                    <span id="yzloads"></span>
                   </div>
                 </div>
                 <div class="item form-group">
@@ -212,6 +213,7 @@
                     <textarea id="appInfo" required="required" name="appInfo"
                               class="form-control col-md-7 col-xs-12"
                               placeholder="请输入本软件的相关信息，本信息作为软件的详细信息进行软件介绍。"></textarea>
+                    <span id="yztext"></span>
                   </div>
                 </div>
 
@@ -242,7 +244,8 @@
   </div>
   <!-- /page content -->
 
-
+  <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/AppForm.js">  </script>
 
 
 

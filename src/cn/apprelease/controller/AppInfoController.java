@@ -150,7 +150,10 @@ public class AppInfoController {
     }
 
 
+    public Object showAddApps(AppInfo appInfo){
 
+        return "";
+    }
 
 
 

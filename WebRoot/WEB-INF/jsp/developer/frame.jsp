@@ -355,8 +355,9 @@
 
 //        ==========================================================张玮钰==================================================================
 
-
-
+        $("#addNewApp").click(function () {
+            $("#Content").load("${pageContext.request.contextPath}/statics/templet/appadd.jsp  #Content>*");
+        })
 
 
 
