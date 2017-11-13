@@ -63,7 +63,7 @@
                     </div>
                     <div class="x_content">
 
-                        <form class="form-horizontal form-label-left" novalidate action="/appInfo/update" method="post">
+                        <form class="form-horizontal form-label-left" novalidate action="${pageContext.request.contextPath}/appInfo/changeApp" method="post">
 
                             <p>请填写信息
 
