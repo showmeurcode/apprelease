@@ -69,7 +69,7 @@
             </div>
             <div class="x_content">
 
-              <form class="form-horizontal form-label-left" novalidate action="">
+              <form class="form-horizontal form-label-left" novalidate action="{pageContext.request.contextPath }/appInfo/addApp" method="post">
 
                 <p>请填写信息
 
@@ -244,7 +244,7 @@
   </div>
   <!-- /page content -->
 
-  <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.7.2.min.js"></script>
+
   <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/AppForm.js">  </script>
 
 
