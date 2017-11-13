@@ -3,6 +3,7 @@ package cn.apprelease.controller;
 import cn.apprelease.pojo.AppCategory;
 import cn.apprelease.pojo.AppInfo;
 import cn.apprelease.pojo.AppVersion;
+import cn.apprelease.pojo.DevUser;
 import cn.apprelease.service.app_category.AppCategoryService;
 import cn.apprelease.service.app_info.AppInfoService;
 import cn.apprelease.service.version.AppVersionService;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -156,10 +159,10 @@ public class AppInfoController {
 
 
     @RequestMapping(value = "/changeApp")
-    public String changeApp(Model model, Integer id){
+    public String changeApp(Model model, String id){
 
         AppInfo appInfo = new AppInfo();
-        appInfo.setId(id);
+        appInfo.setId(Integer.valueOf(id));
         List<AppInfo> list = new ArrayList<AppInfo>();
 
         try {
@@ -173,10 +176,47 @@ public class AppInfoController {
             appInfo = null;
         }
 
+
+        List<AppCategory> appCategory1List=null;
+        List<AppCategory> appCategory2List=null;
+        List<AppCategory> appCategory3List=null;
+
+        try {
+            //所有一级分类
+            appCategory1List=appCategoryService.findAppCategorysBylevel(1);
+            //所有二级分类
+            appCategory2List=appCategoryService.findAppCategorysBylevel(2);
+            //所有三级分类
+            appCategory3List=appCategoryService.findAppCategorysBylevel(3);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         model.addAttribute("appInfo",appInfo);
+        model.addAttribute("appCategory1List",appCategory1List);
+        model.addAttribute("appCategory2List",appCategory2List);
+        model.addAttribute("appCategory3List",appCategory3List);
 
         return "developer/appchange";
 
+    }
+
+
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public String updateAppInfo(AppInfo appInfo, HttpSession session){
+        appInfo.setModifyBy(((DevUser)session.getAttribute("devUserSession")).getId());
+        appInfo.setModifyDate(new Date());
+        int result = 0;
+        try {
+            result = appInfoService.updateAppInfo(appInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(result > 0){
+            return "developer/applist";
+        }
+        return "developer/appchange";
     }
 
 //—————————————————————————————————————————————————张玮钰———————————————————————————————————————————————————————————————

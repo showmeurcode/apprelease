@@ -371,30 +371,14 @@
 
 //        ==============================================================李高珊==============================================================
 
+        $("body").on("click",".changeApp",function () {
 
-        $(".changeApp").click(function () {
+            var appId=$(this).attr("id");
 
-            alert("adkjf");
+            $("#Content").load("${pageContext.request.contextPath}/appInfo/changeApp?id="+appId+"  #Content>*");
 
-            <%--$("#Content").load("${pageContext.request.contextPath}/appInfo//changeApp  #Content>*");--%>
 
-            <%--var appId=$(".changeApp").attr("id");--%>
-
-            <%--var data="appId="+appId;--%>
-
-            <%--$.ajax({--%>
-                <%--type:"GET",--%>
-                <%--url:rootpath+"/appInfo/changeApp",--%>
-                <%--data:data,--%>
-                <%--dataType:"html",--%>
-                <%--success:function (data) {--%>
-                    <%--$("#Content").html(data)--%>
-
-                <%--}--%>
-            <%--});--%>
-
-        });
-
+        })
 
 
 
