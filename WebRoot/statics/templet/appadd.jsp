@@ -69,7 +69,7 @@
             </div>
             <div class="x_content">
 
-              <form class="form-horizontal form-label-left" novalidate action="">
+              <form class="form-horizontal form-label-left" novalidate action="{pageContext.request.contextPath }/appInfo/addApp" method="post">
 
                 <p>请填写信息
 
@@ -84,6 +84,7 @@
                     <input id="softwareName" class="form-control col-md-7 col-xs-12"
                            name="softwareName" placeholder="请输入文件名称"
                            required="required" type="text">
+                    <span id="yzname"></span>
                   </div>
                 </div>
                 <div class="item form-group">
@@ -94,6 +95,7 @@
                     <input type="text" id="APKName" name="APKName" required="required"
                            placeholder="请输入APK名称"
                            class="form-control col-md-7 col-xs-12">
+                    <span id="yzAPK"></span>
                   </div>
                 </div>
                 <div class="item form-group">
@@ -104,6 +106,7 @@
                     <input type="text" id="supportROM" name="supportROM"
                            required="required" placeholder="请输入支持的ROM"
                            class="form-control col-md-7 col-xs-12">
+                    <span id="yzROM"></span>
                   </div>
                 </div>
                 <div class="item form-group">
@@ -114,6 +117,7 @@
                     <input type="text" id="interfaceLanguage" name="interfaceLanguage"
                            required="required" placeholder="请输入软件支持的界面语言"
                            class="form-control col-md-7 col-xs-12">
+                    <span id="yzlanguage"></span>
                   </div>
                 </div>
                 <div class="item form-group">
@@ -124,6 +128,7 @@
                     <input type="text" id="softwareSize" name="softwareSize"
                            required="required" placeholder="请输入软件大小，单位是Mb"
                            class="form-control col-md-7 col-xs-12">
+                    <span id="yzSize"></span>
                   </div>
                 </div>
                 <div class="item form-group">
@@ -134,6 +139,7 @@
                     <input id="downloads" type="text" name="downloads"
                            placeholder="请输入下载次数" required="required"
                            class="optional form-control col-md-7 col-xs-12">
+                    <span id="yzloads"></span>
                   </div>
                 </div>
                 <div class="item form-group">
@@ -207,6 +213,7 @@
                     <textarea id="appInfo" required="required" name="appInfo"
                               class="form-control col-md-7 col-xs-12"
                               placeholder="请输入本软件的相关信息，本信息作为软件的详细信息进行软件介绍。"></textarea>
+                    <span id="yztext"></span>
                   </div>
                 </div>
 
@@ -238,6 +245,7 @@
   <!-- /page content -->
 
 
+  <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/AppForm.js">  </script>
 
 
 

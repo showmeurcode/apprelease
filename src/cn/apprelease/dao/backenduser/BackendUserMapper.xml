@@ -48,7 +48,7 @@
 
     <!--——————————————————————————————————查 ———————————————————————————————————————————————— -->
 
-    <select id="findUserByname" parameterType="BackendUser">
+    <select id="findUserByname" resultType="BackendUser">
       SELECT * FROM  backend_user WHERE userName=#{userName};
 
     </select>
@@ -60,13 +60,16 @@
         select * from backend_user u
         WHERE u.userCode=#{userCode}  and u.userPassword = #{userPassword}
     </select>
-
-    <select id="getfindAllBackendUser" parameterType="BackendUser">
-
+    <select id="getfindAllBackendUser" resultType="cn.apprelease.pojo.BackendUser">
         SELECT * FROM backend_user
-
     </select>
 
+    <!-- <select id="getfindAllBackendUser" parameterType="BackendUser">
+
+
+
+     </select>
+ -->
 
 
 

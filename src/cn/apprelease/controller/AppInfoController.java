@@ -179,9 +179,21 @@ public class AppInfoController {
 
     }
 
+//—————————————————————————————————————————————————张玮钰———————————————————————————————————————————————————————————————
+    @RequestMapping(value = "/addApp")
+    public String addApp(AppInfo appInfo){
+        int add=0;
+        try {
+            add=appInfoService.addAppInfo(appInfo);
+            if(add>0){
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 
 
-
-
-
+//————————————————————————————————————————————————孔祥忠————————————————————————————————————————————————————————————————
 }
