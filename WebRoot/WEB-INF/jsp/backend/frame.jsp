@@ -43,7 +43,7 @@
               </div>
               <div class="profile_info">
                 <span>欢迎,</span>
-                <h2>某某某</h2>
+                <h2>${sessionScope.backendUserSession.userName}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -101,7 +101,7 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout">
+              <a data-toggle="tooltip" data-placement="top" title="登出" href="${pageContext.request.contextPath }/backenduser/Bloginout">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -132,7 +132,7 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="Blogin.html"><i class="fa fa-sign-out pull-right"></i>登出</a></li>
                   </ul>
                 </li>
 
@@ -211,7 +211,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>欢迎你：系统管理员 <small>xxxxxxxxxx</small>，请在左侧选择操作</h3>
+                <h3>欢迎你：系统管理员 <small>${sessionScope.backendUserSession.userName}</small>，请在左侧选择操作</h3>
               </div>
             </div>
           </div>
