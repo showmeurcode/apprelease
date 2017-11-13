@@ -18,15 +18,7 @@
         </listener-class>
     </listener>
 
-    <!--指定spring配置文件所在位置，并配置contextloaderlistener监听-->
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:applicationContext-mybatis.xml</param-value>
-    </context-param>
 
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
     <!--  配置字符编码过滤器-->
    <filter>
         <filter-name>encodingFilter</filter-name>
@@ -65,4 +57,13 @@
         <param-name>webAppRootKey</param-name>
         <param-value>apprelease.root</param-value>
     </context-param>
+    <!--指定spring配置文件所在位置，并配置contextloaderlistener监听-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext-*.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 </web-app>
