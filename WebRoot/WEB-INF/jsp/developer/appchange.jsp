@@ -244,6 +244,7 @@
 </div>
 <!-- /page content -->
 
+<script src="${pageContext.request.contextPath }/statics/js/AppForm.js"></script>
 
 </body>
 </html>
