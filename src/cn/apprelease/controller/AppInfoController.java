@@ -122,33 +122,14 @@ public class AppInfoController {
 
 //===================================================================李高珊工作区==============================================================\\
 
-<<<<<<< HEAD
-    @RequestMapping(value = "/changeApp")
-    public String changeApp(Model model, Integer id){
 
-        AppInfo appInfo = new AppInfo();
-        appInfo.setId(id);
-        List<AppInfo> list = new ArrayList<AppInfo>();
-
-        try {
-            list = appInfoService.findAppInfoByAppInfo(appInfo);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (list !=null && list.size() != 0) {
-            appInfo = list.get(0);
-        } else {
-            appInfo = null;
-        }
-
-        model.addAttribute("appInfo",appInfo);
 
     @RequestMapping("/putonandoff")
     @ResponseBody
     public  Object putOnAndOff(AppInfo appInfo,@RequestParam("className")String className ){//app上下架
         String JSON="";
         List<AppInfo> appInfos=new ArrayList<>();
-       AppInfo nowAppInfo=null;
+        AppInfo nowAppInfo=null;
         try {
             nowAppInfo = appInfoService.findAppInfoByAppInfo(appInfo).get(0);
         } catch (Exception e) {
@@ -173,10 +154,30 @@ public class AppInfoController {
     }
 
 
+
+    @RequestMapping(value = "/changeApp")
+    public String changeApp(Model model, Integer id){
+
+        AppInfo appInfo = new AppInfo();
+        appInfo.setId(id);
+        List<AppInfo> list = new ArrayList<AppInfo>();
+
+        try {
+            list = appInfoService.findAppInfoByAppInfo(appInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (list !=null && list.size() != 0) {
+            appInfo = list.get(0);
+        } else {
+            appInfo = null;
+        }
+
+        model.addAttribute("appInfo",appInfo);
+
         return "developer/appchange";
 
     }
-
 
 
 
