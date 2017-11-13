@@ -44,7 +44,7 @@
 
 	</mvc:annotation-driven>
 
-	<!--配置静态资源路径并设置映射--> 
+	<!--配置静态资源路径并设置映射-->
 	<mvc:resources location="/statics/" mapping="/statics/**"/>
 
 	<!-- 配置多视图解析器：允许同样的内容数据呈现不同的view -->
