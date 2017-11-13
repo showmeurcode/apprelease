@@ -47,20 +47,25 @@
             <section class="login_content">
                 <form action="${pageContext.request.contextPath }/devuser/login" method="post">
                     <h1>开发人员登录</h1>
+                    <font color="#c00fff">*</font>
+                    <div style="display: inline; color:red">
+                        ${error}
+                    </div>
                     <div>
-                        <input  name="devCode" value="${devUser.devCode}" type="text" class="form-control" placeholder="用户名" aria-placeholder="请输入用户名" required="" />
+                        <input  name="devCode" value="${devUser.devCode}" type="text" class="form-control" id="devCode" placeholder="用户名" aria-placeholder="请输入用户名" required="" />
                     </div>
                     <font color="#c00fff">*</font>
-                    <div id="nameDiv" style="display: inline; color:red"></div>
+                    <div id="devCodeDiv" style="display: inline; color:red"></div>
 
                     <div>
-                        <input name="devPassword" type="password" class="form-control" placeholder="密码" i aria-placeholder="请输入密码" required="" />
+                        <input name="devPassword" value="${devUser.devPassword}" type="password" id="password" class="form-control" placeholder="密码"  aria-placeholder="请输入密码" required="" />
                     </div>
                     <font color="#c00fff">*</font>
                     <div id="passwordDiv" style="display: inline; color:red"></div>
                     <div>
 
                         <input type="submit" value="登录">
+                        <input type="reset" value="重置"/>
                         <a class="reset_pass" href="#">忘记密码?</a>
                     </div>
 
@@ -130,12 +135,12 @@
         })
 
 
-            $("#name").blur(function(){
+            $("#devCode").blur(function(){
 
-                var name = $(this).val();
+                var devCode = $(this).val();
 
-                if (name == null || name == "") {
-                    $("#nameDiv").html("用户名不能为空！");
+                if (devCode == null || devCode == "") {
+                    $("#devCodeDiv").html("用户名不能为空！");
                 }
 
             })
