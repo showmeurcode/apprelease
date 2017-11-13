@@ -185,13 +185,16 @@ public class AppInfoController {
         int add=0;
         try {
             add=appInfoService.addAppInfo(appInfo);
-            if(add>0){
 
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        if(add>0){
+            return "developer/applist";
+        }else {
+            return "developer/appadd";
+        }
+
     }
 
 
