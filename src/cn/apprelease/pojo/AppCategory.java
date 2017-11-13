@@ -14,6 +14,8 @@ public class AppCategory {
     private String categoryCode;
     //分类名称
     private String categoryName;
+    //代表几级分类，123分别代表123级
+    private  Integer level;
     //父级节点id
     private int parentId;
     //创建者（来源于backend_user用户表的用户id）
@@ -24,6 +26,14 @@ public class AppCategory {
     private  int modifyBy;
     //最新更新时间
     private Date modifyDate;
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
 
     public int getId() {
         return id;

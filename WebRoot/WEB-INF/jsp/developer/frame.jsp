@@ -44,7 +44,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>APP发布系统</span></a>
+                    <a href="###" class="site_title"><i class="fa fa-paw"></i> <span>APP发布系统</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -56,7 +56,7 @@
                     </div>
                     <div class="profile_info">
                         <span>欢迎,</span>
-                        <h2>某某某</h2>
+                        <h2>${sessionScope.devUserSession.devName}</h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -136,7 +136,7 @@
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
-                                <img src="images/img.jpg" alt="">John Doe
+                                <img src="images/img.jpg" alt="">${sessionScope.devUserSession.devName}
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -152,71 +152,7 @@
                             </ul>
                         </li>
 
-                        <li role="presentation" class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
-                               aria-expanded="false">
-                                <i class="fa fa-envelope-o"></i>
-                                <span class="badge bg-green">6</span>
-                            </a>
-                            <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                                <li>
-                                    <a>
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image"/></span>
-                                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image"/></span>
-                                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image"/></span>
-                                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image"/></span>
-                                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="text-center">
-                                        <a>
-                                            <strong>See All Alerts</strong>
-                                            <i class="fa fa-angle-right"></i>
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
+
                     </ul>
                 </nav>
             </div>
@@ -232,17 +168,17 @@
 
 
 
-            <!-- 欢迎页内容区 -->
-            <div id="Content" class="right_col" role="main">
+        <!-- 欢迎页内容区 -->
+        <div id="Content" class="right_col" role="main">
 
-                <h3>欢迎登录app发布系统
-                    <small>xxxxxxxxxx</small>
-                    ，请在左侧选择操作
-                </h3>
+            <h3>欢迎登录app发布系统
+                <small>${sessionScope.devUserSession.devName}</small>
+                ，请在左侧选择操作
+            </h3>
 
 
-            </div>
-            <!-- /page content -->
+        </div>
+        <!-- /page content -->
 
 
 
@@ -277,6 +213,7 @@
 
 <!-- Datatables -->
 <script src="${pageContext.request.contextPath }/statics/js/jquery.dataTables.js"></script>
+<script src="${pageContext.request.contextPath }/statics/js/jquery.pjax.js"></script>
 <script src="${pageContext.request.contextPath }/statics/js/dataTables.bootstrap.js"></script>
 <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
 <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
@@ -294,40 +231,151 @@
 
 <!-- Custom Theme Scripts -->
 <script src="../build/js/custom.min.js"></script>
-
-
 <input type="hidden" id="rootpath" value="${pageContext.request.contextPath}">
-
+<input type="hidden" id="devUserId" value="${sessionScope.devUserSession.id}">
 <script type="text/javascript">
     $(function () {
+//        ===============================尹晓晨 分页显示app列表，按级显示查询条件，并按条件查询app================================================================
+        var rootpath=$("#rootpath").val();//获取根路径
+        var devUserId=$("#devUserId").val();//获取根路径
+        var params="";//声明关联查询条件的全局变量
+        var table;
+        function showApps () {//根据页码显示app列表
+            var data="devId="+devUserId;
+            /* alert(data)*/
+            if(params!=""){
+                data+="&"+params;
+            }
+            $.ajax({
+                type:"GET",
+                url:rootpath+"/appInfo/showAllApps",
+                data:data,
+                dataType:"html",
+                success:function (data) {
+                    $("#apptobody").html(data)
+                    table=$('#listTable').DataTable({
+                        "bLengthChange": false, //是否显示修改显示数据数量的菜单
+                        "iDisplayLength": 5,//设置每页默认显示多少数据
+                        searching : false, //去掉搜索框方法一：百度上的方法，但是我用这没管用
+                        language: {
+                            "sProcessing": "处理中...",
+                            "sLengthMenu": "显示 _MENU_ 项结果",
+                            "sZeroRecords": "没有匹配结果",
+                            "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                            "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                            "sInfoPostFix": "",
+                            "sSearch": "搜索:",
+                            "sUrl": "",
+                            "sEmptyTable": "表中数据为空",
+                            "sLoadingRecords": "载入中...",
+                            "sInfoThousands": ",",
+                            "oPaginate": {
+                                "sFirst": "首页",
+                                "sPrevious": "上页",
+                                "sNext": "下页",
+                                "sLast": "末页"
+                            },
+                            "oAria": {
+                                "sSortAscending": ": 以升序排列此列",
+                                "sSortDescending": ": 以降序排列此列"
+                            }
+                        }
+                    });
+                }
+            });
 
-
-    })
-
-</script>
-
-
-<script type="text/javascript">
-    $(function () {
-//        ============================================================尹晓晨================================================================        var $Content =$("#Content");
+        }
         $("#showAllApps").click(function () {
+            params="";// 全局变量归0
+            $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
+            /*$.pjax({
+                url: '${pageContext.request.contextPath}/appCategory/showlevelmethod2',
+                container: '#Content',//本网页的容器
+                maxCacheLength:20,//缓存历史页面数
+                cache: true,
+                fragment: "#Content",//目标网页的容器
+                timeout: 8000
+            });*/
+            showApps ();//显示所有app列表(后台拼接html法)
+        });
 
-            $("#Content").load("${pageContext.request.contextPath}/statics/templet/applist.jsp  #Content>*")
-        })
+        // 注册点击的多级联动事件
+        $("body").on("change", ".levels",function () {//select选项改变使用.change（）事件
+            var value=$(this).find("option:checked").attr("value");
+            var $nowselect=$(this);
+            var $nextselect= $nowselect.parents(".form-group").next().find(".levels");
+            $.ajax({
+                type:"GET",
+                url:rootpath+"/appCategory/showsonlevel.json",
+                data:"parentId="+value,
+                dataType:"json",
+                success:function (data) {
+                    $nextselect.empty();
+                    $nextselect.append("<option value='0'>--请选择--</option>");
+                    if(data!=null&&data.length!=0){
+                        $.each(data,function (index,category) {
+                            /*  alert(category.categoryName);*/
+                            $nextselect.append(" <option value='"+category.id+"'>"+category.categoryName+"</option>")
+
+                        })
+                    }
+                }
+            });
+        });
+        // 查询按钮点击时，赋予全局变量param新的值（关联查询条件），紧接着进行查询获取数据
+        $("body").on("click", "#querysubmit",function () {
+            params=$("#queryform").serialize();
+            table.destroy();
+            showApps ();
+        });
+        //        ====================================尹晓晨APP上下架操作==================================================================
+        $("body").on("click", ".putonApp,.putoffApp",function () {
+            var className= $(this).attr("class");
+            var appInfoId= $(this).attr("id");
+            var $this=$(this);
+            var data="className="+className+"&id="+appInfoId;
+            $.ajax({
+                type:"GET",
+                url:rootpath+"/appInfo/putonandoff",
+                data:data,
+                dataType:"json",
+                success:function (data) {
+                    $this.html(data.option);//修改上架或下架选项
+                    $this.attr("class",data.className);//修改类名
+                    $this.parents("tr").find(".btn-success").html(data.statusName);//修改状态
+
+                }
+            });
+        });
+
+
+
 
 
 //        ==========================================================张玮钰==================================================================
 
-        $("#addNewApp").click(function () {
 
-            $("#Content").load("${pageContext.request.contextPath}/statics/templet/appadd.jsp  #Content>*")
-        })
 
 
 
 
 
 //        ==============================================================李高珊==============================================================
+
+        $("#changeApp").click(function () {
+
+            $("#Content").load("${pageContext.request.contextPath}/statics/templet/appchage.jsp  #Content>*");
+
+            var appid = this.attr("appid");
+
+            $.getJSON("/appInfo/change","id="+appid);
+
+        });
+
+
+
+
 
 
     })

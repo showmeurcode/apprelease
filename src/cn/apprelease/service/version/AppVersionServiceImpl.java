@@ -16,22 +16,22 @@ import java.util.List;
 public class AppVersionServiceImpl implements AppVersionService {
 
     @Resource
-    private AppVersionMapper versionMapper;
+    private AppVersionMapper appVersionMapper;
 
     @Override
-    public int addVersion(AppVersion appVersion) {
-        return versionMapper.addVersion(appVersion);
+    public int addVersion(AppVersion appVersion)throws  Exception {
+        return appVersionMapper.addVersion(appVersion);
     }
 
     @Override
-    public int updateVersion(AppVersion appVersion) {
-        return versionMapper.updateVersion(appVersion);
+    public int updateVersion(AppVersion appVersion)throws  Exception {
+        return appVersionMapper.updateVersion(appVersion);
     }
 
     @Override
-    public List<AppVersion> findAllAppVersions(AppVersion appVersion) {
+    public List<AppVersion> findAllAppVersions(AppVersion appVersion)throws  Exception {
         List<AppVersion> list  = new ArrayList<>();
-        list=versionMapper.findAllAppVersions(appVersion);
+        list=appVersionMapper.findAllAppVersions(appVersion);
         if(list.size()==0){
 
             list=null;
@@ -40,7 +40,12 @@ public class AppVersionServiceImpl implements AppVersionService {
     }
 
     @Override
-    public int deleteVersionById(AppVersion appVersion) {
-        return versionMapper.deleteVersionById(appVersion);
+    public int deleteVersionById(AppVersion appVersion)throws  Exception {
+        return appVersionMapper.deleteVersionById(appVersion);
+    }
+
+    @Override
+    public AppVersion findAppVersionByid(Integer id) {
+        return  appVersionMapper.findAppVersionByid(id);
     }
 }

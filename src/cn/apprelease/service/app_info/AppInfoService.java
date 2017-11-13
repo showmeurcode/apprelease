@@ -15,28 +15,28 @@ public interface AppInfoService {
      * @param appInfo
      * @return
      */
-    int addAppInfo(AppInfo appInfo);
+    int addAppInfo(AppInfo appInfo)throws  Exception;
 
     /**
      * 删除app信息
      * @param id
      * @return
      */
-    int delAppInfo(Integer id);
+    int delAppInfo(Integer id)throws  Exception;
 
     /**
      * 修改app信息
      * @param appInfo
      * @return
      */
-    int updateAppInfo(AppInfo appInfo);
+    int updateAppInfo(AppInfo appInfo)throws  Exception;
 
     /**
      * 根据app信息查找app
      * @param appInfo
      * @return
      */
-    List<AppInfo> findAppInfoByAppInfo(AppInfo appInfo);
+    List<AppInfo> findAppInfoByAppInfo(AppInfo appInfo) throws Exception;
 
-
+    int findAppinfoCounts() throws Exception;
 }

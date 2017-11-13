@@ -9,8 +9,8 @@
 	<!--——————————————————————————————————增 ———————————————————————————————————————————————— -->
 	<!-- 添加分类 -->
 	<insert id="addAppCategory" parameterType="AppCategory">
-		INSERT INTO `app_category` (`categoryCode`, `categoryName`, `parentId`, `createdBy`, `creationTime`)
-		VALUES (#{categoryCode}, #{categoryName}, #{parentId}, #{createdBy}, #{creationTime})
+		INSERT INTO `app_category` (level,`categoryCode`, `categoryName`, `parentId`, `createdBy`, `creationTime`)
+		VALUES (#{level},#{categoryCode}, #{categoryName}, #{parentId}, #{createdBy}, #{creationTime})
 	</insert>
 	
 	<!--——————————————————————————————————删 ———————————————————————————————————————————————— -->
@@ -22,7 +22,7 @@
 	<!--——————————————————————————————————改 ———————————————————————————————————————————————— -->
 	<!-- 修改分类 -->
 	<update id="updateAppCategory" parameterType="AppCategory">
-		UPDATE `app_category` SET `categoryCode`=#{categoryCode},`categoryName`=#{categoryName},
+		UPDATE `app_category` SET level=#{level} ,`categoryCode`=#{categoryCode},`categoryName`=#{categoryName},
 			`parentId`=#{parentId}, `modifyBy`=#{modifyBy}, `modifyDate`=#{modifyDate}
 		WHERE `id`=#{id}
 	</update>
@@ -38,9 +38,17 @@
 			<if test="categoryName != null and categoryName != ''">AND `categoryName` LIKE CONCAT('%',#{categoryName},'%')</if>
 		</where>
 	</select>
-	
-	
-	
+    <select id="findAppCategoryByid" resultType="cn.apprelease.pojo.AppCategory">
+		SELECT  *FROM app_category WHERE  id=#{id}
+	</select>
+	<select id="findAppCategorysByParentId" resultType="cn.apprelease.pojo.AppCategory">
+		SELECT  *FROM app_category WHERE parentId=#{parentId}
+	</select>
+	<select id="findAppCategorysBylevel" resultType="cn.apprelease.pojo.AppCategory">
+		SELECT  *FROM app_category WHERE level=#{level}
+	</select>
+
+
 	<!-- ————————————————————————————————cache配置————————————————————————————  -->
 	<cache eviction="FIFO" flushInterval="60000" size="512"  readOnly="true"/>
 	

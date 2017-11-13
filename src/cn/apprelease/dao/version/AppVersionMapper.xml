@@ -31,7 +31,7 @@
         WHERE id=#{id}
     </update>
     <!--——————————————————————————————————查 ———————————————————————————————————————————————— -->
-    <select id="findAllAppVersions" parameterType="AppVersion">
+    <select id="findAllAppVersions" parameterType="AppVersion" resultType="cn.apprelease.pojo.AppVersion">
         SELECT * FROM  app_version
         <where>
             <if test="id != null and id != ''">AND id=#{id}</if>
@@ -40,11 +40,9 @@
             <if test="publishStatus != null and publishStatus != ''">AND publishStatus=#{publishStatus}</if>
         </where>
     </select>
-
-
-
-
-
+    <select id="findAppVersionByid" resultType="cn.apprelease.pojo.AppVersion">
+        SELECT * FROM app_version WHERE id=#{id}
+    </select>
 
 
     <!-- ————————————————————————————————cache配置————————————————————————————  -->
