@@ -122,6 +122,7 @@ public class AppInfoController {
 
 //===================================================================李高珊工作区==============================================================\\
 
+<<<<<<< HEAD
     @RequestMapping(value = "/changeApp")
     public String changeApp(Model model, Integer id){
 
@@ -141,6 +142,36 @@ public class AppInfoController {
         }
 
         model.addAttribute("appInfo",appInfo);
+
+    @RequestMapping("/putonandoff")
+    @ResponseBody
+    public  Object putOnAndOff(AppInfo appInfo,@RequestParam("className")String className ){//app上下架
+        String JSON="";
+        List<AppInfo> appInfos=new ArrayList<>();
+       AppInfo nowAppInfo=null;
+        try {
+            nowAppInfo = appInfoService.findAppInfoByAppInfo(appInfo).get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(className.equals("putonApp")){//说明当前状态为审核通过或者已下架，等待上架
+            nowAppInfo.setStatus(4);
+            JSON="{\"className\":\"putoffApp\",\"option\":\"下架\",\"statusName\":\"已上架\"}";
+        }else{//说明当前状态为已上架，等待下架
+
+            nowAppInfo.setStatus(5);
+            JSON="{\"className\":\"putonApp\",\"option\":\"上架\",\"statusName\":\"已下架\"}";
+        }
+
+        try {
+            appInfoService.updateAppInfo(nowAppInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return JSON;
+    }
+
 
         return "developer/appchange";
 

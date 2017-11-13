@@ -32,7 +32,7 @@
   <body class="nav-md">
 
 
-
+   我就是事实
   <!-- app列表内容区 -->
   <div id="Content" class="right_col" role="main" >
 
@@ -154,54 +154,6 @@
               </tr>
               </thead>
               <tbody  id="apptobody">
-              <tr>
-                <td>关屏锁定</td>
-                <td>
-                  <a>guanpingsuoding</a>
-
-                </td>
-                <td>
-                  3.00m
-                </td>
-                <td class="project_progress">
-                  手机
-                </td>
-                <td>
-                  全部应用》》撒大声地》盛世嫡妃
-                </td>
-                <td>
-                  <button type="button" class="btn btn-success btn-xs">审核通过</button>
-                </td>
-                <td>
-                  30
-                </td>
-                <td>
-                  v1.1.2
-                </td>
-
-
-                <td>
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-                      点击操作
-                      <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-
-                      <li><a href="#">下架</a> </li>
-                      <li><a href="#">新增版本</a> </li>
-                      <li><a href="#">修改版本</a> </li>
-                      <li><a href="#">查看</a> </li>
-                      <li><a href="#">修改</a> </li>
-                      <li><a href="#">删除</a> </li>
-
-                    </ul>
-                  </div>
-                </td>
-
-
-              </tr>
-
 
               </tbody>
             </table>
