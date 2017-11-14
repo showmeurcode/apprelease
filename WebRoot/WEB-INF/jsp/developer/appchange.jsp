@@ -175,7 +175,6 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <select name="categoryLevel2" id="categoryLevel2"
                                             class="form-control col-md-7 col-xs-12" required="required">
-                                        <option value="0" selected>请选择</option> 
                                         <c:forEach items="${appCategory2List}" var="appCategory2">
                                             <option value="${appCategory2.id}" <c:if test="${appCategory2.id == appInfo.categoryLevel2}">selected</c:if>>${appCategory2.categoryName}</option>
                                         </c:forEach>
@@ -188,7 +187,6 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <select name="categoryLevel3" id="categoryLevel3"
                                             class="form-control col-md-7 col-xs-12" required="required">
-                                        <option value="0" selected>请选择</option> 
                                         <c:forEach items="${appCategory3List}" var="appCategory3">
                                             <option value="${appCategory3.id}" <c:if test="${appCategory3.id == appInfo.categoryLevel3}">selected</c:if>>${appCategory3.categoryName}</option>
                                         </c:forEach>
