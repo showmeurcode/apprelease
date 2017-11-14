@@ -46,4 +46,14 @@ public class AppInfoServiceImpl implements AppInfoService {
     public int findAppinfoCounts() throws Exception {
         return  appInfoMapper.findAppinfoCounts();
     }
+
+    @Override
+    public List<AppInfo> findAppInfobyStatus(AppInfo status) throws Exception {
+
+        List<AppInfo> list = new ArrayList<AppInfo>();
+
+        list = appInfoMapper.findAppInfobyStatus(status);
+
+        return list;
+    }
 }

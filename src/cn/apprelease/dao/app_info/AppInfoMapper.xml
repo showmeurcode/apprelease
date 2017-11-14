@@ -58,6 +58,11 @@
 	<select id="findAppinfoCounts" resultType="java.lang.Integer">
 		SELECT count(*) FROM app_info
 	</select>
+	<select id="findAppInfobyStatus" resultType="cn.apprelease.pojo.AppInfo">
+
+		SELECT * FROM app_info WHERE status=#{status}
+
+	</select>
 
 
 	<!-- ————————————————————————————————cache配置————————————————————————————  -->
