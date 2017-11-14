@@ -20,4 +20,7 @@ public interface AppVersionService {
     int deleteVersionById(AppVersion appVersion)throws  Exception;
 
     AppVersion findAppVersionByid(@Param("id")Integer id);
+
+    List<AppVersion> findAppVersionsByappId(Integer appId)throws  Exception;
+
 }

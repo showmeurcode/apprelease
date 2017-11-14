@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>APP开发者管理! | </title>
+    <title>APP开发者管理| </title>
 
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath }/statics/css/bootstrap.min.css" rel="stylesheet">
@@ -353,8 +353,17 @@
                 }
             });
         });
+//        ====================================尹晓晨新增app版本信息==================================================================
+        $("body").on("click", ".addAppVersion",function () {
+            var  appId= $(this).attr("id");
+            alert(appId);
+            $("#Content").load("${pageContext.request.contextPath}/appVersion/addAppVersion?appId="+appId+"  #Content>*");
 
 
+
+
+
+        });
 
 
 
@@ -368,30 +377,14 @@
 
 //        ==============================================================李高珊==============================================================
 
+        $("body").on("click",".changeApp",function () {
 
-        $(".changeApp").click(function () {
+            var appId=$(this).attr("id");
 
-            alert("adkjf");
+            $("#Content").load("${pageContext.request.contextPath}/appInfo/changeApp?id="+appId+"  #Content>*");
 
-            <%--$("#Content").load("${pageContext.request.contextPath}/appInfo//changeApp  #Content>*");--%>
 
-            <%--var appId=$(".changeApp").attr("id");--%>
-
-            <%--var data="appId="+appId;--%>
-
-            <%--$.ajax({--%>
-                <%--type:"GET",--%>
-                <%--url:rootpath+"/appInfo/changeApp",--%>
-                <%--data:data,--%>
-                <%--dataType:"html",--%>
-                <%--success:function (data) {--%>
-                    <%--$("#Content").html(data)--%>
-
-                <%--}--%>
-            <%--});--%>
-
-        });
-
+        })
 
 
 

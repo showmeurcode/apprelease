@@ -20,13 +20,14 @@
     <meta http-equiv="expires" content="0">
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="This is my page">
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 </head>
 <body>
 
 
 <!--修改app内容区 -->
-<div id="Content" class="right_col" role="main" hidden>
+<div id="Content" class="right_col" role="main" >
 
     <div class="">
         <div class="page-title">
@@ -63,7 +64,7 @@
                     </div>
                     <div class="x_content">
 
-                        <form class="form-horizontal form-label-left" novalidate action="/appInfo/update" method="post">
+                        <form class="form-horizontal form-label-left" novalidate action="${pageContext.request.contextPath}/appInfo/update" method="post">
 
                             <p>请填写信息
 
@@ -146,10 +147,10 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <select name="flatformId" id="flatformId"
                                             class="form-control col-md-7 col-xs-12" required="required">
-                                        <option value="0" selected>请选择</option> 
-                                        <option value="1">手机</option> 
-                                        <option value="2">平板</option> 
-                                        <option value="3">通用</option> 
+                                        <option value="0">请选择</option> 
+                                        <option value="1" <c:if test="${appInfo.flatformId == 1}">selected</c:if>>手机</option> 
+                                        <option value="2" <c:if test="${appInfo.flatformId == 2}">selected</c:if>>平板</option> 
+                                        <option value="3" <c:if test="${appInfo.flatformId == 3}">selected</c:if>>通用</option> 
                                     </select>
                                 </div>
                             </div>
@@ -159,10 +160,10 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <select name="categoryLevel1" id="categoryLevel1"
                                             class="form-control col-md-7 col-xs-12" required="required">
-                                        <option value="0" selected>请选择</option> 
-                                        <option value="1">手机</option> 
-                                        <option value="2">平板</option> 
-                                        <option value="3">通用</option> 
+                                        <option value="0">请选择</option> 
+                                        <c:forEach items="${appCategory1List}" var="appCategory1">
+                                            <option value="${appCategory1.id}" <c:if test="${appCategory1.id == appInfo.categoryLevel1}">selected</c:if>>${appCategory1.categoryName}</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
@@ -173,9 +174,9 @@
                                     <select name="categoryLevel2" id="categoryLevel2"
                                             class="form-control col-md-7 col-xs-12" required="required">
                                         <option value="0" selected>请选择</option> 
-                                        <option value="1">手机</option> 
-                                        <option value="2">平板</option> 
-                                        <option value="3">通用</option> 
+                                        <c:forEach items="${appCategory2List}" var="appCategory2">
+                                            <option value="${appCategory2.id}" <c:if test="${appCategory2.id == appInfo.categoryLevel2}">selected</c:if>>${appCategory2.categoryName}</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
@@ -186,9 +187,9 @@
                                     <select name="categoryLevel3" id="categoryLevel3"
                                             class="form-control col-md-7 col-xs-12" required="required">
                                         <option value="0" selected>请选择</option> 
-                                        <option value="1">手机</option> 
-                                        <option value="2">平板</option> 
-                                        <option value="3">通用</option> 
+                                        <c:forEach items="${appCategory3List}" var="appCategory3">
+                                            <option value="${appCategory3.id}" <c:if test="${appCategory3.id == appInfo.categoryLevel3}">selected</c:if>>${appCategory3.categoryName}</option>
+                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
@@ -197,8 +198,12 @@
                                        for="status">APP状态 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="status" name="status"
-                                           readonly value="${appInfo.status}"
+                                    <input type="text" id="status" name="status" readonly
+                                           <c:if test="${appInfo.status == 1}">value="待审核" </c:if>
+                                           <c:if test="${appInfo.status == 2}">value="审核通过" </c:if>
+                                           <c:if test="${appInfo.status == 3}">value="审核不通过" </c:if>
+                                           <c:if test="${appInfo.status == 4}">value="已上架" </c:if>
+                                           <c:if test="${appInfo.status == 5}">value="已下架" </c:if>
                                            class="form-control col-md-7 col-xs-12">
                                 </div>
                             </div>
