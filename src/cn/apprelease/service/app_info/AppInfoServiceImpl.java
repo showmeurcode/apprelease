@@ -3,6 +3,7 @@ package cn.apprelease.service.app_info;
 import cn.apprelease.dao.app_info.AppInfoMapper;
 import cn.apprelease.pojo.AppInfo;
 
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -45,5 +46,10 @@ public class AppInfoServiceImpl implements AppInfoService {
     @Override
     public int findAppinfoCounts() throws Exception {
         return  appInfoMapper.findAppinfoCounts();
+    }
+
+    @Override
+    public AppInfo findAppinfoByid(Integer id) throws Exception {
+        return appInfoMapper.findAppinfoByid(id);
     }
 }

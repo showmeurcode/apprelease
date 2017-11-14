@@ -34,6 +34,7 @@
 
     <!-- Custom Theme Style -->
     <link href="${pageContext.request.contextPath }/statics/css/custom.min.css" rel="stylesheet">
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 </head>
@@ -230,6 +231,8 @@
 <script src="../vendors/jszip/dist/jszip.min.js"></script>
 <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/appfrom.js"></script>
+
 
 <!-- Custom Theme Scripts -->
 <script src="../build/js/custom.min.js"></script>
@@ -352,7 +355,11 @@
         });
 //        ====================================尹晓晨新增app版本信息==================================================================
         $("body").on("click", ".addAppVersion",function () {
-            var  appInfoId= $(this).attr("id");
+            var  appId= $(this).attr("id");
+            alert(appId);
+            $("#Content").load("${pageContext.request.contextPath}/appVersion/addAppVersion?appId="+appId+"  #Content>*");
+
+
 
 
 
@@ -363,9 +370,8 @@
 //        ==========================================================张玮钰==================================================================
 
         $("#addNewApp").click(function () {
-            $("#Content").load("${pageContext.request.contextPath}/statics/templet/appadd.jsp  #Content>*");
+            $("#Content").load("${pageContext.request.contextPath}/appInfo/add  #Content>*");
         })
-
 
 
 

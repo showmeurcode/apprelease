@@ -8,13 +8,11 @@ import cn.apprelease.service.app_category.AppCategoryService;
 import cn.apprelease.service.app_info.AppInfoService;
 import cn.apprelease.service.version.AppVersionService;
 import cn.apprelease.tools.DictionaryUtil;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
@@ -220,21 +218,64 @@ public class AppInfoController {
         return "{\"status\":\"error\"}";
 
     }
+
 //—————————————————————————————————————————————————张玮钰———————————————————————————————————————————————————————————————
     @RequestMapping(value = "/addApp")
-    public String addApp(AppInfo appInfo){
+    public String addApp(AppInfo appInfo,Model model){
         int add=0;
         try {
             add=appInfoService.addAppInfo(appInfo);
-            if(add>0){
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("add",add);
+        
+        return "developer/frame";
+
+
+    }
+
+
+    @RequestMapping("/add")
+    public String add(Model model){
+        List<AppCategory> appCategoryList1=null;
+        List<AppCategory> appCategoryList2=null;
+        List<AppCategory> appCategoryList3=null;
+
+        try {
+            appCategoryList1=appCategoryService.findAppCategorysBylevel(1);
+            appCategoryList2=appCategoryService.findAppCategorysBylevel(2);
+            appCategoryList3=appCategoryService.findAppCategorysBylevel(3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("appCategoryList1",appCategoryList1);
+        model.addAttribute("appCategoryList2",appCategoryList2);
+        model.addAttribute("appCategoryList3",appCategoryList3);
+
+        return "developer/appadd";
+    }
+
+    @RequestMapping("/apk")
+    @ResponseBody
+    public Object apkName(String APKName){
+        String app="{\"status\":\"success\"}";
+        try {
+            List<AppInfo> list=appInfoService.findAppInfoByAppInfo(new AppInfo());
+            for (AppInfo appinfo:list) {
+                if(APKName.equals(appinfo.getAPKName())){
+                    app="{\"status\":\"error\"}";
+                    break;
+                }
 
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        return app;
     }
-
 
 //————————————————————————————————————————————————孔祥忠————————————————————————————————————————————————————————————————
 }
