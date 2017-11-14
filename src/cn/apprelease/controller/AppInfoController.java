@@ -186,9 +186,9 @@ public class AppInfoController {
             //所有一级分类
             appCategory1List=appCategoryService.findAppCategorysBylevel(1);
             //所有二级分类
-            appCategory2List=appCategoryService.findAppCategorysBylevel(2);
+            appCategory2List=appCategoryService.findAppCategorysByParentId(appInfo.getCategoryLevel1());
             //所有三级分类
-            appCategory3List=appCategoryService.findAppCategorysBylevel(3);
+            appCategory3List=appCategoryService.findAppCategorysByParentId(appInfo.getCategoryLevel2());
 
         } catch (Exception e) {
             e.printStackTrace();
