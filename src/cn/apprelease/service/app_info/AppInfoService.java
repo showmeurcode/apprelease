@@ -1,7 +1,6 @@
 package cn.apprelease.service.app_info;
 
 import cn.apprelease.pojo.AppInfo;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
