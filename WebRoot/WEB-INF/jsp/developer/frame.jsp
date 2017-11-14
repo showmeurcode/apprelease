@@ -353,6 +353,7 @@
 //        ====================================尹晓晨新增app版本信息==================================================================
         $("body").on("click", ".addAppVersion",function () {
             var  appId= $(this).attr("id");
+            alert(appId);
             $("#Content").load("${pageContext.request.contextPath}/appVersion/addAppVersion?appId="+appId+"  #Content>*");
 
 

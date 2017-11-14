@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%--<%@include file="common/header.jsp"%>--%>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -58,18 +61,31 @@
 
 
                         <tbody id="apptobody">
-
+                        <c:forEach items="${appVersionList}" var="appVersion">
                         <tr role="row" class="odd">
-                            <td class="sorting_1">Dont Starve饥荒</td>
-                            <td><a>com.kleientertainment.doNotStarvePocket</a></td>
-                            <td> 4.0</td>
+                            <td class="sorting_1">${appInfo.softwareName}</td>
+                           <td>  ${appVersion.versionNo}</td>
+                            <td> ${appVersion.versionSize}</td>
                             <td>
-                                <button type="\&quot;button\&quot;" class="btn btn-success btn-xs">已上架</button>
+                                <button type="\&quot;button\&quot;" class="btn btn-success btn-xs">
+                                    <c:if test="${appVersion.publishStatus==1}">
+                                            不发布
+                                    </c:if>
+                                    <c:if test="${appVersion.publishStatus==2}">
+                                        已发布
+                                    </c:if>
+                                    <c:if test="${appVersion.publishStatus==3}">
+                                        未发布
+                                    </c:if>
+                                </button>
                             </td>
-                            <td class="\&quot;project_progress\&quot;"> 平板</td>
-                            <td> 全部游戏》休闲游戏》冒险</td>
-                        </tr>
+                            <td class="\&quot;project_progress\&quot;">
+                                <a href="${pageContext.request.contextPath }/statics/uploadfiles/${appVersion.apkFileName}"> ${appVersion.apkFileName} </a>
 
+                            </td>
+                            <td>  <fmt:formatDate value="${appVersion.modifyDate}" pattern="yyyy-MM-dd HH:mm:ss"/> </td>
+                        </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -88,7 +104,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>为APP xxxxx 新增版本信息
+                        <h2>为APP ${appInfo.softwareName} 新增版本信息
                             <small>sub title</small>
                         </h2>
                         <ul class="nav navbar-right panel_toolbox">
@@ -119,32 +135,32 @@
                             <span class="section"> </span>
 
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="softwareName">软件名称
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="softwareName">版本号*
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input id="softwareName" class="form-control col-md-7 col-xs-12"
-                                           name="softwareName" placeholder="请输入文件名称"
+                                           name="softwareName" placeholder="请输入版本号"
                                            required="required" type="text">
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                       for="APKName">APK名称<span class="required">*</span>
+                                       for="APKName">版本大小<span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="text" id="APKName" name="APKName" required="required"
-                                           placeholder="请输入APK名称"
+                                           placeholder="请输入版本大小 ，单位为Mb"
                                            class="form-control col-md-7 col-xs-12">
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                       for="supportROM">支持ROM<span class="required">*</span>
+                                       for="supportROM">发布状态<span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="supportROM" name="supportROM"
-                                           required="required" placeholder="请输入支持的ROM"
+                                    <input  readonly type="text" id="supportROM" name="supportROM"
+                                           required="required" placeholder=""
                                            class="form-control col-md-7 col-xs-12">
                                 </div>
                             </div>
