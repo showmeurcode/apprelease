@@ -43,5 +43,7 @@ public interface AppInfoMapper {
 
     int findAppinfoCounts() throws Exception;
 
-    List<AppInfo> findAppInfobyStatus( AppInfo status)throws  Exception;
+
+    AppInfo findAppinfoByid(@Param("id")Integer id) throws Exception;
+
 }
