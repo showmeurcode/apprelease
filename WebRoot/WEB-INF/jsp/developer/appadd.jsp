@@ -26,6 +26,7 @@
   <link href="${pageContext.request.contextPath }/statics/css/dataTables.bootstrap.min.css" rel="stylesheet">
   <link href="${pageContext.request.contextPath }/statics/css/jquery.dataTables.min.css" rel="stylesheet">
 
+  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 
 
@@ -69,7 +70,7 @@
             </div>
             <div class="x_content">
 
-              <form class="form-horizontal form-label-left" novalidate action="{pageContext.request.contextPath }/appInfo/addApp" method="post">
+              <form id="ceshi1" class="form-horizontal form-label-left" novalidate action="${pageContext.request.contextPath }/appInfo/addApp" method="post">
 
                 <p>请填写信息
 
@@ -84,8 +85,9 @@
                     <input id="softwareName" class="form-control col-md-7 col-xs-12"
                            name="softwareName" placeholder="请输入文件名称"
                            required="required" type="text">
-                    <span id="yzname"></span>
+
                   </div>
+                  <span id="yzname"></span>
                 </div>
                 <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -95,8 +97,9 @@
                     <input type="text" id="APKName" name="APKName" required="required"
                            placeholder="请输入APK名称"
                            class="form-control col-md-7 col-xs-12">
-                    <span id="yzAPK"></span>
+
                   </div>
+                  <span id="yzAPK"></span>
                 </div>
                 <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -106,8 +109,8 @@
                     <input type="text" id="supportROM" name="supportROM"
                            required="required" placeholder="请输入支持的ROM"
                            class="form-control col-md-7 col-xs-12">
-                    <span id="yzROM"></span>
                   </div>
+                  <span id="yzROM"></span>
                 </div>
                 <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -117,8 +120,9 @@
                     <input type="text" id="interfaceLanguage" name="interfaceLanguage"
                            required="required" placeholder="请输入软件支持的界面语言"
                            class="form-control col-md-7 col-xs-12">
-                    <span id="yzlanguage"></span>
+
                   </div>
+                  <span id="yzlanguage"></span>
                 </div>
                 <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -128,8 +132,9 @@
                     <input type="text" id="softwareSize" name="softwareSize"
                            required="required" placeholder="请输入软件大小，单位是Mb"
                            class="form-control col-md-7 col-xs-12">
-                    <span id="yzSize"></span>
+
                   </div>
+                  <span id="yzSize"></span>
                 </div>
                 <div class="item form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -139,8 +144,9 @@
                     <input id="downloads" type="text" name="downloads"
                            placeholder="请输入下载次数" required="required"
                            class="optional form-control col-md-7 col-xs-12">
-                    <span id="yzloads"></span>
+
                   </div>
+                  <span id="yzloads"></span>
                 </div>
                 <div class="item form-group">
                   <label for="flatformId"
@@ -148,6 +154,7 @@
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select name="flatformId" id="flatformId"
                             class="form-control col-md-7 col-xs-12" required="required">
+
                       <option value="0" selected>请选择</option> 
                       <option value="1">手机</option> 
                       <option value="2">平板</option> 
@@ -162,9 +169,9 @@
                     <select name="categoryLevel1" id="categoryLevel1"
                             class="form-control col-md-7 col-xs-12" required="required">
                       <option value="0" selected>请选择</option> 
-                      <option value="1">手机</option> 
-                      <option value="2">平板</option> 
-                      <option value="3">通用</option> 
+                      <c:forEach items="${appCategoryList1}" var="appCategory1">
+                        <option value="${appCategory1.id}">${appCategory1.categoryName}</option>
+                      </c:forEach>
                     </select>
                   </div>
                 </div>
@@ -175,9 +182,10 @@
                     <select name="categoryLevel2" id="categoryLevel2"
                             class="form-control col-md-7 col-xs-12" required="required">
                       <option value="0" selected>请选择</option> 
-                      <option value="1">手机</option> 
-                      <option value="2">平板</option> 
-                      <option value="3">通用</option> 
+                      <c:forEach items="${appCategoryList2}" var="appCategory2">
+                        <option value="${appCategory2.id}">${appCategory2.categoryName}</option>
+                      </c:forEach>
+
                     </select>
                   </div>
                 </div>
@@ -188,9 +196,9 @@
                     <select name="categoryLevel3" id="categoryLevel3"
                             class="form-control col-md-7 col-xs-12" required="required">
                       <option value="0" selected>请选择</option> 
-                      <option value="1">手机</option> 
-                      <option value="2">平板</option> 
-                      <option value="3">通用</option> 
+                      <c:forEach items="${appCategoryList3}" var="appCategory3">
+                        <option value="${appCategory3.id}">${appCategory3.categoryName}</option>
+                      </c:forEach>
                     </select>
                   </div>
                 </div>
@@ -213,8 +221,9 @@
                     <textarea id="appInfo" required="required" name="appInfo"
                               class="form-control col-md-7 col-xs-12"
                               placeholder="请输入本软件的相关信息，本信息作为软件的详细信息进行软件介绍。"></textarea>
-                    <span id="yztext"></span>
+
                   </div>
+                  <span id="yztext"></span>
                 </div>
 
             <div class="item form-group">
@@ -240,12 +249,13 @@
         </div>
       </div>
     </div>
+
   </div>
   </div>
   <!-- /page content -->
 
 
-  <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/AppForm.js">  </script>
+
 
 
 
