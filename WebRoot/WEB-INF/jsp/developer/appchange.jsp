@@ -225,15 +225,19 @@
                             </div>
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                               for="logoPicPath">LOGO图片 <span class="required">*</span>
+                               for="logoLocPath">LOGO图片 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="logoPicPath" type="file" name="logoPicPath" required="required"
-                                   value="${appInfo.logoLocPath}"
+                            <input id="logoLocPath" type="file" name="logoLocPath" required="required"
+                                   value="${appInfo.logoPicPath}"
                                    class="optional form-control col-md-7 col-xs-12">
                         </div>
-
                     </div>
+                            <input id="updateDate" name="updateDate" value="${appInfo.updateDate}" hidden/>
+                            <input id="devId" name="devId" value="${appInfo.devId}" hidden/>
+                            <input id="onSaleDate" name="onSaleDate" value="${appInfo.onSaleDate}" hidden/>
+                            <input id="offSaleDate" name="offSaleDate" value="${appInfo.offSaleDate}" hidden/>
+                            <input id="versionId" name="versionId" value="${appInfo.versionId}" hidden/>
                     <div class="ln_solid"></div>
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
