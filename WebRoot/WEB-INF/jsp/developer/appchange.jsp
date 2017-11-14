@@ -64,12 +64,14 @@
                     </div>
                     <div class="x_content">
 
-                        <form class="form-horizontal form-label-left" novalidate action="${pageContext.request.contextPath}/appInfo/update" method="post">
+                        <form class="form-horizontal form-label-left" id="changeApp" novalidate>
 
                             <p>请填写信息
 
                             </p>
                             <span class="section"> </span>
+
+                            <input id="id" name="id" value="${appInfo.id}" hidden/>
 
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="softwareName">软件名称
@@ -223,20 +225,24 @@
                             </div>
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                               for="logoPicPath">LOGO图片 <span class="required">*</span>
+                               for="logoLocPath">LOGO图片 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="logoPicPath" type="file" name="logoPicPath" required="required"
-                                   value="${appInfo.logoLocPath}"
+                            <input id="logoLocPath" type="file" name="logoLocPath" required="required"
+                                   value="${appInfo.logoPicPath}"
                                    class="optional form-control col-md-7 col-xs-12">
                         </div>
-
                     </div>
+                            <input id="updateDate" name="updateDate" value="${appInfo.updateDate}" hidden/>
+                            <input id="devId" name="devId" value="${appInfo.devId}" hidden/>
+                            <input id="onSaleDate" name="onSaleDate" value="${appInfo.onSaleDate}" hidden/>
+                            <input id="offSaleDate" name="offSaleDate" value="${appInfo.offSaleDate}" hidden/>
+                            <input id="versionId" name="versionId" value="${appInfo.versionId}" hidden/>
                     <div class="ln_solid"></div>
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                            <button id="send" type="submit" class="btn btn-success">保存
-                            </button>
+                            <a id="send" type="button" class="btn btn-success">保存
+                            </a>
                             <button type="button" class="btn btn-primary">返回</button>
                         </div>
                     </div>
