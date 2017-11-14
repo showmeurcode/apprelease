@@ -395,7 +395,7 @@
                 type:"POST",
                 url:rootpath+"/appInfo/update",
                 data:bparams,
-                dataType:"JSON",
+                dataType:"json",
                 success:function (data) {
                     if (data.status == "success") {
                         alert("修改成功");
