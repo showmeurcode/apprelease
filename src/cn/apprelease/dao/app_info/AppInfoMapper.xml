@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+﻿﻿<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -58,12 +58,13 @@
 	<select id="findAppinfoCounts" resultType="java.lang.Integer">
 		SELECT count(*) FROM app_info
 	</select>
+
     <select id="findAppinfoByid" resultType="AppInfo">
 		SELECT  *FROM  app_info WHERE  id=#{id}
 	</select>
 
 
-    <!-- ————————————————————————————————cache配置————————————————————————————  -->
+	<!-- ————————————————————————————————cache配置————————————————————————————  -->
 	<cache eviction="FIFO" flushInterval="60000" size="512"  readOnly="true"/>
 	
 

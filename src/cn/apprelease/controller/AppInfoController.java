@@ -10,7 +10,10 @@ import cn.apprelease.service.version.AppVersionService;
 import cn.apprelease.tools.DictionaryUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -231,7 +234,7 @@ public class AppInfoController {
         }
 
         model.addAttribute("add",add);
-        
+
         return "developer/frame";
 
 
@@ -278,4 +281,92 @@ public class AppInfoController {
     }
 
 //————————————————————————————————————————————————孔祥忠————————————————————————————————————————————————————————————————
+
+    @RequestMapping("/showAllToexamineAPPS")
+    @ResponseBody
+    public String showAllToexamineAPPS(AppInfo status){
+
+        StringBuffer html=new StringBuffer("");
+       /* html.append("开发者id是"+appInfo.getDevId());*/
+        List <AppInfo> appInfoList =new ArrayList<>();
+        try {
+            appInfoList=appInfoService.findAppInfobyStatus(status);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(appInfoList==null){
+            appInfoList=new ArrayList<>();
+        }
+        AppCategory appCategoryOne=null;
+        AppCategory appCategoryTwo=null;
+        AppCategory appCategoryThree=null;
+        AppVersion appVersion=null;
+
+        for (AppInfo info : appInfoList) {
+            try {
+                appCategoryOne=appCategoryService.findAppCategoryByid(info.getCategoryLevel1());
+                appCategoryTwo=appCategoryService.findAppCategoryByid(info.getCategoryLevel2());
+                appCategoryThree=appCategoryService.findAppCategoryByid(info.getCategoryLevel3());
+                appVersion =appVersionService.findAppVersionByid(info.getVersionId());
+                //拼接html
+                html.append("<tr>" +
+                        "                <td>"+info.getSoftwareName()+"</td>" +
+                        "                <td>" +
+                        "                  <a>"+info.getAPKName()+"</a>" +
+                        "                </td>" +
+                        "                <td>" +
+                        "                  "+((appVersion==null)?"":appVersion.getVersionSize())+"" +
+                        "                </td>" +
+                        "                <td class=\"project_progress\">" +
+                        "                  "+ DictionaryUtil.showPlatformName(info.getFlatformId())+"" +
+                        "                </td>" +
+                        "                <td>" +
+                        "                  "+appCategoryOne.getCategoryName()+"》"+appCategoryTwo.getCategoryName()+"》"+appCategoryThree.getCategoryName()+"" +
+                        "                </td>" +
+                        "                <td>" +
+                        "                  <button type=\"button\" class='btn btn-success btn-xs'>"+DictionaryUtil.showStatusName(info.getStatus()) +"</button>" +
+                        "                </td>" +
+                        "                <td>" +
+                        "                  "+info.getDownloads()+"" +
+                        "                </td>" +
+                        "                <td>" +
+                        "                  "+((appVersion==null)?"":appVersion.getVersionInfo())+"" +
+                        "                </td>");
+
+
+                //开始拼接按钮
+                html.append("<td>" +
+                        "                  <div class='btn-group'>" +
+                        "                    <button type='button' class='btn btn-info dropdown-toggle' data-toggle='dropdown'>" +
+                        "                      审核" +
+                        "                      <span class='caret'></span>" +
+                        "                    </button>" +
+                        "                    <ul class='dropdown-menu' role='menu'>"+
+                        "<li><a href='###' id='"+info.getId()+"' class='ToexamineAPP'>查看并审核APP</a> </li>"
+
+                );
+                if (info.getStatus()==5||info.getStatus()==2){
+                    html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>上架</a> </li>");
+                }
+                if (info.getStatus()==4){
+                    html.append("<li><a href='###' id='"+info.getId()+"' class='putoffApp'>下架</a> </li>");
+                }
+                html.append("</ul>" +
+                        "                  </div>" +
+                        "                </td>" +
+                        "              </tr>");
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+        return  html.toString();
+
+
+    }
 }
