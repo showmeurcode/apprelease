@@ -43,6 +43,9 @@
     <select id="findAppVersionByid" resultType="cn.apprelease.pojo.AppVersion">
         SELECT * FROM app_version WHERE id=#{id}
     </select>
+    <select id="findAppVersionsByappId" resultType="cn.apprelease.pojo.AppVersion">
+        SELECT  *FROM  app_version WHERE appId=#{appId}
+    </select>
 
 
     <!-- ————————————————————————————————cache配置————————————————————————————  -->
