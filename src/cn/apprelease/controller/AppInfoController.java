@@ -224,19 +224,61 @@ public class AppInfoController {
 
 //—————————————————————————————————————————————————张玮钰———————————————————————————————————————————————————————————————
     @RequestMapping(value = "/addApp")
-    public String addApp(AppInfo appInfo){
+    public String addApp(AppInfo appInfo,Model model){
         int add=0;
         try {
             add=appInfoService.addAppInfo(appInfo);
-            if(add>0){
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("add",add);
+
+        return "developer/frame";
+
+
+    }
+
+
+    @RequestMapping("/add")
+    public String add(Model model){
+        List<AppCategory> appCategoryList1=null;
+        List<AppCategory> appCategoryList2=null;
+        List<AppCategory> appCategoryList3=null;
+
+        try {
+            appCategoryList1=appCategoryService.findAppCategorysBylevel(1);
+            appCategoryList2=appCategoryService.findAppCategorysBylevel(2);
+            appCategoryList3=appCategoryService.findAppCategorysBylevel(3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("appCategoryList1",appCategoryList1);
+        model.addAttribute("appCategoryList2",appCategoryList2);
+        model.addAttribute("appCategoryList3",appCategoryList3);
+
+        return "developer/appadd";
+    }
+
+    @RequestMapping("/apk")
+    @ResponseBody
+    public Object apkName(String APKName){
+        String app="{\"status\":\"success\"}";
+        try {
+            List<AppInfo> list=appInfoService.findAppInfoByAppInfo(new AppInfo());
+            for (AppInfo appinfo:list) {
+                if(APKName.equals(appinfo.getAPKName())){
+                    app="{\"status\":\"error\"}";
+                    break;
+                }
 
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        return app;
     }
-
 
 //————————————————————————————————————————————————孔祥忠————————————————————————————————————————————————————————————————
 }
