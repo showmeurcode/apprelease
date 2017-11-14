@@ -280,7 +280,7 @@ public class AppInfoController {
         return app;
     }
 
-//————————————————————————————————————————————————孔祥忠————————————————————————————————————————————————————————————————
+//————————————————————————————————————————————————孔祥忠(后台APP信息展示)————————————————————————————————————————————————————————————————
 
     @RequestMapping("/showAllToexamineAPPS")
     @ResponseBody
@@ -345,12 +345,13 @@ public class AppInfoController {
                         "<li><a href='###' id='"+info.getId()+"' class='ToexamineAPP'>查看并审核APP</a> </li>"
 
                 );
-                if (info.getStatus()==5||info.getStatus()==2){
-                    html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>上架</a> </li>");
+                if (info.getStatus()==1){
+                    html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>待审核</a> </li>");
                 }
-                if (info.getStatus()==4){
-                    html.append("<li><a href='###' id='"+info.getId()+"' class='putoffApp'>下架</a> </li>");
+                if (info.getStatus()==2){
+                    html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>审核通过</a> </li>");
                 }
+
                 html.append("</ul>" +
                         "                  </div>" +
                         "                </td>" +

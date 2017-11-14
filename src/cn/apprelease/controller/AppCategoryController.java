@@ -66,4 +66,17 @@ public class AppCategoryController {
         return  sonappCategoryList;
     }
 
+    @RequestMapping("/showlevelmethod2backend")
+    public String showAllCategoryLevel1method2backend(Model model){//显示所有的一级分类
+        List<AppCategory> appCategory1List=null;
+        try {
+            appCategory1List = appCategoryService.findAppCategorysBylevel(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("appCategory1List",appCategory1List);
+
+        return  "backend/backendapplist";
+    }
+
 }
