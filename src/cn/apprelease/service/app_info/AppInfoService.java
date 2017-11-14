@@ -41,4 +41,6 @@ public interface AppInfoService {
     int findAppinfoCounts() throws Exception;
 
     List<AppInfo> findAppInfobyStatus( AppInfo status)throws  Exception;
+
+    AppInfo findAppinfoByid(int i);
 }
