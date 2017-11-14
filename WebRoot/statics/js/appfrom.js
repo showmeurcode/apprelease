@@ -24,8 +24,9 @@ $("body").on("blur",".form-label-left #APKName",function () {
     if (apkName == null || apkName == ""){
         $("#yzAPK").html("APK名称不能为空！").attr("style","color: red");
     } else {
-        $.post("${pageContext.request.contextPath}/appInfo/apk","APKName="+apkName,apkback);
+        $.post("/apprelease/appInfo/apk","APKName="+apkName,apkback);
         function apkback(data) {
+            //alert("ss")
             if(data.status=="success"){
                 $("#yzAPK").html("√").attr("style","color: green");
             }else{

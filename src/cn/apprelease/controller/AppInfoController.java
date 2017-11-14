@@ -196,7 +196,7 @@ public class AppInfoController {
     }
 
 
-    @RequestMapping("add")
+    @RequestMapping("/add")
     public String add(Model model){
         List<AppCategory> appCategoryList1=null;
         List<AppCategory> appCategoryList2=null;
@@ -216,11 +216,12 @@ public class AppInfoController {
         return "developer/appadd";
     }
 
-    @RequestMapping("apk")
+    @RequestMapping("/apk")
+    @ResponseBody
     public Object apkName(String APKName){
         String app="{\"status\":\"success\"}";
         try {
-            List<AppInfo> list=appInfoService.findAppInfoByAppInfo(null);
+            List<AppInfo> list=appInfoService.findAppInfoByAppInfo(new AppInfo());
             for (AppInfo appinfo:list) {
                 if(APKName.equals(appinfo.getAPKName())){
                     app="{\"status\":\"error\"}";
