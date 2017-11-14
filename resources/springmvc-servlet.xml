@@ -87,7 +87,7 @@
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
-				<prop key="java.lang.Exception">exceptionerror</prop><!--有异常即跳转至exceptionerror视图，可自定义异常信息，及多个异常-->
+				<prop key="java.lang.Exception">404</prop><!--有异常即跳转至error视图，可自定义异常信息，及多个异常-->
 			</props>
 		</property>
 	</bean>

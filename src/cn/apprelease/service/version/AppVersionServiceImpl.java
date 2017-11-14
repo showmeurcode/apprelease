@@ -48,4 +48,10 @@ public class AppVersionServiceImpl implements AppVersionService {
     public AppVersion findAppVersionByid(Integer id) {
         return  appVersionMapper.findAppVersionByid(id);
     }
+
+    @Override
+    //根据appId 查找对应的版本信息列表
+    public List<AppVersion> findAppVersionsByappId(Integer appId) throws Exception {
+        return appVersionMapper.findAppVersionsByappId(appId);
+    }
 }

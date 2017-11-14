@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>APP开发者管理! | </title>
+    <title>APP开发者管理| </title>
 
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath }/statics/css/bootstrap.min.css" rel="stylesheet">
@@ -350,8 +350,13 @@
                 }
             });
         });
+//        ====================================尹晓晨新增app版本信息==================================================================
+        $("body").on("click", ".addAppVersion",function () {
+            var  appInfoId= $(this).attr("id");
 
 
+
+        });
 
 
 
