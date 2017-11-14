@@ -352,7 +352,10 @@
         });
 //        ====================================尹晓晨新增app版本信息==================================================================
         $("body").on("click", ".addAppVersion",function () {
-            var  appInfoId= $(this).attr("id");
+            var  appId= $(this).attr("id");
+            $("#Content").load("${pageContext.request.contextPath}/appVersion/addAppVersion?appId="+appId+"  #Content>*");
+
+
 
 
 
