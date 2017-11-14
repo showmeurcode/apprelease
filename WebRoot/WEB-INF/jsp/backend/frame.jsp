@@ -279,7 +279,6 @@
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
     <input type="hidden" id="rootpath" value="${pageContext.request.contextPath}">
-    <input type="hidden" id="status" value="${sessionScope.appInfo.status}">
   <script type="text/javascript">
 
   $(function () {
@@ -287,11 +286,11 @@
       <!--=========================================================审核APP列表信息展示  孔祥忠=======================================================-->
 
       var rootpath=$("#rootpath").val();//获取根路径
-      var listApp=$("#status").val();//获取所有用户未审核的app状态
+
       var params="";//声明关联查询条件的全局变量
       var table;
      function showToexamineAPPS() {
-         var data="listApp="+listApp;
+         var data="status="+1;
          alert(data)
          if(params!=""){
              data+="&"+params;
