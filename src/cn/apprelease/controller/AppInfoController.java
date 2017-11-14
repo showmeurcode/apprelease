@@ -284,13 +284,13 @@ public class AppInfoController {
 
     @RequestMapping("/showAllToexamineAPPS")
     @ResponseBody
-    public String showAllToexamineAPPS(AppInfo status){
+    public String showAllToexamineAPPS(AppInfo appInfo){
 
         StringBuffer html=new StringBuffer("");
        /* html.append("开发者id是"+appInfo.getDevId());*/
         List <AppInfo> appInfoList =new ArrayList<>();
         try {
-            appInfoList=appInfoService.findAppInfobyStatus(status);
+            appInfoList=appInfoService.findAppInfoByAppInfo(appInfo);
         } catch (Exception e) {
             e.printStackTrace();
         }
