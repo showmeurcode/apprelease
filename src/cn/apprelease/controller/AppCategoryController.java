@@ -66,4 +66,19 @@ public class AppCategoryController {
         return  sonappCategoryList;
     }
 
+//    ===================================================李高珊============================================================================
+
+    @RequestMapping("/getlevelByparent")
+    @ResponseBody
+    public Object getCategoryListToHTML(@RequestParam("parentId")String parentId){
+
+        List<AppCategory> sonappCategoryList= showSonLevel(parentId);
+
+        StringBuffer html = new StringBuffer("");
+        for (AppCategory appCategory:sonappCategoryList) {
+            html.append(" <option value='"+appCategory.getId()+"'>"+appCategory.getCategoryName()+"</option> ");
+        }
+        return  html.toString();
+    }
+
 }
