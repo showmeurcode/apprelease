@@ -373,9 +373,34 @@
             $("#Content").load("${pageContext.request.contextPath}/appInfo/changeApp?id="+appId+"  #Content>*");
 
 
-        })
+        });
 
+        $("body").on("click","#send",function () {
 
+           var bparams = $("#changeApp").serialize();
+           alert(bparams);
+            $.ajax({
+
+                type:"POST",
+                url:rootpath+"/appInfo/update",
+                data:bparams,
+                dataType:"JSON",
+                success:function (data) {
+                    if (data.status == "success") {
+                        alert("修改成功");
+                    } else {
+                        alert("修改失败");
+                    }
+                    
+                },
+                error:function (data) {
+                    alert("修改大失败");
+                }
+
+            });
+            alert("异步之后");
+
+        });
 
 
 

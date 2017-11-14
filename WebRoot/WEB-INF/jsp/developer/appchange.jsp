@@ -64,12 +64,14 @@
                     </div>
                     <div class="x_content">
 
-                        <form class="form-horizontal form-label-left" novalidate action="${pageContext.request.contextPath}/appInfo/update" method="post">
+                        <form class="form-horizontal form-label-left" id="changeApp" novalidate>
 
                             <p>请填写信息
 
                             </p>
                             <span class="section"> </span>
+
+                            <input id="id" name="id" value="${appInfo.id}" hidden/>
 
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="softwareName">软件名称
@@ -235,8 +237,8 @@
                     <div class="ln_solid"></div>
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                            <button id="send" type="submit" class="btn btn-success">保存
-                            </button>
+                            <a id="send" type="button" class="btn btn-success">保存
+                            </a>
                             <button type="button" class="btn btn-primary">返回</button>
                         </div>
                     </div>

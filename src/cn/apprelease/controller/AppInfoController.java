@@ -204,7 +204,8 @@ public class AppInfoController {
 
 
     @RequestMapping(value = "/update",method = RequestMethod.POST)
-    public String updateAppInfo(AppInfo appInfo, HttpSession session){
+    @ResponseBody
+    public Object updateAppInfo(AppInfo appInfo, HttpSession session){
         appInfo.setModifyBy(((DevUser)session.getAttribute("devUserSession")).getId());
         appInfo.setModifyDate(new Date());
         int result = 0;
@@ -214,11 +215,11 @@ public class AppInfoController {
             e.printStackTrace();
         }
         if(result > 0){
-            return "developer/applist";
+            return "{\"status\":\"success\"}";
         }
-        return "developer/appchange";
-    }
+        return "{\"status\":\"error\"}";
 
+    }
 //—————————————————————————————————————————————————张玮钰———————————————————————————————————————————————————————————————
     @RequestMapping(value = "/addApp")
     public String addApp(AppInfo appInfo){
