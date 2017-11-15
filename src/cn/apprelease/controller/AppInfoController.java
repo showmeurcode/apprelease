@@ -8,18 +8,15 @@ import cn.apprelease.service.app_category.AppCategoryService;
 import cn.apprelease.service.app_info.AppInfoService;
 import cn.apprelease.service.version.AppVersionService;
 import cn.apprelease.tools.DictionaryUtil;
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -189,9 +186,9 @@ public class AppInfoController {
             //所有一级分类
             appCategory1List=appCategoryService.findAppCategorysBylevel(1);
             //所有二级分类
-            appCategory2List=appCategoryService.findAppCategorysBylevel(2);
+            appCategory2List=appCategoryService.findAppCategorysByParentId(appInfo.getCategoryLevel1());
             //所有三级分类
-            appCategory3List=appCategoryService.findAppCategorysBylevel(3);
+            appCategory3List=appCategoryService.findAppCategorysByParentId(appInfo.getCategoryLevel2());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -237,7 +234,7 @@ public class AppInfoController {
         }
 
         model.addAttribute("add",add);
-        
+
         return "developer/frame";
 
 
@@ -283,56 +280,94 @@ public class AppInfoController {
         return app;
     }
 
+//————————————————————————————————————————————————孔祥忠(后台APP信息展示)————————————————————————————————————————————————————————————————
 
-    public String addInfoSave(AppInfo appInfo, HttpSession session,
-                              HttpServletRequest request,
-                              @RequestParam(value="logoPicPath",required = false) MultipartFile attach){
-        String logoPicPath=null;
-        //判断文件是否为空
-        if(!attach.isEmpty()){
-            //定义上传目标路径
-            String path=request.getSession().getServletContext().getRealPath("statics"+ File.separator+"uploadfiles");
-            String olFileName=attach.getOriginalFilename();
-            String prefix= FilenameUtils.getExtension(olFileName);
-            int filesize=50000;
-            if(attach.getSize()>filesize){
-                request.setAttribute("uploadFileError","上传大小不能超过50KB");
-                return "developer/appadd";
-            }else if(prefix.equalsIgnoreCase("jpg")
-                    ||prefix.equalsIgnoreCase("jpeg")
-                    ||prefix.equalsIgnoreCase("png")){
-                //当前系统时间+随机数+"_Personal.jpg"
-                String fileName=System.currentTimeMillis()
-                        + RandomUtils.nextInt(1000000)+"_Personal.jpg";
-                File targetFile=new File(path,fileName);
-                if(!targetFile.exists()){
-                    targetFile.mkdirs();
-                }
-                try {
-                    attach.transferTo(targetFile);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    request.setAttribute("uploadFileError","上传失败");
-                    return "developer/appadd";
-                }
-                logoPicPath=path+File.separator+fileName;
-            }else {
-                request.setAttribute("uploadFileError","上传文件格式不正确");
-                return "developer/appadd";
-            }
-        }
-        appInfo.setLogoPicPath(logoPicPath);
-        int result=0;
+    @RequestMapping("/showAllToexamineAPPS")
+    @ResponseBody
+    public String showAllToexamineAPPS(AppInfo appInfo){
+
+        StringBuffer html=new StringBuffer("");
+       /* html.append("开发者id是"+appInfo.getDevId());*/
+        List <AppInfo> appInfoList =new ArrayList<>();
         try {
-           result=appInfoService.addAppInfo(appInfo);
+            appInfoList=appInfoService.findAppInfoByAppInfo(appInfo);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(result>0){
-            return "redirect:/developer/applist";
+        if(appInfoList==null){
+            appInfoList=new ArrayList<>();
         }
-        return "developer/appadd";
-    }
+        AppCategory appCategoryOne=null;
+        AppCategory appCategoryTwo=null;
+        AppCategory appCategoryThree=null;
+        AppVersion appVersion=null;
 
-//————————————————————————————————————————————————孔祥忠————————————————————————————————————————————————————————————————
+        for (AppInfo info : appInfoList) {
+            try {
+                appCategoryOne=appCategoryService.findAppCategoryByid(info.getCategoryLevel1());
+                appCategoryTwo=appCategoryService.findAppCategoryByid(info.getCategoryLevel2());
+                appCategoryThree=appCategoryService.findAppCategoryByid(info.getCategoryLevel3());
+                appVersion =appVersionService.findAppVersionByid(info.getVersionId());
+                //拼接html
+                html.append("<tr>" +
+                        "                <td>"+info.getSoftwareName()+"</td>" +
+                        "                <td>" +
+                        "                  <a>"+info.getAPKName()+"</a>" +
+                        "                </td>" +
+                        "                <td>" +
+                        "                  "+((appVersion==null)?"":appVersion.getVersionSize())+"" +
+                        "                </td>" +
+                        "                <td class=\"project_progress\">" +
+                        "                  "+ DictionaryUtil.showPlatformName(info.getFlatformId())+"" +
+                        "                </td>" +
+                        "                <td>" +
+                        "                  "+appCategoryOne.getCategoryName()+"》"+appCategoryTwo.getCategoryName()+"》"+appCategoryThree.getCategoryName()+"" +
+                        "                </td>" +
+                        "                <td>" +
+                        "                  <button type=\"button\" class='btn btn-success btn-xs'>"+DictionaryUtil.showStatusName(info.getStatus()) +"</button>" +
+                        "                </td>" +
+                        "                <td>" +
+                        "                  "+info.getDownloads()+"" +
+                        "                </td>" +
+                        "                <td>" +
+                        "                  "+((appVersion==null)?"":appVersion.getVersionInfo())+"" +
+                        "                </td>");
+
+
+                //开始拼接按钮
+                html.append("<td>" +
+                        "                  <div class='btn-group'>" +
+                        "                    <button type='button' class='btn btn-info dropdown-toggle' data-toggle='dropdown'>" +
+                        "                      审核" +
+                        "                      <span class='caret'></span>" +
+                        "                    </button>" +
+                        "                    <ul class='dropdown-menu' role='menu'>"+
+                        "<li><a href='###' id='"+info.getId()+"' class='ToexamineAPP'>查看并审核APP</a> </li>"
+
+                );
+                if (info.getStatus()==1){
+                    html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>待审核</a> </li>");
+                }
+                if (info.getStatus()==2){
+                    html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>审核通过</a> </li>");
+                }
+
+                html.append("</ul>" +
+                        "                  </div>" +
+                        "                </td>" +
+                        "              </tr>");
+
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+        return  html.toString();
+
+
+    }
 }

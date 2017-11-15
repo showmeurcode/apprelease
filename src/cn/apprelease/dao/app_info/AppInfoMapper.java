@@ -1,10 +1,7 @@
 package cn.apprelease.dao.app_info;
 
-import cn.apprelease.pojo.AppCategory;
 import cn.apprelease.pojo.AppInfo;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Appinfo;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -43,8 +40,9 @@ public interface AppInfoMapper {
      */
     List<AppInfo> findAppInfoByAppInfo(AppInfo appInfo)throws  Exception;
 
-//获取所有appinfo的数量
+
     int findAppinfoCounts() throws Exception;
+
 
     AppInfo findAppinfoByid(@Param("id")Integer id) throws Exception;
 

@@ -231,7 +231,6 @@
 <script src="../vendors/jszip/dist/jszip.min.js"></script>
 <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/appfrom.js"></script>
 
 
 <!-- Custom Theme Scripts -->
@@ -377,6 +376,7 @@
 
 //        ==============================================================李高珊==============================================================
 
+        //加载更新的页面
         $("body").on("click",".changeApp",function () {
 
             var appId=$(this).attr("id");
@@ -386,6 +386,36 @@
 
         });
 
+
+        //一级分类改变关联的二级分类
+        $("body").on("change","#categoryLevel1",function () {
+            var categoryLevel1 = $(this).val();
+            $.ajax({
+                type:"POST",
+                url:rootpath+"/appCategory/getlevelByparent",
+                data:"parentId="+categoryLevel1,
+                dataType:"html",
+                success:function (data) {
+                    $("#categoryLevel2").html(data);
+                }
+            });
+        });
+
+        //二级分类改变关联的三级分类
+        $("body").on("change","#categoryLevel2",function () {
+            var categoryLevel2 = $(this).val();
+            $.ajax({
+                type:"POST",
+                url:rootpath+"/appCategory/getlevelByparent",
+                data:"parentId="+categoryLevel2,
+                dataType:"html",
+                success:function (data) {
+                    $("#categoryLevel3").html(data);
+                }
+            });
+        });
+
+        //点击保存进行数据更改
         $("body").on("click","#send",function () {
 
            var bparams = $("#changeApp").serialize();
@@ -395,7 +425,7 @@
                 type:"POST",
                 url:rootpath+"/appInfo/update",
                 data:bparams,
-                dataType:"JSON",
+                dataType:"json",
                 success:function (data) {
                     if (data.status == "success") {
                         alert("修改成功");
