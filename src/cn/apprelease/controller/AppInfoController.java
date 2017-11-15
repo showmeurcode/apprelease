@@ -322,6 +322,7 @@ public class AppInfoController {
     }
 
     @RequestMapping(value = "/updateadd",method = RequestMethod.POST)
+    @ResponseBody
     public Object addInfoSave(AppInfo appInfo, HttpSession session,
                               HttpServletRequest request,
                               @RequestParam(value="logoPicPath",required = false) MultipartFile attach){
@@ -390,6 +391,23 @@ public class AppInfoController {
         return JOSN;
     }
 
+    //APP删除
+    @RequestMapping("/delApp")
+    @ResponseBody
+    public Object delApp(int id){
+        int result=0;
+        try {
+            result=appInfoService.delAppInfo(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(result>0){
+            return "{\"status\":\"success\"}";
+        }else {
+            return "{\"status\":\"error\"}";
+        }
+    }
 
 //————————————————————————————————————————————————孔祥忠(后台APP信息展示)————————————————————————————————————————————————————————————————
 
