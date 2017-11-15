@@ -70,7 +70,7 @@
             </div>
             <div class="x_content">
 
-              <form id="ceshi1" class="form-horizontal form-label-left" novalidate action="${pageContext.request.contextPath }/appInfo/addApp"
+              <form id="appadd" class="form-horizontal form-label-left" novalidate action="${pageContext.request.contextPath }/appInfo/addApp"
                     method="post" enctype="multipart/form-data">
 
                 <p>请填写信息

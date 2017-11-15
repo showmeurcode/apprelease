@@ -282,10 +282,28 @@ public class AppInfoController {
         return app;
     }
 
-    public String addInfoSave(AppInfo appInfo, HttpSession session,
+    @RequestMapping(value = "/updateadd",method = RequestMethod.POST)
+    public Object addInfoSave(AppInfo appInfo, HttpSession session,
                               HttpServletRequest request,
                               @RequestParam(value="logoPicPath",required = false) MultipartFile attach){
+        String JOSN="";
         String logoPicPath=null;
+
+        appInfo.setCreatedBy(((DevUser)session.getAttribute("devUserSession")).getId());
+        appInfo.setCreationDate(new Date());
+        int rest = 0;
+        try {
+            rest = appInfoService.addAppInfo(appInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(rest > 0){
+            JOSN= "{\"status\":\"success\"}";
+        }
+        JOSN= "{\"status\":\"error\"}";
+
+
+
         //判断文件是否为空
         if(!attach.isEmpty()){
             //定义上传目标路径
@@ -327,9 +345,10 @@ public class AppInfoController {
             e.printStackTrace();
         }
         if(result>0){
-            return "redirect:/developer/applist";
+            JOSN= "redirect:/developer/applist";
         }
-        return "developer/appadd";
+        JOSN= "developer/appadd";
+        return JOSN;
     }
 
 

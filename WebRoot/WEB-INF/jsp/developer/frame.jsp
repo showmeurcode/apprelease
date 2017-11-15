@@ -370,7 +370,29 @@
 
         $("#addNewApp").click(function () {
             $("#Content").load("${pageContext.request.contextPath}/appInfo/add  #Content>*");
-        })
+        });
+
+        $("body").on("click","#send1",function () {
+            var bparam = $("#appadd").serialize();
+
+            $.ajax({
+                type:"POST",
+                url:rootpath+"/appInfo/updateadd",
+                data:bparam,
+                dataType:"json",
+                success:function (data) {
+                    if (data.status == "success") {
+                        alert("修改成功");
+                    } else {
+                        alert("修改失败");
+                    }
+                },
+                error:function (data) {
+                    alert("修改大失败");
+                }
+            });
+            alert("异步之后");
+        });
 
 
 
