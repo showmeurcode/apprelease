@@ -8,12 +8,18 @@ import cn.apprelease.service.app_category.AppCategoryService;
 import cn.apprelease.service.app_info.AppInfoService;
 import cn.apprelease.service.version.AppVersionService;
 import cn.apprelease.tools.DictionaryUtil;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -275,6 +281,57 @@ public class AppInfoController {
             e.printStackTrace();
         }
         return app;
+    }
+
+
+    public String addInfoSave(AppInfo appInfo, HttpSession session,
+                              HttpServletRequest request,
+                              @RequestParam(value="logoPicPath",required = false) MultipartFile attach){
+        String logoPicPath=null;
+        //判断文件是否为空
+        if(!attach.isEmpty()){
+            //定义上传目标路径
+            String path=request.getSession().getServletContext().getRealPath("statics"+ File.separator+"uploadfiles");
+            String olFileName=attach.getOriginalFilename();
+            String prefix= FilenameUtils.getExtension(olFileName);
+            int filesize=50000;
+            if(attach.getSize()>filesize){
+                request.setAttribute("uploadFileError","上传大小不能超过50KB");
+                return "developer/appadd";
+            }else if(prefix.equalsIgnoreCase("jpg")
+                    ||prefix.equalsIgnoreCase("jpeg")
+                    ||prefix.equalsIgnoreCase("png")){
+                //当前系统时间+随机数+"_Personal.jpg"
+                String fileName=System.currentTimeMillis()
+                        + RandomUtils.nextInt(1000000)+"_Personal.jpg";
+                File targetFile=new File(path,fileName);
+                if(!targetFile.exists()){
+                    targetFile.mkdirs();
+                }
+                try {
+                    attach.transferTo(targetFile);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    request.setAttribute("uploadFileError","上传失败");
+                    return "developer/appadd";
+                }
+                logoPicPath=path+File.separator+fileName;
+            }else {
+                request.setAttribute("uploadFileError","上传文件格式不正确");
+                return "developer/appadd";
+            }
+        }
+        appInfo.setLogoPicPath(logoPicPath);
+        int result=0;
+        try {
+           result=appInfoService.addAppInfo(appInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(result>0){
+            return "redirect:/developer/applist";
+        }
+        return "developer/appadd";
     }
 
 //————————————————————————————————————————————————孔祥忠————————————————————————————————————————————————————————————————
