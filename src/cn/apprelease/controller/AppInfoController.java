@@ -209,9 +209,10 @@ public class AppInfoController {
     }
 
 
-    @RequestMapping(value = "/updateApp",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateApp")
     @ResponseBody
-    public Object updateAppInfo(AppInfo appInfo, HttpSession session){
+    public Object updateApp(AppInfo appInfo, HttpSession session){
+        System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>进入方法，路径正确");
         appInfo.setModifyBy(((DevUser)session.getAttribute("devUserSession")).getId());
         appInfo.setModifyDate(new Date());
         int result = 0;
@@ -220,6 +221,7 @@ public class AppInfoController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>更新完成，影响行数："+result);
         if(result > 0){
             return "{\"status\":\"success\"}";
         }
@@ -263,6 +265,26 @@ public class AppInfoController {
         model.addAttribute("appCategory3",appCategory3);
 
         return "developer/appdetail";
+
+    }
+
+    @RequestMapping(value = "/CommitAndSave")
+    @ResponseBody
+    public Object CommitAndSave(AppInfo appInfo,HttpSession session){
+
+        appInfo.setModifyBy(((DevUser)session.getAttribute("devUserSession")).getId());
+        appInfo.setModifyDate(new Date());
+        appInfo.setStatus(1);
+        int result = 0;
+        try {
+            result = appInfoService.updateAppInfo(appInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(result > 0){
+            return "{\"status\":\"success\"}";
+        }
+        return "{\"status\":\"error\"}";
 
     }
 

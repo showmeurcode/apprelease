@@ -512,10 +512,37 @@
             showApps ();
         });
 
+        //点击查看
         $("body").on("click",".viewApp",function () {
             var appId=$(this).attr("id");
             $("#Content").load("${pageContext.request.contextPath}/appInfo/viewApp?id="+appId+"  #Content>*");
         });
+
+        //点击保存并提交审核
+        $("body").on("click","#CommitAndSave",function () {
+
+            var info = $("#changeApp").serialize();
+            $.ajax({
+                type:"POST",
+                url:rootpath+"/appInfo/CommitAndSave",
+                data:info,
+                dataType:"json",
+                success:function (data) {
+                    if (data.status == "success") {
+                        alert("修改成功");
+                    } else {
+                        alert("修改失败");
+                    }
+                    
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("XMLHttpRequest.status："+XMLHttpRequest.status);
+                    alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
+                    alert("textStatus："+textStatus);
+                }
+            });
+
+        })
 
 
 

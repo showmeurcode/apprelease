@@ -239,7 +239,7 @@
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <c:if test="${appInfo.status == 3}">
-                                    <a id="CommitAndSend" type="button" class="btn btn-success">保存并在此提交审核</a>
+                                    <a id="CommitAndSave" type="button" class="btn btn-success">保存并再次提交审核</a>
                                 </c:if>
                                 <div class="col-md-6 col-md-offset-3">
                                     <a id="send" type="button" class="btn btn-success">保存
