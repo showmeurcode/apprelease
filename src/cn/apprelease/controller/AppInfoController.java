@@ -209,7 +209,7 @@ public class AppInfoController {
     }
 
 
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateApp",method = RequestMethod.POST)
     @ResponseBody
     public Object updateAppInfo(AppInfo appInfo, HttpSession session){
         appInfo.setModifyBy(((DevUser)session.getAttribute("devUserSession")).getId());
@@ -224,6 +224,45 @@ public class AppInfoController {
             return "{\"status\":\"success\"}";
         }
         return "{\"status\":\"error\"}";
+
+    }
+
+    @RequestMapping(value = "/viewApp")
+    public String viewApp(Model model, String id){
+
+        AppInfo appInfo = new AppInfo();
+        appInfo.setId(Integer.valueOf(id));
+        List<AppInfo> list = new ArrayList<AppInfo>();
+
+        try {
+            list = appInfoService.findAppInfoByAppInfo(appInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (list !=null && list.size() != 0) {
+            appInfo = list.get(0);
+        } else {
+            appInfo = null;
+        }
+
+        AppCategory appCategory1 = null;
+        AppCategory appCategory2 = null;
+        AppCategory appCategory3 = null;
+
+        try {
+            appCategory1 = appCategoryService.findAppCategoryByid(appInfo.getCategoryLevel1());
+            appCategory2 = appCategoryService.findAppCategoryByid(appInfo.getCategoryLevel2());
+            appCategory3 = appCategoryService.findAppCategoryByid(appInfo.getCategoryLevel3());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("appInfo",appInfo);
+        model.addAttribute("appCategory1",appCategory1);
+        model.addAttribute("appCategory2",appCategory2);
+        model.addAttribute("appCategory3",appCategory3);
+
+        return "developer/appdetail";
 
     }
 
