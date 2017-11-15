@@ -147,12 +147,11 @@
                                 <label for="flatformId"
                                        class="control-label col-md-3">所属平台</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select name="flatformId" id="flatformId"
-                                            class="form-control col-md-7 col-xs-12" required="required" readonly>
-                                        <option value="1" <c:if test="${appInfo.flatformId == 1}">selected</c:if>>手机</option> 
-                                        <option value="2" <c:if test="${appInfo.flatformId == 2}">selected</c:if>>平板</option> 
-                                        <option value="3" <c:if test="${appInfo.flatformId == 3}">selected</c:if>>通用</option> 
-                                    </select>
+                                    <input name="flatformId" id="flatformId"
+                                            <c:if test="${appInfo.flatformId == 1}"> value="手机" </c:if>
+                                            <c:if test="${appInfo.flatformId == 2}"> value="平板" </c:if>
+                                            <c:if test="${appInfo.flatformId == 3}"> value="通用" </c:if>
+                                           class="form-control col-md-7 col-xs-12" required="required" readonly/> 
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -160,7 +159,7 @@
                                        class="control-label col-md-3 col-sm-3 col-xs-12">一级分类</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input name="categoryLevel1" id="categoryLevel1" value="${appCategory1.categoryName}"
-                                            class="form-control col-md-7 col-xs-12" required="required" readonly>
+                                           class="form-control col-md-7 col-xs-12" required="required" readonly>
                                     </input>
                                 </div>
                             </div>
@@ -169,7 +168,7 @@
                                        class="control-label col-md-3 col-sm-3 col-xs-12">二级分类</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input name="categoryLevel2" id="categoryLevel2" value="${appCategory2.categoryName}"
-                                            class="form-control col-md-7 col-xs-12" required="required" readonly>
+                                           class="form-control col-md-7 col-xs-12" required="required" readonly>
                                     </input>
                                 </div>
                             </div>
@@ -178,7 +177,7 @@
                                        class="control-label col-md-3 col-sm-3 col-xs-12">三级分类</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input name="categoryLevel3" id="categoryLevel3" value="${appCategory3.categoryName}"
-                                            class="form-control col-md-7 col-xs-12" required="required" readonly>
+                                           class="form-control col-md-7 col-xs-12" required="required" readonly>
                                     </input>
                                 </div>
                             </div>
