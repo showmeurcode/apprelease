@@ -378,10 +378,20 @@
 
         //加载更新的页面
         $("body").on("click",".changeApp",function () {
-
+            var status = $(this).parents("tr").find(".btn-xs").html();
             var appId=$(this).attr("id");
+            alert(status);
 
-            $("#Content").load("${pageContext.request.contextPath}/appInfo/changeApp?id="+appId+"  #Content>*");
+
+            if (status.eq("审核通过") || status.eq("已上架") || status.eq("已下架")) {
+                alert("该APP应用的状态为：【"+status+"】，不能修改！")
+                alert(">>>");
+            } else {
+                alert(">>>");
+                $("#Content").load("${pageContext.request.contextPath}/appInfo/changeApp?id="+appId+"  #Content>*");
+            }
+
+
 
 
         });
@@ -441,6 +451,12 @@
             });
             alert("异步之后");
 
+        });
+
+        //点击返回操作
+        $("body").on("click",".btn-primary",function () {
+            $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
+            showApps ();
         });
 
 
