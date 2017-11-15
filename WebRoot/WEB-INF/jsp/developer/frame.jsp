@@ -444,6 +444,12 @@
 
         });
 
+        //点击返回操作
+        <%--$("body").on("click",".btn-primary",function () {--%>
+            <%--$("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");--%>
+            <%--showApps ();--%>
+        <%--});--%>
+
 
 
     })
