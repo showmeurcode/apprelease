@@ -70,7 +70,8 @@
             </div>
             <div class="x_content">
 
-              <form id="ceshi1" class="form-horizontal form-label-left" novalidate action="${pageContext.request.contextPath }/appInfo/addApp" method="post">
+              <form id="ceshi1" class="form-horizontal form-label-left" novalidate action="${pageContext.request.contextPath }/appInfo/addApp"
+                    method="post" enctype="multipart/form-data">
 
                 <p>请填写信息
 
@@ -227,6 +228,7 @@
                 </div>
 
             <div class="item form-group">
+              <input type="hidden" id="errorinfo" value="${uploadFileError}"/>
               <label class="control-label col-md-3 col-sm-3 col-xs-12"
                      for="logoPicPath">LOGO图片 <span class="required">*</span>
               </label>
@@ -239,7 +241,7 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-md-offset-3">
-                <button id="send" type="submit" class="btn btn-success">保存
+                <button id="send1" type="submit" class="btn btn-success">保存
                 </button>
                 <button type="button" class="btn btn-primary">返回</button>
               </div>

@@ -35,6 +35,7 @@
 
     <!-- Custom Theme Style -->
     <link href="${pageContext.request.contextPath }/statics/css/custom.min.css" rel="stylesheet">
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   </head>
 
   <body class="nav-md">
@@ -220,13 +221,11 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
+
               <div class="title_left" id="Content" role="main">
                 <h3>欢迎你：系统管理员 <small>${sessionScope.backendUserSession.userName}</small>，请在左侧选择操作</h3>
               </div>
-            </div>
-          </div>
+
         </div>
         <!-- /page content -->
 
@@ -275,6 +274,7 @@
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/appfrom.js"></script>
     
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -297,16 +297,17 @@
          }
          $.ajax({
              type:"GET",
-             url:rootpath+"appInfo/showAllToexamineAPPS",
-             data:"data",
+             url:rootpath+"/appInfo/showAllToexamineAPPS", //注意此处斜杠不能少，否则无法显示APP信息
+             data:data,   //注意此处不需要加引号("")
              dataType :"html",
              success : function (data) {
 
                  $("#appdetails").html(data)
+
                  table=$('#listTable').DataTable({
                      "bLengthChange": false, //是否显示修改显示数据数量的菜单
                      "iDisplayLength": 5,//设置每页默认显示多少数据
-                     searching : false, //去掉搜索框方法一：百度上的方法，但是我用这没管用
+                     searching : false, //去掉搜索框
                      language: {
                          "sProcessing": "处理中...",
                          "sLengthMenu": "显示 _MENU_ 项结果",
@@ -341,7 +342,7 @@
 
       $("#showAllToexamineAPPS").click(function () {
           params="";// 全局变量归0
-          $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
+          $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2backend  #Content>*");
 
           showToexamineAPPS ();//显示所有app列表(后台拼接html法)
       });

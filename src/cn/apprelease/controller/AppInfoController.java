@@ -8,15 +8,20 @@ import cn.apprelease.service.app_category.AppCategoryService;
 import cn.apprelease.service.app_info.AppInfoService;
 import cn.apprelease.service.version.AppVersionService;
 import cn.apprelease.tools.DictionaryUtil;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -280,7 +285,58 @@ public class AppInfoController {
         return app;
     }
 
-//————————————————————————————————————————————————孔祥忠————————————————————————————————————————————————————————————————
+    public String addInfoSave(AppInfo appInfo, HttpSession session,
+                              HttpServletRequest request,
+                              @RequestParam(value="logoPicPath",required = false) MultipartFile attach){
+        String logoPicPath=null;
+        //判断文件是否为空
+        if(!attach.isEmpty()){
+            //定义上传目标路径
+            String path=request.getSession().getServletContext().getRealPath("statics"+ File.separator+"uploadfiles");
+            String olFileName=attach.getOriginalFilename();
+            String prefix= FilenameUtils.getExtension(olFileName);
+            int filesize=50000;
+            if(attach.getSize()>filesize){
+                request.setAttribute("uploadFileError","上传大小不能超过50KB");
+                return "developer/appadd";
+            }else if(prefix.equalsIgnoreCase("jpg")
+                    ||prefix.equalsIgnoreCase("jpeg")
+                    ||prefix.equalsIgnoreCase("png")){
+                //当前系统时间+随机数+"_Personal.jpg"
+                String fileName=System.currentTimeMillis()
+                        + RandomUtils.nextInt(1000000)+"_Personal.jpg";
+                File targetFile=new File(path,fileName);
+                if(!targetFile.exists()){
+                    targetFile.mkdirs();
+                }
+                try {
+                    attach.transferTo(targetFile);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    request.setAttribute("uploadFileError","上传失败");
+                    return "developer/appadd";
+                }
+                logoPicPath=path+File.separator+fileName;
+            }else {
+                request.setAttribute("uploadFileError","上传文件格式不正确");
+                return "developer/appadd";
+            }
+        }
+        appInfo.setLogoPicPath(logoPicPath);
+        int result=0;
+        try {
+            result=appInfoService.addAppInfo(appInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(result>0){
+            return "redirect:/developer/applist";
+        }
+        return "developer/appadd";
+    }
+
+
+//————————————————————————————————————————————————孔祥忠(后台APP信息展示)————————————————————————————————————————————————————————————————
 
     @RequestMapping("/showAllToexamineAPPS")
     @ResponseBody
@@ -345,12 +401,13 @@ public class AppInfoController {
                         "<li><a href='###' id='"+info.getId()+"' class='ToexamineAPP'>查看并审核APP</a> </li>"
 
                 );
-                if (info.getStatus()==5||info.getStatus()==2){
-                    html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>上架</a> </li>");
+                if (info.getStatus()==1){
+                    html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>待审核</a> </li>");
                 }
-                if (info.getStatus()==4){
-                    html.append("<li><a href='###' id='"+info.getId()+"' class='putoffApp'>下架</a> </li>");
+                if (info.getStatus()==2){
+                    html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>审核通过</a> </li>");
                 }
+
                 html.append("</ul>" +
                         "                  </div>" +
                         "                </td>" +
