@@ -249,19 +249,16 @@ public class AppInfoController {
     @RequestMapping("/add")
     public String add(Model model){
         List<AppCategory> appCategoryList1=null;
-        List<AppCategory> appCategoryList2=null;
-        List<AppCategory> appCategoryList3=null;
+
 
         try {
             appCategoryList1=appCategoryService.findAppCategorysBylevel(1);
-            appCategoryList2=appCategoryService.findAppCategorysBylevel(2);
-            appCategoryList3=appCategoryService.findAppCategorysBylevel(3);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         model.addAttribute("appCategoryList1",appCategoryList1);
-        model.addAttribute("appCategoryList2",appCategoryList2);
-        model.addAttribute("appCategoryList3",appCategoryList3);
+
 
         return "developer/appadd";
     }
