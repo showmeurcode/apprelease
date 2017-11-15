@@ -380,14 +380,11 @@
         $("body").on("click",".changeApp",function () {
             var status = $(this).parents("tr").find(".btn-xs").html();
             var appId=$(this).attr("id");
-            alert(status);
 
 
-            if (status.eq("审核通过") || status.eq("已上架") || status.eq("已下架")) {
+            if (status == "审核通过" || status == "已上架" || status == "已下架") {
                 alert("该APP应用的状态为：【"+status+"】，不能修改！")
-                alert(">>>");
             } else {
-                alert(">>>");
                 $("#Content").load("${pageContext.request.contextPath}/appInfo/changeApp?id="+appId+"  #Content>*");
             }
 
@@ -433,7 +430,7 @@
             $.ajax({
 
                 type:"POST",
-                url:rootpath+"/appInfo/update",
+                url:rootpath+"/appInfo/updateApp",
                 data:bparams,
                 dataType:"json",
                 success:function (data) {
@@ -444,12 +441,22 @@
                     }
                     
                 },
-                error:function (data) {
-                    alert("修改大失败");
+//                XMLHttpRequest：XMLHttpRequest.readyState: 状态码的意思
+//            0 － （未初始化）还没有调用send()方法
+//            1 － （载入）已调用send()方法，正在发送请求
+//            2 － （载入完成）send()方法执行完成，已经接收到全部响应内容
+//            3 － （交互）正在解析响应内容
+//            4 － （完成）响应内容解析完成，可以在客户端调用了
+//                XMLHttpRequest：XMLHttpRequest.status:
+//            textStatus：错误原因
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("XMLHttpRequest.status："+XMLHttpRequest.status);
+                alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
+                alert("textStatus："+textStatus);
+//                readystate: 4  status: 400 textStatus: error
                 }
 
             });
-            alert("异步之后");
 
         });
 
@@ -457,6 +464,11 @@
         $("body").on("click",".btn-primary",function () {
             $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
             showApps ();
+        });
+
+        $("body").on("click",".viewApp",function () {
+            var appId=$(this).attr("id");
+            $("#Content").load("${pageContext.request.contextPath}/appInfo/viewApp?id="+appId+"  #Content>*");
         });
 
 

@@ -81,7 +81,7 @@
                                     <input id="softwareName" class="form-control col-md-7 col-xs-12"
                                            name="softwareName" placeholder="请输入文件名称"
                                            value="${appInfo.softwareName}"
-                                           required="required" type="text">
+                                           required="required" type="text" readonly>
                                     <span id="yzname"></span>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="text" id="APKName" name="APKName" required="required"
                                            placeholder="请输入APK名称" value="${appInfo.APKName}"
-                                           class="form-control col-md-7 col-xs-12">
+                                           class="form-control col-md-7 col-xs-12" readonly>
                                     <span id="yzAPK"></span>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
                                     <input type="text" id="supportROM" name="supportROM"
                                            required="required" placeholder="请输入支持的ROM"
                                            value="${appInfo.supportROM}"
-                                           class="form-control col-md-7 col-xs-12">
+                                           class="form-control col-md-7 col-xs-12" readonly>
                                     <span id="yzROM"></span>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
                                     <input type="text" id="interfaceLanguage" name="interfaceLanguage"
                                            required="required" placeholder="请输入软件支持的界面语言"
                                            value="${appInfo.interfaceLanguage}"
-                                           class="form-control col-md-7 col-xs-12">
+                                           class="form-control col-md-7 col-xs-12" readonly>
                                     <span id="yzlanguage"></span>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                                     <input type="text" id="softwareSize" name="softwareSize"
                                            required="required" placeholder="请输入软件大小，单位是Mb"
                                            value="${appInfo.softwareSize}"
-                                           class="form-control col-md-7 col-xs-12">
+                                           class="form-control col-md-7 col-xs-12" readonly>
                                     <span id="yzSize"></span>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input id="downloads" type="text" name="downloads" value="${appInfo.downloads}"
                                            placeholder="请输入下载次数" required="required"
-                                           class="optional form-control col-md-7 col-xs-12">
+                                           class="optional form-control col-md-7 col-xs-12" readonly>
                                     <span id="yzloads"></span>
                                 </div>
                             </div>
@@ -148,8 +148,7 @@
                                        class="control-label col-md-3">所属平台</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <select name="flatformId" id="flatformId"
-                                            class="form-control col-md-7 col-xs-12" required="required">
-                                        <option value="0">请选择</option> 
+                                            class="form-control col-md-7 col-xs-12" required="required" readonly>
                                         <option value="1" <c:if test="${appInfo.flatformId == 1}">selected</c:if>>手机</option> 
                                         <option value="2" <c:if test="${appInfo.flatformId == 2}">selected</c:if>>平板</option> 
                                         <option value="3" <c:if test="${appInfo.flatformId == 3}">selected</c:if>>通用</option> 
@@ -160,37 +159,27 @@
                                 <label for="categoryLevel1"
                                        class="control-label col-md-3 col-sm-3 col-xs-12">一级分类</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select name="categoryLevel1" id="categoryLevel1"
-                                            class="form-control col-md-7 col-xs-12" required="required">
-                                        <option value="0">请选择</option> 
-                                        <c:forEach items="${appCategory1List}" var="appCategory1">
-                                            <option value="${appCategory1.id}" <c:if test="${appCategory1.id == appInfo.categoryLevel1}">selected</c:if>>${appCategory1.categoryName}</option>
-                                        </c:forEach>
-                                    </select>
+                                    <input name="categoryLevel1" id="categoryLevel1" value="${appCategory1.categoryName}"
+                                            class="form-control col-md-7 col-xs-12" required="required" readonly>
+                                    </input>
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label for="categoryLevel2"
                                        class="control-label col-md-3 col-sm-3 col-xs-12">二级分类</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select name="categoryLevel2" id="categoryLevel2"
-                                            class="form-control col-md-7 col-xs-12" required="required">
-                                        <c:forEach items="${appCategory2List}" var="appCategory2">
-                                            <option value="${appCategory2.id}" <c:if test="${appCategory2.id == appInfo.categoryLevel2}">selected</c:if>>${appCategory2.categoryName}</option>
-                                        </c:forEach>
-                                    </select>
+                                    <input name="categoryLevel2" id="categoryLevel2" value="${appCategory2.categoryName}"
+                                            class="form-control col-md-7 col-xs-12" required="required" readonly>
+                                    </input>
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label for="categoryLevel3"
                                        class="control-label col-md-3 col-sm-3 col-xs-12">三级分类</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select name="categoryLevel3" id="categoryLevel3"
-                                            class="form-control col-md-7 col-xs-12" required="required">
-                                        <c:forEach items="${appCategory3List}" var="appCategory3">
-                                            <option value="${appCategory3.id}" <c:if test="${appCategory3.id == appInfo.categoryLevel3}">selected</c:if>>${appCategory3.categoryName}</option>
-                                        </c:forEach>
-                                    </select>
+                                    <input name="categoryLevel3" id="categoryLevel3" value="${appCategory3.categoryName}"
+                                            class="form-control col-md-7 col-xs-12" required="required" readonly>
+                                    </input>
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -215,20 +204,17 @@
 
                                     <textarea id="appInfo" required="required" name="appInfo"
                                               class="form-control col-md-7 col-xs-12"
-                                              placeholder="请输入本软件的相关信息，本信息作为软件的详细信息进行软件介绍。">${appInfo.appInfo}</textarea>
+                                              placeholder="请输入本软件的相关信息，本信息作为软件的详细信息进行软件介绍。" readonly>${appInfo.appInfo}</textarea>
                                     <span id="yztext"></span>
                                 </div>
 
 
                             </div>
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                       for="logoLocPath">LOGO图片 <span class="required">*</span>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">LOGO图片 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="logoLocPath" type="file" name="logoLocPath" required="required"
-                                           value="${appInfo.logoPicPath}"
-                                           class="optional form-control col-md-7 col-xs-12">
+                                    <img src="${appInfo.logoPicPath}"/>
                                 </div>
                             </div>
                             <input id="updateDate" name="updateDate" value="${appInfo.updateDate}" hidden/>
@@ -238,12 +224,7 @@
                             <input id="versionId" name="versionId" value="${appInfo.versionId}" hidden/>
                             <div class="ln_solid"></div>
                             <div class="form-group">
-                                <c:if test="${appInfo.status == 3}">
-                                    <a id="CommitAndSend" type="button" class="btn btn-success">保存并在此提交审核</a>
-                                </c:if>
                                 <div class="col-md-6 col-md-offset-3">
-                                    <a id="send" type="button" class="btn btn-success">保存
-                                    </a>
                                     <button type="button" class="btn btn-primary">返回</button>
                                 </div>
                             </div>
