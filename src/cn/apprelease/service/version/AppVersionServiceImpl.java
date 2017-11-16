@@ -54,4 +54,9 @@ public class AppVersionServiceImpl implements AppVersionService {
     public List<AppVersion> findAppVersionsByappId(Integer appId) throws Exception {
         return appVersionMapper.findAppVersionsByappId(appId);
     }
+
+    @Override
+    public int deleteVersionByappId(Integer appId) throws Exception {
+        return appVersionMapper.deleteVersionByappId(appId);
+    }
 }

@@ -23,4 +23,7 @@ public interface AppVersionService {
 
     List<AppVersion> findAppVersionsByappId(Integer appId)throws  Exception;
 
+    //删除某appinfo下的所有版本信息
+    int deleteVersionByappId(@Param("appId")Integer appId)throws  Exception;
+
 }

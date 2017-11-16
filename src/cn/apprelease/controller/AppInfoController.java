@@ -81,7 +81,7 @@ public class AppInfoController {
                         "                  "+ DictionaryUtil.showPlatformName(info.getFlatformId())+"" +
                         "                </td>" +
                         "                <td>" +
-                        "                  "+appCategory1.getCategoryName()+"》"+appCategory2.getCategoryName()+"》"+((appCategory2==null)?"":appCategory2.getCategoryName())+"" +
+                        "                  "+((appCategory1==null)?"":appCategory1.getCategoryName())+"》"+((appCategory2==null)?"":appCategory2.getCategoryName())+"》"+((appCategory3==null)?"":appCategory3.getCategoryName())+"" +
                         "                </td>" +
                         "                <td>" +
                         "                  <button type=\"button\" class='btn btn-success btn-xs'>"+DictionaryUtil.showStatusName(info.getStatus()) +"</button>" +
@@ -496,7 +496,7 @@ public class AppInfoController {
                         "                  "+ DictionaryUtil.showPlatformName(info.getFlatformId())+"" +
                         "                </td>" +
                         "                <td>" +
-                        "                  "+appCategoryOne.getCategoryName()+"》"+appCategoryTwo.getCategoryName()+"》"+appCategoryThree.getCategoryName()+"" +
+                        "                  "+((appCategoryOne==null)?"":appCategoryOne.getCategoryName())+"》"+((appCategoryTwo==null)?"":appCategoryTwo.getCategoryName())+"》"+((appCategoryThree==null)?"":appCategoryThree.getCategoryName())+"" +
                         "                </td>" +
                         "                <td>" +
                         "                  <button type=\"button\" class='btn btn-success btn-xs'>"+DictionaryUtil.showStatusName(info.getStatus()) +"</button>" +

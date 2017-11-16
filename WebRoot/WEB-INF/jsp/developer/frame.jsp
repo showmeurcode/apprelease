@@ -74,7 +74,7 @@
                             <li><a><i class="fa fa-home"></i>APP应用管理<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="javascript:;" id="showAllApps">个人APP维护</a></li>
-                                    <li><a href="###" id="addNewApp">上传新APP</a></li>
+                                    <li><a href="###" id="addNewApp">增加APP基础信息</a></li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-edit"></i> 个人账户管理<span class="fa fa-chevron-down"></span></a>
@@ -418,10 +418,10 @@
 //                alert("APK名称不能为空");
 //                return false;
 //            }
-            var data=new FormData($("body #appadd")[0]);
+            var data=new FormData($("body #appaddform")[0]);
             $.ajax({
                 type:"POST",
-                url:rootpath+"/appInfo/updateadd.json",
+                url:rootpath+"/appInfo/addsave.json",
                 data:data,
                 dataType:"json",
                 async:false,
@@ -445,7 +445,7 @@
         });
 
         $("body").on("click",".deleteApp",function () {
-            if (confirm("确定要删除APP")) {
+            if (confirm("确定要删除此APP（其下所有版本信息也会被删除）？")) {
                 var id=$(this).attr("id");
                 $.ajax({
                     type:"POST",

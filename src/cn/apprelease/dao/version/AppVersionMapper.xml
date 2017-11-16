@@ -22,6 +22,9 @@
             <if test="appId != null and appId != ''">AND appId=#{appId}</if>
         </where>
     </delete>
+    <delete id="deleteVersionByappId">
+        DELETE  *FROM app_version WHERE  appId=#{appId}
+    </delete>
 
     <!--——————————————————————————————————改 ———————————————————————————————————————————————— -->
     <update id="updateVersion" parameterType="AppVersion">

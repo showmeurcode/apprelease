@@ -18,6 +18,8 @@ public interface AppVersionMapper {
     List<AppVersion> findAllAppVersions(AppVersion appVersion)throws  Exception;
     //删除版本信息
     int deleteVersionById( AppVersion appVersion)throws  Exception;
+    //删除某appinfo下的所有版本信息
+    int deleteVersionByappId(@Param("appId")Integer appId)throws  Exception;
 
     //根据verionid查找version对象
     AppVersion findAppVersionByid(@Param("id")Integer id);
