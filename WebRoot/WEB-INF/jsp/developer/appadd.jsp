@@ -204,9 +204,8 @@
                          for="status">APP状态 <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="status" name="status"
-                           readonly value="待审核"
-                           class="form-control col-md-7 col-xs-12">
+                    <input id="status" name="status" value="1" hidden type="text"/>
+                    待审核
                   </div>
                 </div>
                 <div class="item form-group">
