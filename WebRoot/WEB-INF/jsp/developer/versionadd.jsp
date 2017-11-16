@@ -127,72 +127,75 @@
                     </div>
                     <div class="x_content">
 
-                        <form class="form-horizontal form-label-left" novalidate>
+                        <form  method="post" id="versionaddform" onkeydown="if(event.keyCode==13)return false;" class="form-horizontal form-label-left"  enctype="multipart/form-data">
 
                             <p>请填写信息
-
                             </p>
                             <span class="section"> </span>
-
+                            <input type="hidden" name="appId" value="${appInfo.id}">
+                            <input type="hidden" name="createBy" value="${sessionScope.devUserSession.id}">
+                            <%--版本号--%>
                             <div class="item form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="softwareName">版本号*
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="versionNo">版本号*
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="softwareName" class="form-control col-md-7 col-xs-12"
-                                           name="softwareName" placeholder="请输入版本号"
+                                    <input id="versionNo" class="form-control col-md-7 col-xs-12"
+                                           name="versionNo" placeholder="请输入版本号"
                                            required="required" type="text">
                                 </div>
                             </div>
+                            <%--版本大小--%>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                       for="APKName">版本大小<span class="required">*</span>
+                                       for="versionSize">版本大小<span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="APKName" name="APKName" required="required"
+                                    <input type="text" id="versionSize" name="versionSize" required="required"
                                            placeholder="请输入版本大小 ，单位为Mb"
                                            class="form-control col-md-7 col-xs-12">
                                 </div>
                             </div>
+                            <%--发布状态--%>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                       for="supportROM">发布状态<span class="required">*</span>
+                                       for="publishStatus">发布状态<span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input  readonly type="text" id="supportROM" name="supportROM"
-                                           required="required" placeholder=""
-                                           class="form-control col-md-7 col-xs-12">
+                                    <input  type="text" id="publishStatus" name="publishStatus"
+                                            value="3" hidden>预发布
                                 </div>
                             </div>
-
+                            <%--版本简介--%>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                       for="appInfo">版本简介 <span class="required">*</span>
+                                       for="versionInfo">版本简介 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
 
-                                <textarea id="appInfo" required="required" name="appInfo"
+                                <textarea id="versionInfo" required="required" name="versionInfo"
                                           class="form-control col-md-7 col-xs-12"
-                                          placeholder="请输入本软件的相关信息，本信息作为软件的详细信息进行软件介绍。">
+                                          placeholder="请输入本版本的相关信息，本信息作为版本的详细信息进行软件介绍。">
                                                         </textarea>
                                 </div>
                             </div>
+                            <%--apk文件上传--%>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                       for="logoPicPath">APK文件 <span class="required">*</span>
+                                       for="apkup">APK文件 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="logoPicPath" type="file" name="logoPicPath" required="required"
+                                    <input id="apkup" type="file" name="attach" required="required"
                                            class="optional form-control col-md-7 col-xs-12">
                                 </div>
                             </div>
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <button id="addversionbutton" class="btn btn-success">保存
-                                    </button>
+                                    <a  id="addversionbutton" class="btn btn-success">保存</a>
                                     <button type="button" class="btn btn-primary">返回</button>
                                 </div>
+
                             </div>
                         </form>
                     </div>

@@ -231,6 +231,9 @@
 <script src="../vendors/jszip/dist/jszip.min.js"></script>
 <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+<script src="${pageContext.request.contextPath }/statics/js/appfrom.js"></script>
+
+<script src="${pageContext.request.contextPath }/statics/js/appfrom.js"></script>
 
 
 <!-- Custom Theme Scripts -->
@@ -352,16 +355,50 @@
                 }
             });
         });
-//        ====================================尹晓晨新增app版本信息==================================================================
-        $("body").on("click", ".addAppVersion",function () {
-            var  appId= $(this).attr("id");
-            alert(appId);
-            $("#Content").load("${pageContext.request.contextPath}/appVersion/addAppVersion?appId="+appId+"  #Content>*");
 
+        //        ====================================尹晓晨新增app版本信息==================================================================
+        var  appIdforlistversion;
+        $("body").on("click", ".addAppVersion",function showversionlist() {
+              appIdforlistversion= $(this).attr("id");
+            $("#Content").load("/apprelease/appVersion/addAppVersion?appId="+appIdforlistversion+"  #Content>*");
+        });
 
+        $("body").on("click", "#addversionbutton",function () {
+            //验证开始（输入框在前台验证，文件上传在后端验证）
+            var istrue=false;
+           if($("body #versionaddform #versionNo").val()==""){
+                alert("版本号不能为空"); return false;
+            }
+            var yz1=/^[0-9]+([.]{1}[0-9]+){0,1}$/;
+            if($("body #versionaddform #versionSize").val()==""||!yz1.test($("body #versionaddform #versionSize").val())){
+                alert("版本大小不能为空且必须是数字"); return false;
+            }
+            if($("body #versionaddform #versionInfo").val().trim()==""||null){
+                alert("内容简介不能为空"); return false;
+            }
+           var data= new FormData($( "body #versionaddform" )[0]);
+            $.ajax({
+                type:"POST",
+                url:rootpath+"/appVersion/addAppVersionsave.json",
+                data:data,
+                dataType:"json",
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success:function (data) {
+                    if(data.errorInfo=="上传成功"){
+                        istrue=true;
+                    }else{
+                    alert(data.errorInfo);
+                    }
+                }
 
-
-
+            });
+            if(istrue==true){
+                alert(" 增加版本信息成功！ ");
+                $("#Content").load("/apprelease/appVersion/addAppVersion?appId="+appIdforlistversion+"  #Content>*");
+            }
         });
 
 
@@ -370,18 +407,74 @@
 
         $("#addNewApp").click(function () {
             $("#Content").load("${pageContext.request.contextPath}/appInfo/add  #Content>*");
-        })
+        });
 
+        $("body").on("click","#send1",function () {
+            var bparam = $("#appadd").serialize();
+
+            $.ajax({
+                type:"POST",
+                url:rootpath+"/appInfo/updateadd",
+                data:bparam,
+                dataType:"json",
+                success:function (data) {
+                    if (data.status == "success") {
+                        alert("添加成功");
+                    } else {
+                        alert("添加失败");
+                    }
+                },
+                error:function (data) {
+                    alert("添加大失败");
+                }
+            });
+            alert("异步之后");
+        });
+
+        $("body").on("click",".deleteApp",function () {
+            if (confirm("确定要删除APP")) {
+                var id=$(this).attr("id");
+                $.ajax({
+                    type:"POST",
+                    url:rootpath+"/appInfo/delApp",
+                    data:"id="+id,
+                    dataType:"json",
+                    success:function (data) {
+                        $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
+                        showApps ();
+                        if(data.status=="success"){
+                            alert("删除成功！")
+                        }else {
+                            alert("删除失败！")
+                        }
+                    },
+                    error:function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("XMLHttpRequest.status："+XMLHttpRequest.status);
+                        alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
+                        alert("textStatus："+textStatus);
+//                readystate: 4  status: 400 textStatus: error
+                    }
+                })
+            } else {}
+
+        });
 
 
 //        ==============================================================李高珊==============================================================
 
         //加载更新的页面
         $("body").on("click",".changeApp",function () {
-
+            var status = $(this).parents("tr").find(".btn-xs").html();
             var appId=$(this).attr("id");
 
-            $("#Content").load("${pageContext.request.contextPath}/appInfo/changeApp?id="+appId+"  #Content>*");
+
+            if (status == "审核通过" || status == "已上架" || status == "已下架") {
+                alert("该APP应用的状态为：【"+status+"】，不能修改！")
+            } else {
+                $("#Content").load("${pageContext.request.contextPath}/appInfo/changeApp?id="+appId+"  #Content>*");
+            }
+
+
 
 
         });
@@ -423,7 +516,7 @@
             $.ajax({
 
                 type:"POST",
-                url:rootpath+"/appInfo/update",
+                url:rootpath+"/appInfo/updateApp",
                 data:bparams,
                 dataType:"json",
                 success:function (data) {
@@ -434,8 +527,19 @@
                     }
                     
                 },
-                error:function (data) {
-                    alert("修改大失败");
+//                XMLHttpRequest：XMLHttpRequest.readyState: 状态码的意思
+//            0 － （未初始化）还没有调用send()方法
+//            1 － （载入）已调用send()方法，正在发送请求
+//            2 － （载入完成）send()方法执行完成，已经接收到全部响应内容
+//            3 － （交互）正在解析响应内容
+//            4 － （完成）响应内容解析完成，可以在客户端调用了
+//                XMLHttpRequest：XMLHttpRequest.status:
+//            textStatus：错误原因
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("XMLHttpRequest.status："+XMLHttpRequest.status);
+                alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
+                alert("textStatus："+textStatus);
+//                readystate: 4  status: 400 textStatus: error
                 }
 
             });
@@ -443,11 +547,49 @@
 
         });
 
+        //点击返回操作
+        $("body").on("click",".btn-primary",function () {
+            $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
+            showApps ();
+        });
+
+        //点击查看
+        $("body").on("click",".viewApp",function () {
+            var appId=$(this).attr("id");
+            $("#Content").load("${pageContext.request.contextPath}/appInfo/viewApp?id="+appId+"  #Content>*");
+        });
+
+        //点击保存并提交审核
+        $("body").on("click","#CommitAndSave",function () {
+
+            var info = $("#changeApp").serialize();
+            $.ajax({
+                type:"POST",
+                url:rootpath+"/appInfo/CommitAndSave",
+                data:info,
+                dataType:"json",
+                success:function (data) {
+                    if (data.status == "success") {
+                        alert("修改成功");
+                    } else {
+                        alert("修改失败");
+                    }
+
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("XMLHttpRequest.status："+XMLHttpRequest.status);
+                    alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
+                    alert("textStatus："+textStatus);
+                }
+            });
+
+        })
+
 
 
     })
 
 </script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/appfrom.js"></script>
 </body>
 </html>
