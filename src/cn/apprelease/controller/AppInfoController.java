@@ -81,7 +81,7 @@ public class AppInfoController {
                         "                  "+ DictionaryUtil.showPlatformName(info.getFlatformId())+"" +
                         "                </td>" +
                         "                <td>" +
-                        "                  "+appCategory1.getCategoryName()+"》"+appCategory2.getCategoryName()+"》"+appCategory3.getCategoryName()+"" +
+                        "                  "+appCategory1.getCategoryName()+"》"+appCategory2.getCategoryName()+"》"+((appCategory2==null)?"":appCategory2.getCategoryName())+"" +
                         "                </td>" +
                         "                <td>" +
                         "                  <button type=\"button\" class='btn btn-success btn-xs'>"+DictionaryUtil.showStatusName(info.getStatus()) +"</button>" +
@@ -310,7 +310,8 @@ public class AppInfoController {
 
 
 //—————————————————————————————————————————————————张玮钰———————————————————————————————————————————————————————————————
-    @RequestMapping(value = "/addApp")
+    /*张伟玉你在搞什么，注释也不写，命名随心情乱起，方法乱写，后面的人还怎么维护*/
+    /*@RequestMapping(value = "/addApp")
     public String addApp(AppInfo appInfo,Model model){
         int add=0;
         try {
@@ -325,7 +326,7 @@ public class AppInfoController {
         return "developer/frame";
 
 
-    }
+    }*/
 
 
     @RequestMapping("/add")
@@ -364,7 +365,7 @@ public class AppInfoController {
         return app;
     }
 
-    @RequestMapping(value = "/updateadd")
+    @RequestMapping(value = "/addsave")
     @ResponseBody
     public Object addInfoSave(AppInfo appInfo, HttpSession session,
                               HttpServletRequest request,
@@ -383,10 +384,10 @@ public class AppInfoController {
 
             olFileName=attach.getOriginalFilename();//获取原文件名
             String prefix= FilenameUtils.getExtension(olFileName);//获取原文件后缀名
-            int filesize=50000;//设置文件大小限制 50KB
+            int filesize=500000;//设置文件大小限制 50KB
             if(attach.getSize()>filesize){
                 //request.setAttribute("uploadFileError","上传大小不能超过50KB");
-                return  "{\"status\":\"上传大小不能超过50KB\"}";
+                return  "{\"status\":\"上传大小不能超过500KB\"}";
             }else if(prefix.equalsIgnoreCase("jpg")
                     ||prefix.equalsIgnoreCase("jpeg")
                     ||prefix.equalsIgnoreCase("png")){
@@ -417,7 +418,7 @@ public class AppInfoController {
 
 
         //赋值
-        appInfo.setCreatedBy(((DevUser)session.getAttribute("devUserSession")).getId());
+        appInfo.setDevId(((DevUser)session.getAttribute("devUserSession")).getId());
         appInfo.setCreationDate(new Date());
         appInfo.setLogoPicPath(logoPicPath);
         int rest = 0;
@@ -439,8 +440,10 @@ public class AppInfoController {
     @ResponseBody
     public Object delApp(int id){
         int result=0;
+        int result1=0;
         try {
             result=appInfoService.delAppInfo(id);
+            result1=appVersionService.deleteVersionByappId(id);
         } catch (Exception e) {
             e.printStackTrace();
         }
