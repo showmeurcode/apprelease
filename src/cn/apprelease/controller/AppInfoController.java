@@ -363,12 +363,12 @@ public class AppInfoController {
         return app;
     }
 
-    @RequestMapping(value = "/updateadd",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateadd")
     @ResponseBody
     public Object addInfoSave(AppInfo appInfo, HttpSession session,
                               HttpServletRequest request,
-                              @RequestParam(value="logoPicPath",required = false) MultipartFile attach){
-        String JOSN="";
+                              @RequestParam(value="logoPicPath1",required = false) MultipartFile attach){
+       // String JOSN="";
 
         String logoPicPath=null;
         String path=request.getSession().getServletContext().getRealPath("statics/uploadfiles");
@@ -385,7 +385,7 @@ public class AppInfoController {
             int filesize=50000;//设置文件大小限制 50KB
             if(attach.getSize()>filesize){
                 //request.setAttribute("uploadFileError","上传大小不能超过50KB");
-                JOSN= "{\"status\":\"上传大小不能超过50KB\"}";
+                return  "{\"status\":\"上传大小不能超过50KB\"}";
             }else if(prefix.equalsIgnoreCase("jpg")
                     ||prefix.equalsIgnoreCase("jpeg")
                     ||prefix.equalsIgnoreCase("png")){
@@ -408,10 +408,10 @@ public class AppInfoController {
                 logoPicPath=path+"/"+fileName;
             }else {
 //                request.setAttribute("uploadFileError","上传文件格式不正确");
-                JOSN= "{\"status\":\"上传文件格式不正确\"}";
+                return "{\"status\":\"上传文件格式不正确\"}";
             }
         }else {
-            JOSN= "{\"status\":\"未选中文件，上传失败\"}";
+            return "{\"status\":\"未选中文件，上传失败\"}";
         }
 
 
@@ -426,11 +426,11 @@ public class AppInfoController {
             e.printStackTrace();
         }
         if(rest > 0){
-            JOSN= "{\"status\":\"success\"}";
+            return "{\"status\":\"添加成功\"}";
         }
-        JOSN= "{\"status\":\"error\"}";
+        return "{\"status\":\"添加失败\"}";
 
-        return JOSN;
+
     }
 
     //APP删除

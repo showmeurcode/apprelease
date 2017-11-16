@@ -424,7 +424,7 @@
             var data=new FormData($("body #appadd")[0]);
             $.ajax({
                 type:"POST",
-                url:rootpath+"/appInfo/updateadd.josn",
+                url:rootpath+"/appInfo/updateadd.json",
                 data:data,
                 dataType:"json",
                 async:false,
@@ -433,6 +433,8 @@
                 processData:false,
                 success:function (data) {
                     if (data.status == "上传成功") {
+                        $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
+                        showApps ();
                         istrue=true;
                     } else {
                         alert(data.status);

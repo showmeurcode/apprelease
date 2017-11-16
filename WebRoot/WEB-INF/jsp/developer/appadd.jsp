@@ -225,10 +225,10 @@
             <div class="item form-group">
               <input type="hidden" id="errorinfo" value="${uploadFileError}"/>
               <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                     for="logoPicPath">LOGO图片 <span class="required">*</span>
+                     for="logoPicPath1">LOGO图片 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="logoPicPath" type="file" name="logoPicPath" required="required"
+                <input id="logoPicPath1" type="file" name="logoPicPath1" required="required"
                        class="optional form-control col-md-7 col-xs-12">
               </div>
 
