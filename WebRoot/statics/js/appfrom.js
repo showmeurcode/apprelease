@@ -118,15 +118,5 @@ $("body").on("blur",".form-label-left #appInfo",function () {
         logoPicPath.next().html(errorinfo.val());
     }
 
-//验证保存
-    $("body").on("blur",".form-label-left #send1",function () {
-               if(name == ""){
-            alert("软件名称不可为空");
 
-        }else if(apkName==""){
-            alert("APK名称不可为空");
-
-        }
-
-    });
 });

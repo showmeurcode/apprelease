@@ -413,7 +413,14 @@
             var bparam = $("#appadd").serialize();
 
             var istrue=false;
-
+            if($("#softwareName").val()==""){
+                alert("软件名称不能为空");
+                return false;
+            }
+            if($("#APKName").val()==""){
+                alert("APK名称不能为空");
+                return false;
+            }
             var data=new FormData($("body #appadd")[0]);
             $.ajax({
                 type:"POST",
