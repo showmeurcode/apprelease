@@ -127,7 +127,7 @@
                     </div>
                     <div class="x_content">
 
-                        <form class="form-horizontal form-label-left" novalidate>
+                        <form  id="versionaddform" onkeydown="if(event.keyCode==13)return false;" class="form-horizontal form-label-left" novalidate>
 
                             <p>请填写信息
                             </p>
@@ -180,19 +180,17 @@
                             <%--apk文件上传--%>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                       for="logoPicPath">APK文件 <span class="required">*</span>
+                                       for="apkup">APK文件 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="logoPicPath" type="file" name="attachs" required="required"
+                                    <input id="apkup" type="file" name="attach" required="required"
                                            class="optional form-control col-md-7 col-xs-12">
                                 </div>
                             </div>
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <button id="addversionbutton" class="btn btn-success">保存
-                                    </button>
-                                    <button type="button" class="btn btn-primary">返回</button>
+                                    <a  id="addversionbutton" class="btn btn-success">保存</a>
                                 </div>
                             </div>
                         </form>

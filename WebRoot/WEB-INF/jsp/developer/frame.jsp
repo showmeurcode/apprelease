@@ -231,7 +231,7 @@
 <script src="../vendors/jszip/dist/jszip.min.js"></script>
 <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/appfrom.js"></script>
+
 
 
 <!-- Custom Theme Scripts -->
@@ -353,16 +353,53 @@
                 }
             });
         });
-//        ====================================尹晓晨新增app版本信息==================================================================
+
+        //        ====================================尹晓晨新增app版本信息==================================================================
         $("body").on("click", ".addAppVersion",function () {
             var  appId= $(this).attr("id");
-            alert(appId);
-            $("#Content").load("${pageContext.request.contextPath}/appVersion/addAppVersion?appId="+appId+"  #Content>*");
+            $("#Content").load("/apprelease/appVersion/addAppVersion?appId="+appId+"  #Content>*");
+        });
+
+        $("body").on("click", "#addversionbutton",function () {
+            //验证开始（输入框在前台验证，文件上传在后端验证）
+            var istrue=false;
+           /* if($("body #versionaddform #versionNo").val()==""){
+                alert("版本号不能为空"); return false;
+            }
+            if($("body #versionaddform #versionSize").val()==""){
+                alert("版本大小不能为空"); return false;
+            }
+            if($("body #versionaddform #versionInfo").val().trim()==""||null){
+                alert("内容简介不能为空"); return false;
+            }*/
+           var data= $("body #versionaddform").serialize();
+            alert(data);
+            $.ajax({
+                type:"GET",
+                url:rootpath+"/appInfo/putonandoff",
+                data:data,
+                dataType:"json",
+                success:function (data) {
+                    $this.html(data.option);//修改上架或下架选项
+                    $this.attr("class",data.className);//修改类名
+                    $this.parents("tr").find(".btn-success").html(data.statusName);//修改状态
+
+                }
+
+
+            })
 
 
 
 
-
+            istrue=true;
+            if(istrue==true){
+                alert("上传成功");
+                params="";// 全局变量归0
+                //执行列出app列表页面
+                $("#Content").load("/apprelease/appCategory/showlevelmethod2  #Content>*");
+                showApps ();//显示所有app列表(后台拼接html法)
+            }
         });
 
 
@@ -449,6 +486,6 @@
     })
 
 </script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/appfrom.js"></script>
 </body>
 </html>
