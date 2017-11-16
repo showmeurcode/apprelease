@@ -231,6 +231,7 @@
 <script src="../vendors/jszip/dist/jszip.min.js"></script>
 <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+<script src="${pageContext.request.contextPath }/statics/js/appfrom.js"></script>
 
 
 <!-- Custom Theme Scripts -->

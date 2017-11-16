@@ -82,19 +82,19 @@
                                            name="softwareName" placeholder="请输入文件名称"
                                            value="${appInfo.softwareName}"
                                            required="required" type="text">
-                                    <span id="yzname"></span>
                                 </div>
+                                <span id="yzname"></span>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                       for="APKName">APK名称<span class="required">*</span>
+                                       for="APKName1">APK名称<span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="APKName" name="APKName" required="required"
+                                    <input type="text" id="APKName1" name="APKName" required="required"
                                            placeholder="请输入APK名称" value="${appInfo.APKName}"
                                            class="form-control col-md-7 col-xs-12">
-                                    <span id="yzAPK"></span>
                                 </div>
+                                <span id="yzAPK"></span>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -105,8 +105,8 @@
                                            required="required" placeholder="请输入支持的ROM"
                                            value="${appInfo.supportROM}"
                                            class="form-control col-md-7 col-xs-12">
-                                    <span id="yzROM"></span>
                                 </div>
+                                <span id="yzROM"></span>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -117,8 +117,8 @@
                                            required="required" placeholder="请输入软件支持的界面语言"
                                            value="${appInfo.interfaceLanguage}"
                                            class="form-control col-md-7 col-xs-12">
-                                    <span id="yzlanguage"></span>
                                 </div>
+                                <span id="yzlanguage"></span>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -129,8 +129,8 @@
                                            required="required" placeholder="请输入软件大小，单位是Mb"
                                            value="${appInfo.softwareSize}"
                                            class="form-control col-md-7 col-xs-12">
-                                    <span id="yzSize"></span>
                                 </div>
+                                <span id="yzSize"></span>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -140,8 +140,8 @@
                                     <input id="downloads" type="text" name="downloads" value="${appInfo.downloads}"
                                            placeholder="请输入下载次数" required="required"
                                            class="optional form-control col-md-7 col-xs-12">
-                                    <span id="yzloads"></span>
                                 </div>
+                                <span id="yzloads"></span>
                             </div>
                             <div class="item form-group">
                                 <label for="flatformId"
@@ -216,8 +216,8 @@
                                     <textarea id="appInfo" required="required" name="appInfo"
                                               class="form-control col-md-7 col-xs-12"
                                               placeholder="请输入本软件的相关信息，本信息作为软件的详细信息进行软件介绍。">${appInfo.appInfo}</textarea>
-                                    <span id="yztext"></span>
                                 </div>
+                                <span id="yztext"></span>
 
 
                             </div>
@@ -230,6 +230,7 @@
                                     <input id="s_logoLocPath" type="file" name="s_logoLocPath" required="required"
                                            class="optional form-control col-md-7 col-xs-12">
                                 </div>
+                                <div id="errorfile">${uploadFileError}</div>
                             </div>
                             <input id="logoPicPath" name="logoPicPath" value="${appInfo.logoPicPath}" hidden/>
                             <input id="logoLocPath" name="logoLocPath" value="${appInfo.logoLocPath}" hidden/>
