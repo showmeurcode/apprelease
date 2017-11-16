@@ -509,7 +509,7 @@
         });
 
         //点击保存进行数据更改
-        $("body").on("click","#send",function () {
+        $("body").on("click","#send,#CommitAndSave",function () {
 
 //           var bparams = $("#changeApp").serialize();
 //           alert(bparams);
@@ -550,8 +550,6 @@
                 }
 
             });
-            alert("异步之后");
-
         });
 
         //点击返回操作
@@ -565,39 +563,6 @@
             var appId=$(this).attr("id");
             $("#Content").load("${pageContext.request.contextPath}/appInfo/viewApp?id="+appId+"  #Content>*");
         });
-
-        //点击保存并提交审核
-        $("body").on("click","#CommitAndSave",function () {
-
-//            var info = $("#changeApp").serialize();
-            var info= new FormData($( "body #changeApp" )[0]);
-            $.ajax({
-                type:"POST",
-                url:rootpath+"/appInfo/CommitAndSave.json",
-                data:info,
-                dataType:"json",
-                async: false,
-                cache: false,
-                contentType: false,
-                processData: false,
-                success:function (data) {
-                    if (data.status == "success") {
-                        alert("修改成功");
-                        $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
-                        showApps ();
-                    } else {
-                        alert("修改失败");
-                    }
-
-                },
-                error:function (XMLHttpRequest, textStatus, errorThrown) {
-                    alert("XMLHttpRequest.status："+XMLHttpRequest.status);
-                    alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
-                    alert("textStatus："+textStatus);
-                }
-            });
-
-        })
 
 
 

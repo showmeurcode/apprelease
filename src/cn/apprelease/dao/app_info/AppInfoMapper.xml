@@ -28,8 +28,15 @@
 	<!-- 修改分类 -->
 	<update id="updateAppInfo" parameterType="AppInfo">
 		UPDATE `app_info` SET `softwareName`=#{softwareName}, `APKName`=#{APKName}, `supportROM`=#{supportROM}, `interfaceLanguage`=#{interfaceLanguage}, `softwareSize`=#{softwareSize},
-		`updateDate`=#{updateDate}, `devId`=#{devId}, `appInfo`=#{appInfo}, `status`=#{status}, `onSaleDate`=#{onSaleDate}, `offSaleDate`=#{offSaleDate}, `flatformId`=#{flatformId},
-		`categoryLevel3`=#{categoryLevel3}, `downloads`=#{downloads}, `modifyBy`=#{modifyBy}, `modifyDate`=#{modifyDate}, `categoryLevel1`=#{categoryLevel1},
+		<if test="updateDate!= null and updateDate != ''"> `updateDate`=#{updateDate},   </if>
+		<if test="onSaleDate != null and onSaleDate != ''"> `onSaleDate`=#{onSaleDate},   </if>
+		<if test="offSaleDate != null and offSaleDate != ''"> `offSaleDate`=#{offSaleDate},  </if>
+		<if test="modifyDate!= null and modifyDate != ''"> `modifyDate`=#{modifyDate},  </if>
+			`devId`=#{devId}, `appInfo`=#{appInfo}, `status`=#{status},
+			`flatformId`=#{flatformId},
+		`categoryLevel3`=#{categoryLevel3}, `downloads`=#{downloads}, `modifyBy`=#{modifyBy},
+
+			`categoryLevel1`=#{categoryLevel1},
 		`categoryLevel2`=#{categoryLevel2}, `logoPicPath`=#{logoPicPath}, `logoLocPath`=#{logoLocPath}, `versionId`=#{versionId}
 		WHERE `id`=#{id}
 	</update>

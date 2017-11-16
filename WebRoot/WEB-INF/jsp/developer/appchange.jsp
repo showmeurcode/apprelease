@@ -198,13 +198,13 @@
                                        for="status">APP状态 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="status" name="status" readonly
-                                           <c:if test="${appInfo.status == 1}">value="待审核" </c:if>
-                                           <c:if test="${appInfo.status == 2}">value="审核通过" </c:if>
-                                           <c:if test="${appInfo.status == 3}">value="审核不通过" </c:if>
-                                           <c:if test="${appInfo.status == 4}">value="已上架" </c:if>
-                                           <c:if test="${appInfo.status == 5}">value="已下架" </c:if>
-                                           class="form-control col-md-7 col-xs-12">
+                                    <input type="hidden" id="status" name="status" value="${appInfo.status}"   class="form-control col-md-7 col-xs-12"/>
+                                    <c:if test="${appInfo.status == 1}">待审核 </c:if>
+                                    <c:if test="${appInfo.status == 2}">审核通过 </c:if>
+                                    <c:if test="${appInfo.status == 3}">审核不通过 </c:if>
+                                    <c:if test="${appInfo.status == 4}">已上架 </c:if>
+                                    <c:if test="${appInfo.status == 5}">已下架 </c:if>
+
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -234,17 +234,24 @@
                             </div>
                             <input id="logoPicPath" name="logoPicPath" value="${appInfo.logoPicPath}" hidden/>
                             <input id="logoLocPath" name="logoLocPath" value="${appInfo.logoLocPath}" hidden/>
-                            <input id="updateDate" name="updateDate" value="${appInfo.updateDate}" hidden/>
+
+
+
                             <input id="devId" name="devId" value="${appInfo.devId}" hidden/>
-                            <input id="onSaleDate" name="onSaleDate" value="${appInfo.onSaleDate}" hidden/>
-                            <input id="offSaleDate" name="offSaleDate" value="${appInfo.offSaleDate}" hidden/>
+
                             <input id="versionId" name="versionId" value="${appInfo.versionId}" hidden/>
                             <div class="ln_solid"></div>
                             <div class="form-group">
-                                <c:if test="${appInfo.status == 3}">
-                                    <a id="CommitAndSave" type="button" class="btn btn-success">保存并再次提交审核</a>
-                                </c:if>
+
                                 <div class="col-md-6 col-md-offset-3">
+                                    <c:if test="${appInfo.status == 3}">
+                                        <input type="hidden" name="isSubmit" value="yes">
+                                        <a id="CommitAndSave" type="button" class="btn btn-success">保存并再次提交审核</a>
+                                    </c:if>
+
+                                    <c:if test="${appInfo.status != 3}">
+                                        <input type="hidden" name="isSubmit" value="no">
+                                    </c:if>
                                     <a id="send" type="button" class="btn btn-success">保存
                                     </a>
                                     <button type="button" class="btn btn-primary">返回</button>
