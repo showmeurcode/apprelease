@@ -70,7 +70,7 @@
             </div>
             <div class="x_content">
 
-              <form id="appadd" class="form-horizontal form-label-left" novalidate action="${pageContext.request.contextPath }/appInfo/addApp"
+              <form id="appadd" class="form-horizontal form-label-left" novalidate
                     method="post" enctype="multipart/form-data">
 
                 <p>请填写信息
@@ -236,7 +236,7 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-md-offset-3">
-                <input id="send1" type="submit" class="btn btn-success">保存
+                <a id="send1" type="button" class="btn btn-success">保存</a>
                 </input>
                 <button type="button" class="btn btn-primary">返回</button>
               </div>

@@ -385,7 +385,7 @@ public class AppInfoController {
             int filesize=50000;//设置文件大小限制 50KB
             if(attach.getSize()>filesize){
                 //request.setAttribute("uploadFileError","上传大小不能超过50KB");
-                return "{\"status\":\"上传大小不能超过50KB\"}";
+                JOSN= "{\"status\":\"上传大小不能超过50KB\"}";
             }else if(prefix.equalsIgnoreCase("jpg")
                     ||prefix.equalsIgnoreCase("jpeg")
                     ||prefix.equalsIgnoreCase("png")){

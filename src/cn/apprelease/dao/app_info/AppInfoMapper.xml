@@ -10,11 +10,20 @@
 	<!-- 添加分类 -->
 	<insert id="addAppInfo" parameterType="AppInfo">
 		INSERT INTO `app_info` (`softwareName`, `APKName`, `supportROM`, `interfaceLanguage`, `softwareSize`,
-		`updateDate`, `devId`, `appInfo`, `status`, `onSaleDate`, `offSaleDate`, `flatformId`,
+		<if test="updateDate!= null and updateDate != ''"> `updateDate`,  </if>
+		`devId`, `appInfo`, `status`,
+		<if test="onSaleDate != null and onSaleDate != ''"> `onSaleDate`,   </if>
+		<if test="offSaleDate != null and offSaleDate != ''"> `offSaleDate`,  </if>
+		`flatformId`,
 		`categoryLevel3`, `downloads`, `createdBy`, `creationDate`, `categoryLevel1`,
 		`categoryLevel2`, `logoPicPath`, `logoLocPath`, `versionId`)
-		VALUES (#{softwareName}, #{APKName}, #{supportROM}, #{interfaceLanguage}, #{softwareSize}, #{updateDate}, #{devId},
-		#{appInfo}, #{status}, #{onSaleDate}, #{offSaleDate}, #{flatformId},#{categoryLevel3},
+		VALUES (#{softwareName}, #{APKName}, #{supportROM}, #{interfaceLanguage}, #{softwareSize},
+		<if test="updateDate!= null and updateDate != ''"> #{updateDate},   </if>
+		 #{devId},
+		#{appInfo}, #{status},
+		<if test="onSaleDate != null and onSaleDate != ''"> #{onSaleDate},   </if>
+		<if test="offSaleDate != null and offSaleDate != ''"> #{offSaleDate},  </if>
+		 #{flatformId},#{categoryLevel3},
 		#{downloads}, #{createdBy}, #{creationDate}, #{categoryLevel1},#{categoryLevel2}, #{logoPicPath}, #{logoLocPath}, #{versionId})
 	</insert>
 
