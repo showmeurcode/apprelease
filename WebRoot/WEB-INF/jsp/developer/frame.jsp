@@ -412,23 +412,37 @@
         $("body").on("click","#send1",function () {
             var bparam = $("#appadd").serialize();
 
+            var istrue=false;
+//            if($("#softwareName").val()==""){
+//                alert("软件名称不能为空");
+//                return false;
+//            }
+//            if($("#APKName").val()==""){
+//                alert("APK名称不能为空");
+//                return false;
+//            }
+            var data=new FormData($("body #appadd")[0]);
             $.ajax({
                 type:"POST",
-                url:rootpath+"/appInfo/updateadd",
-                data:bparam,
+                url:rootpath+"/appInfo/updateadd.josn",
+                data:data,
                 dataType:"json",
+                async:false,
+                cache:false,
+                contentType:false,
+                processData:false,
                 success:function (data) {
-                    if (data.status == "success") {
-                        alert("添加成功");
+                    if (data.status == "上传成功") {
+                        istrue=true;
                     } else {
-                        alert("添加失败");
+                        alert(data.status);
                     }
                 },
                 error:function (data) {
                     alert("添加大失败");
                 }
             });
-            alert("异步之后");
+
         });
 
         $("body").on("click",".deleteApp",function () {
