@@ -44,7 +44,7 @@
     <div class="login_wrapper">
         <div class="animate form login_form">
             <section class="login_content">
-                <form  action="${pageContext.request.contextPath }/backenduser/Blogin">
+                <form  action="${pageContext.request.contextPath }/backenduser/Blogin" method="post">
                     <h1>管理员登录</h1>
                     <font color="#c00fff">*</font>
                     <div style="display: inline; color:red">

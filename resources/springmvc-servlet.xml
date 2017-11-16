@@ -69,7 +69,9 @@
 	<!-- 配置拦截器interceptors的路径和作用位置-->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/xxxx/**" />
+			<mvc:mapping path="/appInfo/**" />
+			<mvc:mapping path="/appVersion/**" />
+			<mvc:mapping path="/appCategory/**" />
 			<bean class="cn.apprelease.interceptor.SysInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
