@@ -396,28 +396,31 @@
         });
 
         $("body").on("click",".deleteApp",function () {
-            var id=$(this).attr("id");
-            $.ajax({
-                type:"POST",
-                url:rootpath+"/appInfo/delApp",
-                data:"id="+id,
-                dataType:"json",
-                success:function (data) {
-                    $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
-                    showApps ();
-                    if(data.status=="success"){
-                        alert("删除成功！")
-                    }else {
-                        alert("删除失败！")
-                    }
-                },
-                error:function (XMLHttpRequest, textStatus, errorThrown) {
-                    alert("XMLHttpRequest.status："+XMLHttpRequest.status);
-                    alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
-                    alert("textStatus："+textStatus);
+            if (confirm("确定要删除APP")) {
+                var id=$(this).attr("id");
+                $.ajax({
+                    type:"POST",
+                    url:rootpath+"/appInfo/delApp",
+                    data:"id="+id,
+                    dataType:"json",
+                    success:function (data) {
+                        $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
+                        showApps ();
+                        if(data.status=="success"){
+                            alert("删除成功！")
+                        }else {
+                            alert("删除失败！")
+                        }
+                    },
+                    error:function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("XMLHttpRequest.status："+XMLHttpRequest.status);
+                        alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
+                        alert("textStatus："+textStatus);
 //                readystate: 4  status: 400 textStatus: error
-                }
-            })
+                    }
+                })
+            } else {}
+
         });
 
 

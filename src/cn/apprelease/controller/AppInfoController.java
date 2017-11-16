@@ -211,10 +211,11 @@ public class AppInfoController {
 
 
     @RequestMapping(value = "/updateApp")
-    @ResponseBody
-    public Object updateApp(AppInfo appInfo, HttpSession session,HttpServletRequest request,
+    //@ResponseBody
+    public Object updateApp(HttpSession session,HttpServletRequest request,
                             @RequestParam(value = "s_logoLocPath",required = false) MultipartFile attach){
-
+            System.out.print("up仿 >>>>>>>>>>>>>>>>法规回复的更多========>");
+        AppInfo appInfo = new AppInfo();
         String logoPicPath = appInfo.getLogoPicPath();
         if (!attach.isEmpty()) {
             String path = request.getSession().getServletContext().getRealPath("statics"+File.separator+"uploadfiles");
