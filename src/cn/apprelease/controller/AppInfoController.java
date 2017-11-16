@@ -370,8 +370,53 @@ public class AppInfoController {
                               HttpServletRequest request,
                               @RequestParam(value="logoPicPath",required = false) MultipartFile attach){
         String JOSN="";
-        String logoPicPath=null;
 
+        String logoPicPath=null;
+        String path=request.getSession().getServletContext().getRealPath("statics/uploadfiles");
+        String olFileName="";
+        //System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+
+        //判断文件是否为空
+        if(!attach.isEmpty()){
+            //定义上传目标路径
+
+            olFileName=attach.getOriginalFilename();//获取原文件名
+            String prefix= FilenameUtils.getExtension(olFileName);//获取原文件后缀名
+            int filesize=50000;//设置文件大小限制 50KB
+            if(attach.getSize()>filesize){
+                //request.setAttribute("uploadFileError","上传大小不能超过50KB");
+                return "{\"status\":\"上传大小不能超过50KB\"}";
+            }else if(prefix.equalsIgnoreCase("jpg")
+                    ||prefix.equalsIgnoreCase("jpeg")
+                    ||prefix.equalsIgnoreCase("png")){
+                //当前系统时间+随机数+"_Personal.jpg"
+                String fileName=System.currentTimeMillis()
+                        + RandomUtils.nextInt(1000000)+"_Personal.jpg";
+                File targetFile=new File(path,fileName);
+                if(!targetFile.exists()){
+                    targetFile.mkdirs();//递归创建路径
+                }
+                //保存
+                try {
+                    attach.transferTo(targetFile);
+                } catch (Exception e) {
+                    e.printStackTrace();
+//                    request.setAttribute("uploadFileError","上传失败");
+//                    JOSN= "{\"status\":\"errorfile\"}";
+                }
+                //按下标设置路径名
+                logoPicPath=path+"/"+fileName;
+            }else {
+//                request.setAttribute("uploadFileError","上传文件格式不正确");
+                JOSN= "{\"status\":\"上传文件格式不正确\"}";
+            }
+        }else {
+            JOSN= "{\"status\":\"未选中文件，上传失败\"}";
+        }
+
+
+        //赋值
         appInfo.setCreatedBy(((DevUser)session.getAttribute("devUserSession")).getId());
         appInfo.setCreationDate(new Date());
         int rest = 0;
@@ -387,39 +432,7 @@ public class AppInfoController {
 
 
 
-        //判断文件是否为空
-        if(!attach.isEmpty()){
-            //定义上传目标路径
-            String path=request.getSession().getServletContext().getRealPath("statics"+ File.separator+"uploadfiles");
-            String olFileName=attach.getOriginalFilename();
-            String prefix= FilenameUtils.getExtension(olFileName);
-            int filesize=50000;
-            if(attach.getSize()>filesize){
-                request.setAttribute("uploadFileError","上传大小不能超过50KB");
-                return "developer/appadd";
-            }else if(prefix.equalsIgnoreCase("jpg")
-                    ||prefix.equalsIgnoreCase("jpeg")
-                    ||prefix.equalsIgnoreCase("png")){
-                //当前系统时间+随机数+"_Personal.jpg"
-                String fileName=System.currentTimeMillis()
-                        + RandomUtils.nextInt(1000000)+"_Personal.jpg";
-                File targetFile=new File(path,fileName);
-                if(!targetFile.exists()){
-                    targetFile.mkdirs();
-                }
-                try {
-                    attach.transferTo(targetFile);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    request.setAttribute("uploadFileError","上传失败");
-                    return "developer/appadd";
-                }
-                logoPicPath=path+File.separator+fileName;
-            }else {
-                request.setAttribute("uploadFileError","上传文件格式不正确");
-                return "developer/appadd";
-            }
-        }
+        appInfo.setAPKName(olFileName);
         appInfo.setLogoPicPath(logoPicPath);
         int result=0;
         try {
@@ -427,10 +440,11 @@ public class AppInfoController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(result>0){
-            JOSN= "redirect:/developer/applist";
+
+        if (result > 0) {
+            JOSN= "{\"status\":\"上传成功\"}";
         }
-        JOSN= "developer/appadd";
+        JOSN= "{\"status\":\"上传失败\"}";
         return JOSN;
     }
 
