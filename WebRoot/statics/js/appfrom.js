@@ -1,13 +1,11 @@
-var logoPicPath = null;
-var errorinfo = null;
+
 $(function () {
-    
 
 // 软件名称验证
 
 $("body").on("blur",".form-label-left #softwareName",function () {
-
     var name = $(this).val();
+
     //alert(">>>>>>>>>>>>>>>>>>>>>>>");
     if (name == null || name == "") {
         $("#yzname").html("软件名称不能为空！").attr("style","color: red");
@@ -99,16 +97,6 @@ $("body").on("blur",".form-label-left #appInfo",function () {
         $("#yztext").html("√").attr("style","color: green");
     }
 });
-
-//验证文件上传
-    logoPicPath = $("#logoPicPath");
-    errorinfo = $("#errorinfo");
-
-    if (errorinfo.val()==null||errorinfo.val()==""){
-        logoPicPath.next().html("上传大小不能超过50KB，上传类型必须为：jpg、jpeg、png").attr("style","color: red");
-    }else {
-        logoPicPath.next().html(errorinfo.val());
-    }
 
 
 });

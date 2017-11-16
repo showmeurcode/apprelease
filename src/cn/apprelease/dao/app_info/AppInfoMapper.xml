@@ -10,11 +10,20 @@
 	<!-- 添加分类 -->
 	<insert id="addAppInfo" parameterType="AppInfo">
 		INSERT INTO `app_info` (`softwareName`, `APKName`, `supportROM`, `interfaceLanguage`, `softwareSize`,
-		`updateDate`, `devId`, `appInfo`, `status`, `onSaleDate`, `offSaleDate`, `flatformId`,
+		<if test="updateDate!= null and updateDate != ''"> `updateDate`,  </if>
+		`devId`, `appInfo`, `status`,
+		<if test="onSaleDate != null and onSaleDate != ''"> `onSaleDate`,   </if>
+		<if test="offSaleDate != null and offSaleDate != ''"> `offSaleDate`,  </if>
+		`flatformId`,
 		`categoryLevel3`, `downloads`, `createdBy`, `creationDate`, `categoryLevel1`,
 		`categoryLevel2`, `logoPicPath`, `logoLocPath`, `versionId`)
-		VALUES (#{softwareName}, #{APKName}, #{supportROM}, #{interfaceLanguage}, #{softwareSize}, #{updateDate}, #{devId},
-		#{appInfo}, #{status}, #{onSaleDate}, #{offSaleDate}, #{flatformId},#{categoryLevel3},
+		VALUES (#{softwareName}, #{APKName}, #{supportROM}, #{interfaceLanguage}, #{softwareSize},
+		<if test="updateDate!= null and updateDate != ''"> #{updateDate},   </if>
+		 #{devId},
+		#{appInfo}, #{status},
+		<if test="onSaleDate != null and onSaleDate != ''"> #{onSaleDate},   </if>
+		<if test="offSaleDate != null and offSaleDate != ''"> #{offSaleDate},  </if>
+		 #{flatformId},#{categoryLevel3},
 		#{downloads}, #{createdBy}, #{creationDate}, #{categoryLevel1},#{categoryLevel2}, #{logoPicPath}, #{logoLocPath}, #{versionId})
 	</insert>
 
@@ -28,8 +37,15 @@
 	<!-- 修改分类 -->
 	<update id="updateAppInfo" parameterType="AppInfo">
 		UPDATE `app_info` SET `softwareName`=#{softwareName}, `APKName`=#{APKName}, `supportROM`=#{supportROM}, `interfaceLanguage`=#{interfaceLanguage}, `softwareSize`=#{softwareSize},
-		`updateDate`=#{updateDate}, `devId`=#{devId}, `appInfo`=#{appInfo}, `status`=#{status}, `onSaleDate`=#{onSaleDate}, `offSaleDate`=#{offSaleDate}, `flatformId`=#{flatformId},
-		`categoryLevel3`=#{categoryLevel3}, `downloads`=#{downloads}, `modifyBy`=#{modifyBy}, `modifyDate`=#{modifyDate}, `categoryLevel1`=#{categoryLevel1},
+		<if test="updateDate!= null and updateDate != ''"> `updateDate`=#{updateDate},   </if>
+		<if test="onSaleDate != null and onSaleDate != ''"> `onSaleDate`=#{onSaleDate},   </if>
+		<if test="offSaleDate != null and offSaleDate != ''"> `offSaleDate`=#{offSaleDate},  </if>
+		<if test="modifyDate!= null and modifyDate != ''"> `modifyDate`=#{modifyDate},  </if>
+			`devId`=#{devId}, `appInfo`=#{appInfo}, `status`=#{status},
+			`flatformId`=#{flatformId},
+		`categoryLevel3`=#{categoryLevel3}, `downloads`=#{downloads}, `modifyBy`=#{modifyBy},
+
+			`categoryLevel1`=#{categoryLevel1},
 		`categoryLevel2`=#{categoryLevel2}, `logoPicPath`=#{logoPicPath}, `logoLocPath`=#{logoLocPath}, `versionId`=#{versionId}
 		WHERE `id`=#{id}
 	</update>

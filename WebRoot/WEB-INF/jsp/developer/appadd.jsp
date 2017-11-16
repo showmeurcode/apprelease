@@ -70,7 +70,7 @@
             </div>
             <div class="x_content">
 
-              <form id="appadd" class="form-horizontal form-label-left" novalidate action="${pageContext.request.contextPath }/appInfo/addApp"
+              <form id="appadd" class="form-horizontal form-label-left" novalidate
                     method="post" enctype="multipart/form-data">
 
                 <p>请填写信息
@@ -204,9 +204,8 @@
                          for="status">APP状态 <span class="required">*</span>
                   </label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="status" name="status"
-                           readonly value="待审核"
-                           class="form-control col-md-7 col-xs-12">
+                    <input id="status" name="status" value="1" hidden type="text"/>
+                    待审核
                   </div>
                 </div>
                 <div class="item form-group">
@@ -237,8 +236,8 @@
             <div class="ln_solid"></div>
             <div class="form-group">
               <div class="col-md-6 col-md-offset-3">
-                <button id="send1" type="submit" class="btn btn-success">保存
-                </button>
+                <a id="send1" type="button" class="btn btn-success">保存</a>
+                </input>
                 <button type="button" class="btn btn-primary">返回</button>
               </div>
             </div>
