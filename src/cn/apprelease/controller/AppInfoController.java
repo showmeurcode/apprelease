@@ -419,6 +419,7 @@ public class AppInfoController {
         //赋值
         appInfo.setCreatedBy(((DevUser)session.getAttribute("devUserSession")).getId());
         appInfo.setCreationDate(new Date());
+        appInfo.setLogoPicPath(logoPicPath);
         int rest = 0;
         try {
             rest = appInfoService.addAppInfo(appInfo);
@@ -430,21 +431,6 @@ public class AppInfoController {
         }
         JOSN= "{\"status\":\"error\"}";
 
-
-
-        appInfo.setAPKName(olFileName);
-        appInfo.setLogoPicPath(logoPicPath);
-        int result=0;
-        try {
-            result=appInfoService.addAppInfo(appInfo);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        if (result > 0) {
-            JOSN= "{\"status\":\"上传成功\"}";
-        }
-        JOSN= "{\"status\":\"上传失败\"}";
         return JOSN;
     }
 
