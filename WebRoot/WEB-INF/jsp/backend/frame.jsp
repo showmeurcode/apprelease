@@ -274,7 +274,7 @@
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/appfrom.js"></script>
+
     
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
@@ -342,7 +342,6 @@
       $("#showAllToexamineAPPS").click(function () {
           params="";// 全局变量归0
           $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2backend  #Content>*");
-
           showToexamineAPPS ();//显示所有app列表(后台拼接html法)
       });
 
@@ -365,14 +364,37 @@
           }
           $("#Content").load("${pageContext.request.contextPath}/appVersion/ToexamineAPPVersion?appId="+appId+"  #Content>*")
 
+      })
+
+      $("body").on("click",".btn-primary",function () {
+          $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2backend  #Content>*");
+          showToexamineAPPS ();//显示所有app列表(后台拼接html法)
+      });
+
+      $("body").on("click",".tojudge",function(){
+          var  appId= $(this).attr("appId");
+          var  tojudge=$(this).attr("tojudge");
+            $.ajax({
+                type:"GET",
+                url:rootpath+"/appInfo/tojudge.html", //注意此处斜杠不能少，否则无法显示APP信息
+                data:"appId="+appId +"&tojudge="+tojudge,   //注意此处不需要加引号("")
+                dataType :"html",
+                success:function (data) {
+                    alert(data);
+                    $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2backend  #Content>*");
+                    showToexamineAPPS ();//显示所有app列表(后台拼接html法)
+
+
+                }
+
+            })
+
 
 
 
 
 
       })
-
-
 
 
 

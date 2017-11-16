@@ -46,4 +46,6 @@ public interface AppInfoMapper {
 
     AppInfo findAppinfoByid(@Param("id")Integer id) throws Exception;
 
+    AppInfo updateSatus(@Param(value="status")Integer status,@Param(value="id")Integer id)throws Exception;
+
 }

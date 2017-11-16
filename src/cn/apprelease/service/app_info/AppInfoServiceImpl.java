@@ -53,4 +53,13 @@ public class AppInfoServiceImpl implements AppInfoService {
     public AppInfo findAppinfoByid(Integer id) throws Exception {
         return appInfoMapper.findAppinfoByid(id);
     }
+
+    @Override
+    public AppInfo updateSatus(Integer status, Integer id) throws Exception {
+
+
+        return appInfoMapper.updateSatus(status, id);
+    }
+
+
 }

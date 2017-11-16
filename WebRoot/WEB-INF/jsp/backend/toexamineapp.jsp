@@ -64,7 +64,7 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="softwareName" class="form-control col-md-7 col-xs-12"
+                                    <input readonly id="softwareName" class="form-control col-md-7 col-xs-12"
                                            name="softwareName" value="${appInfo.softwareName}"
                                             type="text">
 
@@ -76,7 +76,7 @@
                                        for="APKName">APK名称<span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="APKName" name="APKName"
+                                    <input  readonly type="text" id="APKName" name="APKName"
                                           value="${appInfo.APKName}"
                                            class="form-control col-md-7 col-xs-12">
 
@@ -88,7 +88,7 @@
                                        for="supportROM">支持ROM<span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="supportROM" name="supportROM"
+                                    <input readonly type="text" id="supportROM" name="supportROM"
                                             value="${appInfo.supportROM}"
                                            class="form-control col-md-7 col-xs-12">
                                 </div>
@@ -99,7 +99,7 @@
                                        for="interfaceLanguage">界面语言<span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="interfaceLanguage" name="interfaceLanguage"
+                                    <input readonly type="text" id="interfaceLanguage" name="interfaceLanguage"
                                             value="${appInfo.interfaceLanguage}"
                                            class="form-control col-md-7 col-xs-12">
 
@@ -111,7 +111,7 @@
                                        for="softwareSize">软件大小 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="softwareSize" name="softwareSize"
+                                    <input  readonly type="text" id="softwareSize" name="softwareSize"
                                             value="${appInfo.softwareSize}"
                                            class="form-control col-md-7 col-xs-12">
 
@@ -123,7 +123,7 @@
                                        for="downloads">下载次数 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="downloads" type="text" name="downloads"
+                                    <input readonly id="downloads" type="text" name="downloads"
                                           value="${appInfo.downloads}"
                                            class="optional form-control col-md-7 col-xs-12">
 
@@ -131,17 +131,16 @@
                                 <span id="yzloads"></span>
                             </div>
                             <div class="item form-group">
-                                <label for="flatformId"
+                                <label
                                        class="control-label col-md-3">所属分类</label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <select name="flatformId" id="flatformId"
-                                            class="form-control col-md-7 col-xs-12" >
 
-                                        <option value="0" selected>请选择</option> 
-                                        <option value="1">手机</option> 
-                                        <option value="2">平板</option> 
-                                        <option value="3">通用</option> 
-                                    </select>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" class="form-control col-md-7 col-xs-12"
+                                               value="${appInfo.categoryLevel1} --> ${appInfo.categoryLevel2} --> ${appInfo.categoryLevel3}" readonly="readonly">
+                                    </div>
+
+
                                 </div>
                             </div>
 
@@ -151,7 +150,7 @@
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <input type="text" id="status" name="status"
-                                           readonly value="待审核"
+                                           readonly value="${appInfo.status}"
                                            class="form-control col-md-7 col-xs-12">
                                 </div>
                             </div>
@@ -161,9 +160,9 @@
                                 </label>
 
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <textarea id="appInfo"  name="appInfo"
+                    <textarea readonly id="appInfo"  name="appInfo"
                               class="form-control col-md-7 col-xs-12"
-                              value="${appinfo.appinfo}"></textarea>
+                              >${appInfo.appInfo}</textarea>
 
                                 </div>
                                 <span id="yztext"></span>
@@ -171,24 +170,27 @@
 
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                       for="logoPicPath">LOGO图片 <span class="required">*</span>
+                                       >LOGO图片 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <img src="${appinfo.logoPicPath}">
-                                    <input id="logoPicPath" type="file" name="logoPicPath"
-                                           class="optional form-control col-md-7 col-xs-12">
+                                    <c:choose>
+                                        <c:when test="${appInfo.logoPicPath == null || appInfo.logoPicPath == ''}">
+                                            暂无
+                                        </c:when>
+                                        <c:otherwise>
+                                            <img src="${appInfo.logoPicPath }?m=1" width="100px;"/>
+                                        </c:otherwise>
+                                    </c:choose>
+
                                 </div>
 
                             </div>
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
-                                    <button id="send" type="submit" class="btn btn-success">审核通过
-                                </button>
-                                    <button id="Nosend" type="submit" class="btn btn-success2">审核不通过
-                                    </button>
-
-                                    <button type="button" class="btn btn-primary">返回</button>
+                                    <a appId="${appInfo.id }"  tojudge="yes" class="btn btn-success tojudge">审核通过</a>
+                                    <a appId="${appInfo.id }"  tojudge="no"  class="btn btn-success tojudge">审核不通过</a>
+                                    <a type="button" class="btn btn-primary" id="back">返回</a>
                                 </div>
                             </div>
                         </form>
@@ -205,7 +207,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>为APP ${appInfo.softwareName} 最新版本信息
+                        <h2>APP ${appInfo.softwareName}  的最新版本信息
 
                         </h2>
 
@@ -223,9 +225,9 @@
                                     <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="softwareName1" class="form-control col-md-7 col-xs-12"
-                                           name="softwareName" value=""
-                                            type="text">
+                                    <input readonly id="softwareName1" class="form-control col-md-7 col-xs-12"
+                                           name="softwareName" value="${latestAppVersion.versionNo}"
+                                            type="text"/>
                                 </div>
                             </div>
                             <div class="item form-group">
@@ -233,8 +235,8 @@
                                        for="APKName">版本大小<span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="APKName1" name="APKName" required="required"
-                                           placeholder="请输入版本大小 ，单位为Mb"
+                                    <input readonly type="text" id="APKName1" name="APKName" required="required"
+                                         value="${latestAppVersion.versionSize}"
                                            class="form-control col-md-7 col-xs-12">
                                 </div>
                             </div>
@@ -243,9 +245,15 @@
                                        for="supportROM">发布状态<span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input  readonly type="text" id="supportROM1" name="supportROM"
-                                            required="required" placeholder=""
-                                            class="form-control col-md-7 col-xs-12">
+                                    <c:if test="${latestAppVersion.publishStatus==1}">
+                                        不发布
+                                    </c:if>
+                                    <c:if test="${latestAppVersion.publishStatus==2}">
+                                        已发布
+                                    </c:if>
+                                    <c:if test="${latestAppVersion.publishStatus==3}">
+                                        预发布
+                                    </c:if>
                                 </div>
                             </div>
 
@@ -255,19 +263,18 @@
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
 
-                                <textarea id="appInfo1" required="required" name="appInfo"
+                                <input type=" textarea" id="appInfo1" required="required"
                                           class="form-control col-md-7 col-xs-12"
-                                          placeholder="请输入本软件的相关信息，本信息作为软件的详细信息进行软件介绍。">
-                                                        </textarea>
+                                           value="${latestAppVersion.versionInfo}"/>
+
                                 </div>
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                       for="logoPicPath">APK文件 <span class="required">*</span>
+                                       >APK文件 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="logoPicPath1" type="file" name="logoPicPath" required="required"
-                                           class="optional form-control col-md-7 col-xs-12">
+                                    <a href="${pageContext.request.contextPath }/statics/uploadfiles/${latestAppVersion.apkFileName}"> ${latestAppVersion.apkFileName}  </a>
                                 </div>
                             </div>
                             <div class="ln_solid"></div>
@@ -280,9 +287,12 @@
     </div>
 </div>
 <!-- /page content -->
-
-
-
+<script src="${pageContext.request.contextPath }/statics/js/jquery.min.js"></script>
+<script type="text/javascript">
+$("#back").on("click",function(){
+window.location.href = "list";
+});
+</script>
 
 
 
