@@ -1,13 +1,21 @@
-var logoPicPath = null;
-var errorinfo = null;
+
 $(function () {
-    
+
+    var name = $(this).val();
+    var apkName = $(this).val();
+    var supportROM = $(this).val();
+    var interfaceLanguage = $(this).val();
+    var softwareSize = $(this).val();
+    var downloads = $(this).val();
+    var appInfo = $(this).val();
+    var logoPicPath = null;
+    var errorinfo = null;
 
 // 软件名称验证
 
 $("body").on("blur",".form-label-left #softwareName",function () {
 
-    var name = $(this).val();
+
     //alert(">>>>>>>>>>>>>>>>>>>>>>>");
     if (name == null || name == "") {
         $("#yzname").html("软件名称不能为空！").attr("style","color: red");
@@ -20,7 +28,7 @@ $("body").on("blur",".form-label-left #softwareName",function () {
 
 //验证APK名称
 $("body").on("blur",".form-label-left #APKName",function () {
-    var apkName = $(this).val();
+
 
     if (apkName == null || apkName == ""){
         $("#yzAPK").html("APK名称不能为空！").attr("style","color: red");
@@ -39,7 +47,7 @@ $("body").on("blur",".form-label-left #APKName",function () {
 
 //验证ROM
 $("body").on("blur",".form-label-left #supportROM",function () {
-    var supportROM = $(this).val();
+
 
     if (supportROM == null || supportROM == "") {
         $("#yzROM").html("ROM不能为空！").attr("style","color: red");
@@ -50,7 +58,7 @@ $("body").on("blur",".form-label-left #supportROM",function () {
 
 //验证界面语言
 $("body").on("blur",".form-label-left #interfaceLanguage",function () {
-    var interfaceLanguage = $(this).val();
+
 
     if (interfaceLanguage == null || interfaceLanguage == "") {
         $("#yzlanguage").html("界面语言不能为空！").attr("style","color: red");
@@ -61,7 +69,7 @@ $("body").on("blur",".form-label-left #interfaceLanguage",function () {
 
 //验证软件大小
 $("body").on("blur",".form-label-left #softwareSize",function () {
-    var softwareSize = $(this).val();
+
     var yz=/^[0-9]+([.]{1}[0-9]+){0,1}$/;
 
     if (softwareSize == null || softwareSize == "") {
@@ -75,7 +83,7 @@ $("body").on("blur",".form-label-left #softwareSize",function () {
 
 //验证下载次数
 $("body").on("blur",".form-label-left #downloads",function () {
-    var downloads = $(this).val();
+
     var yz = /^[0-9]+([.]{1}[0-9]+){0,1}$/;
 
     if (downloads == null || downloads == "") {
@@ -91,7 +99,7 @@ $("body").on("blur",".form-label-left #downloads",function () {
 
 //验证应用简介
 $("body").on("blur",".form-label-left #appInfo",function () {
-    var appInfo = $(this).val();
+
 
     if (appInfo == null || appInfo == "") {
         $("#yztext").html("应用简介不能为空！").attr("style","color: red");
@@ -110,5 +118,15 @@ $("body").on("blur",".form-label-left #appInfo",function () {
         logoPicPath.next().html(errorinfo.val());
     }
 
+//验证保存
+    $("body").on("blur",".form-label-left #send1",function () {
+               if(name == ""){
+            alert("软件名称不可为空");
 
+        }else if(apkName==""){
+            alert("APK名称不可为空");
+
+        }
+
+    });
 });

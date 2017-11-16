@@ -436,11 +436,13 @@ public class AppInfoController {
 
     @RequestMapping(value = "/updateadd",method = RequestMethod.POST)
     @ResponseBody
-    public Object addInfoSave(AppInfo appInfo, HttpSession session,
+    public Object addInfoSave( HttpSession session,
                               HttpServletRequest request,
                               @RequestParam(value="logoPicPath",required = false) MultipartFile attach){
         String JOSN="";
         String logoPicPath=null;
+        AppInfo appInfo=new AppInfo();
+        System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         appInfo.setCreatedBy(((DevUser)session.getAttribute("devUserSession")).getId());
         appInfo.setCreationDate(new Date());
@@ -482,12 +484,12 @@ public class AppInfoController {
                 } catch (Exception e) {
                     e.printStackTrace();
                     request.setAttribute("uploadFileError","上传失败");
-                    return "developer/appadd";
+                    return "{\"status\":\"errorfile\"}";
                 }
                 logoPicPath=path+File.separator+fileName;
             }else {
                 request.setAttribute("uploadFileError","上传文件格式不正确");
-                return "developer/appadd";
+                return "{\"status\":\"format\"}";
             }
         }
         appInfo.setLogoPicPath(logoPicPath);
