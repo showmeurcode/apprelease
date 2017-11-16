@@ -283,7 +283,7 @@ public class AppInfoController {
 //————————————————————————————————————————————————孔祥忠(后台APP信息展示)————————————————————————————————————————————————————————————————
 
     @RequestMapping("/showAllToexamineAPPS")
-    @ResponseBody
+   @ResponseBody
     public String showAllToexamineAPPS(AppInfo appInfo){
 
         StringBuffer html=new StringBuffer("");
@@ -329,13 +329,13 @@ public class AppInfoController {
                         "                <td>" +
                         "                  "+info.getDownloads()+"" +
                         "                </td>" +
-                        "                <td>" +
-                        "                  "+((appVersion==null)?"":appVersion.getVersionInfo())+"" +
+                        "                <td >" +
+                        "                  "+((appVersion==null)?"":appVersion.getVersionNo())+"" +
                         "                </td>");
 
 
                 //开始拼接按钮
-                html.append("<td>" +
+                html.append("<td class='xxx'>" +
                         "                  <div class='btn-group'>" +
                         "                    <button type='button' class='btn btn-info dropdown-toggle' data-toggle='dropdown'>" +
                         "                      审核" +
@@ -345,12 +345,8 @@ public class AppInfoController {
                         "<li><a href='###' id='"+info.getId()+"' class='ToexamineAPP'>查看并审核APP</a> </li>"
 
                 );
-                if (info.getStatus()==1){
-                    html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>待审核</a> </li>");
-                }
-                if (info.getStatus()==2){
-                    html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>审核通过</a> </li>");
-                }
+
+
 
                 html.append("</ul>" +
                         "                  </div>" +

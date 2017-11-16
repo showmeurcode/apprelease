@@ -53,6 +53,33 @@ public class AppVersionController {
 
     //—————————————————————————————————————————孔祥忠———————————————————————————————————————————————————
 
+    @RequestMapping("/ToexamineAPPVersion")
+
+    public String ToexamineAPPVersion(String appId,Model model){
+
+        AppInfo appinfo =null;
+        List<AppVersion> appVersionList=null;
+
+
+        try {
+            appinfo=appInfoService.findAppinfoByid(Integer.parseInt(appId));//根据appId找到APP信息
+            appVersionList = appVersionService.findAppVersionsByappId(Integer.parseInt(appId));//根据appId找到版本信息
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        model.addAttribute("appInfo", appinfo);
+        model.addAttribute("appVersionList", appVersionList);
+
+            int no=appinfo.getVersionId();
+
+        return "backend/toexamineapp";
+
+    }
+
+
+
 
 
 }

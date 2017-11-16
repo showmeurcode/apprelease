@@ -291,7 +291,6 @@
       var table;
      function showToexamineAPPS() {
          var data="status="+1;
-         alert(data)
          if(params!=""){
              data+="&"+params;
          }
@@ -306,7 +305,7 @@
 
                  table=$('#listTable').DataTable({
                      "bLengthChange": false, //是否显示修改显示数据数量的菜单
-                     "iDisplayLength": 5,//设置每页默认显示多少数据
+                     "iDisplayLength": 6,//设置每页默认显示多少数据
                      searching : false, //去掉搜索框
                      language: {
                          "sProcessing": "处理中...",
@@ -346,6 +345,34 @@
 
           showToexamineAPPS ();//显示所有app列表(后台拼接html法)
       });
+
+      // 查询按钮点击时，赋予全局变量param新的值（关联查询条件），紧接着进行查询获取数据
+      $("body").on("click", "#querysubmit",function () {
+          params=$("#queryform").serialize();   //serialize() 方法通过序列化表单值，创建 URL 编码文本字符串。
+          table.destroy();
+          showToexamineAPPS ();
+      });
+
+      //单击 查看并审核APP 时传递appId到APPVersionController里做相应查询，然后根据新版本id判断是否可以审核该APP
+
+      $("body").on("click",".ToexamineAPP",function () {
+          var rootpath=$("#rootpath").val();
+          var  appId= $(this).attr("id");
+          //在这里即判断 有没有最新版本信息（通过按钮前面的那一列有没html值，若没有即弹出提示并returnfalse）.
+          if($(this).parents(".xxx").prev().html().trim()==""){
+              alert("该APP应用没有上传最新版本,不能进行审核操作！");
+             return false;
+          }
+          $("#Content").load("${pageContext.request.contextPath}/appVersion/ToexamineAPPVersion?appId="+appId+"  #Content>*")
+
+
+
+
+
+
+      })
+
+
 
 
 

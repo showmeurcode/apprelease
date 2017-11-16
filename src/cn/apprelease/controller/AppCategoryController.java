@@ -82,7 +82,7 @@ public class AppCategoryController {
     }
 
     @RequestMapping("/showlevelmethod2backend")
-    public String showAllCategoryLevel1method2backend(Model model){//显示所有的一级分类
+    public String showAllCategoryLevel1method2backend(Model model){//后台显示所有的一级分类
         List<AppCategory> appCategory1List=null;
         try {
             appCategory1List = appCategoryService.findAppCategorysBylevel(1);
