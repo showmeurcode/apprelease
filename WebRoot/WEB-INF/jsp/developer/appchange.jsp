@@ -218,15 +218,21 @@
                                               placeholder="请输入本软件的相关信息，本信息作为软件的详细信息进行软件介绍。">${appInfo.appInfo}</textarea>
                                 </div>
                                 <span id="yztext"></span>
-
-
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
                                        for="s_logoLocPath">LOGO图片 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <img src="${appInfo.logoPicPath}" id="look" style="width: 50px;height: 50px;"/>
+                                    <c:choose>
+                                        <c:when test="${appInfo.logoPicPath !=null}">
+                                            <img src="${appInfo.logoPicPath}" id="look" style="width: 50px;height: 50px;"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            暂无logo图片，请上传
+                                        </c:otherwise>
+
+                                    </c:choose>
                                     <input id="s_logoLocPath" type="file" name="s_logoLocPath" required="required"
                                            class="optional form-control col-md-7 col-xs-12">
                                 </div>

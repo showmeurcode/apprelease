@@ -544,7 +544,7 @@
                         $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
                         showApps ();
                     } else {
-                        alert("修改失败");
+                        alert(data.status);
                     }
                     
                 },

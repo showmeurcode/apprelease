@@ -224,8 +224,7 @@ public class AppInfoController {
             String prefix = FilenameUtils.getExtension(oldFileName);//原文件名后缀
             int filesize = 50000;
             if (attach.getSize() > filesize) { //上传大小不得超过50KB
-                request.setAttribute("uploadFileError","* 上传大小不得超过50KB");
-                return "{\"status\":\"over\"}";
+                return "{\"status\":\"上传大小不得超过50KB\"}";
             } else if (prefix.equalsIgnoreCase("jpg")
                     || prefix.equalsIgnoreCase("png")
                     || prefix.equalsIgnoreCase("jpeg")) {
@@ -240,12 +239,12 @@ public class AppInfoController {
                 } catch (IOException e) {
                     e.printStackTrace();
                     request.setAttribute("uploadFileError","* 上传失败！");
-                    return "{\"status\":\"errorfile\"}";
+                    return "{\"status\":\"上传失败！\"}";
                 }
                 logoPicPath = path+File.separator+fileName;
             } else {
                 request.setAttribute("uploadFileError","* 上传图片格式不正确");
-                return "{\"status\":\"format\"}";
+                return "{\"status\":\"上传图片格式不正确！\"}";
             }
         }
         if(isSubmit.equals("yes")){//检测是否提交审核
@@ -264,7 +263,7 @@ public class AppInfoController {
         if(result > 0){
             return "{\"status\":\"success\"}";
         }
-        return "{\"status\":\"error\"}";
+        return "{\"status\":\"未知错误！\"}";
 
     }
 
