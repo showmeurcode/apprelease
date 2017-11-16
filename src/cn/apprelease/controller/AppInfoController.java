@@ -8,15 +8,21 @@ import cn.apprelease.service.app_category.AppCategoryService;
 import cn.apprelease.service.app_info.AppInfoService;
 import cn.apprelease.service.version.AppVersionService;
 import cn.apprelease.tools.DictionaryUtil;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -204,11 +210,162 @@ public class AppInfoController {
     }
 
 
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateApp")
     @ResponseBody
-    public Object updateAppInfo(AppInfo appInfo, HttpSession session){
+    public Object updateApp(AppInfo appInfo, HttpSession session,HttpServletRequest request,
+                            @RequestParam(value = "s_logoLocPath",required = false) MultipartFile attach){
+
+        String logoPicPath = appInfo.getLogoPicPath();
+        if (!attach.isEmpty()) {
+            String path = request.getSession().getServletContext().getRealPath("statics"+File.separator+"uploadfiles");
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile path========>"+path);
+
+            String oldFileName = attach.getOriginalFilename();//原文件名
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile oldFileName========>"+oldFileName);
+
+            String prefix = FilenameUtils.getExtension(oldFileName);//原文件名后缀
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile prefix========>"+prefix);
+
+            int filesize = 50000;
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile size========>"+attach.getSize());
+
+            if (attach.getSize() > filesize) { //上传大小不得超过50KB
+                request.setAttribute("uploadFileError","* 上传大小不得超过50KB");
+                return "{\"status\":\"over\"}";
+            } else if (prefix.equalsIgnoreCase("jpg")
+                    || prefix.equalsIgnoreCase("png")
+                    || prefix.equalsIgnoreCase("jpeg")) {
+                String fileName = System.currentTimeMillis()+RandomUtils.nextInt(1000000)+"_Personal.jpg";
+                System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>new fileName========>"+attach.getName());
+
+                File targetFile = new File(path,fileName);
+                if (!targetFile.exists()) {
+                    targetFile.mkdirs();
+                }
+                //保存
+                try {
+                    attach.transferTo(targetFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    request.setAttribute("uploadFileError","* 上传失败！");
+                    return "{\"status\":\"errorfile\"}";
+                }
+                logoPicPath = path+File.separator+fileName;
+            } else {
+                request.setAttribute("uploadFileError","* 上传图片格式不正确");
+                return "{\"status\":\"format\"}";
+            }
+        }
+
+        System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>进入方法，路径正确");
         appInfo.setModifyBy(((DevUser)session.getAttribute("devUserSession")).getId());
         appInfo.setModifyDate(new Date());
+        appInfo.setLogoPicPath(logoPicPath);
+        int result = 0;
+        try {
+            result = appInfoService.updateAppInfo(appInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>更新完成，影响行数："+result);
+        if(result > 0){
+            return "{\"status\":\"success\"}";
+        }
+        return "{\"status\":\"error\"}";
+
+    }
+
+    @RequestMapping(value = "/viewApp")
+    public String viewApp(Model model, String id){
+
+        AppInfo appInfo = new AppInfo();
+        appInfo.setId(Integer.valueOf(id));
+        List<AppInfo> list = new ArrayList<AppInfo>();
+
+        try {
+            list = appInfoService.findAppInfoByAppInfo(appInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (list !=null && list.size() != 0) {
+            appInfo = list.get(0);
+        } else {
+            appInfo = null;
+        }
+
+        AppCategory appCategory1 = null;
+        AppCategory appCategory2 = null;
+        AppCategory appCategory3 = null;
+
+        try {
+            appCategory1 = appCategoryService.findAppCategoryByid(appInfo.getCategoryLevel1());
+            appCategory2 = appCategoryService.findAppCategoryByid(appInfo.getCategoryLevel2());
+            appCategory3 = appCategoryService.findAppCategoryByid(appInfo.getCategoryLevel3());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("appInfo",appInfo);
+        model.addAttribute("appCategory1",appCategory1);
+        model.addAttribute("appCategory2",appCategory2);
+        model.addAttribute("appCategory3",appCategory3);
+
+        return "developer/appdetail";
+
+    }
+
+    @RequestMapping(value = "/CommitAndSave")
+    @ResponseBody
+    public Object CommitAndSave(AppInfo appInfo,HttpSession session,HttpServletRequest request,
+                                @RequestParam(value = "s_logoLocPath",required = false) MultipartFile attach){
+
+
+        String unloadfile = appInfo.getLogoPicPath();
+        if (!attach.isEmpty()) {
+            String path = request.getSession().getServletContext().getRealPath("statics" + File.separator + "uploadfiles");
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile path========>" + path);
+
+            String oldFileName = attach.getOriginalFilename();//原文件名
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile oldFileName========>" + oldFileName);
+
+            String prefix = FilenameUtils.getExtension(oldFileName);//原文件名后缀
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile prefix========>" + prefix);
+
+            int filesize = 50000;
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile size========>" + attach.getSize());
+
+            if (attach.getSize() > filesize) { //上传大小不得超过50KB
+                request.setAttribute("uploadFileError", "* 上传大小不得超过50KB");
+                return "{\"status\":\"over\"}";
+            } else if (prefix.equalsIgnoreCase("jpg")
+                    || prefix.equalsIgnoreCase("png")
+                    || prefix.equalsIgnoreCase("jpeg")) {
+                String fileName = System.currentTimeMillis() + RandomUtils.nextInt(1000000) + "_Personal.jpg";
+                System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>new fileName========>" + attach.getName());
+
+                File targetFile = new File(path, fileName);
+                if (!targetFile.exists()) {
+                    targetFile.mkdirs();
+                }
+                //保存
+                try {
+                    attach.transferTo(targetFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    request.setAttribute("uploadFileError", "* 上传失败！");
+                    return "{\"status\":\"errorfile\"}";
+                }
+                unloadfile = path + File.separator + fileName;
+            } else {
+                request.setAttribute("uploadFileError", "* 上传图片格式不正确");
+                return "{\"status\":\"format\"}";
+            }
+        }
+
+        appInfo.setModifyBy(((DevUser)session.getAttribute("devUserSession")).getId());
+        appInfo.setModifyDate(new Date());
+        appInfo.setLogoPicPath(unloadfile);
+        appInfo.setStatus(1);
         int result = 0;
         try {
             result = appInfoService.updateAppInfo(appInfo);
@@ -244,19 +401,16 @@ public class AppInfoController {
     @RequestMapping("/add")
     public String add(Model model){
         List<AppCategory> appCategoryList1=null;
-        List<AppCategory> appCategoryList2=null;
-        List<AppCategory> appCategoryList3=null;
+
 
         try {
             appCategoryList1=appCategoryService.findAppCategorysBylevel(1);
-            appCategoryList2=appCategoryService.findAppCategorysBylevel(2);
-            appCategoryList3=appCategoryService.findAppCategorysBylevel(3);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         model.addAttribute("appCategoryList1",appCategoryList1);
-        model.addAttribute("appCategoryList2",appCategoryList2);
-        model.addAttribute("appCategoryList3",appCategoryList3);
+
 
         return "developer/appadd";
     }
@@ -280,7 +434,95 @@ public class AppInfoController {
         return app;
     }
 
-//————————————————————————————————————————————————孔祥忠————————————————————————————————————————————————————————————————
+    @RequestMapping(value = "/updateadd",method = RequestMethod.POST)
+    @ResponseBody
+    public Object addInfoSave(AppInfo appInfo, HttpSession session,
+                              HttpServletRequest request,
+                              @RequestParam(value="logoPicPath",required = false) MultipartFile attach){
+        String JOSN="";
+        String logoPicPath=null;
+
+        appInfo.setCreatedBy(((DevUser)session.getAttribute("devUserSession")).getId());
+        appInfo.setCreationDate(new Date());
+        int rest = 0;
+        try {
+            rest = appInfoService.addAppInfo(appInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(rest > 0){
+            JOSN= "{\"status\":\"success\"}";
+        }
+        JOSN= "{\"status\":\"error\"}";
+
+
+
+        //判断文件是否为空
+        if(!attach.isEmpty()){
+            //定义上传目标路径
+            String path=request.getSession().getServletContext().getRealPath("statics"+ File.separator+"uploadfiles");
+            String olFileName=attach.getOriginalFilename();
+            String prefix= FilenameUtils.getExtension(olFileName);
+            int filesize=50000;
+            if(attach.getSize()>filesize){
+                request.setAttribute("uploadFileError","上传大小不能超过50KB");
+                return "developer/appadd";
+            }else if(prefix.equalsIgnoreCase("jpg")
+                    ||prefix.equalsIgnoreCase("jpeg")
+                    ||prefix.equalsIgnoreCase("png")){
+                //当前系统时间+随机数+"_Personal.jpg"
+                String fileName=System.currentTimeMillis()
+                        + RandomUtils.nextInt(1000000)+"_Personal.jpg";
+                File targetFile=new File(path,fileName);
+                if(!targetFile.exists()){
+                    targetFile.mkdirs();
+                }
+                try {
+                    attach.transferTo(targetFile);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    request.setAttribute("uploadFileError","上传失败");
+                    return "developer/appadd";
+                }
+                logoPicPath=path+File.separator+fileName;
+            }else {
+                request.setAttribute("uploadFileError","上传文件格式不正确");
+                return "developer/appadd";
+            }
+        }
+        appInfo.setLogoPicPath(logoPicPath);
+        int result=0;
+        try {
+            result=appInfoService.addAppInfo(appInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(result>0){
+            JOSN= "redirect:/developer/applist";
+        }
+        JOSN= "developer/appadd";
+        return JOSN;
+    }
+
+    //APP删除
+    @RequestMapping("/delApp")
+    @ResponseBody
+    public Object delApp(int id){
+        int result=0;
+        try {
+            result=appInfoService.delAppInfo(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(result>0){
+            return "{\"status\":\"success\"}";
+        }else {
+            return "{\"status\":\"error\"}";
+        }
+    }
+
+//————————————————————————————————————————————————孔祥忠(后台APP信息展示)————————————————————————————————————————————————————————————————
 
     @RequestMapping("/showAllToexamineAPPS")
     @ResponseBody
@@ -345,12 +587,13 @@ public class AppInfoController {
                         "<li><a href='###' id='"+info.getId()+"' class='ToexamineAPP'>查看并审核APP</a> </li>"
 
                 );
-                if (info.getStatus()==5||info.getStatus()==2){
-                    html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>上架</a> </li>");
+                if (info.getStatus()==1){
+                    html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>待审核</a> </li>");
                 }
-                if (info.getStatus()==4){
-                    html.append("<li><a href='###' id='"+info.getId()+"' class='putoffApp'>下架</a> </li>");
+                if (info.getStatus()==2){
+                    html.append("<li><a href='###' id='"+info.getId()+"' class='putonApp'>审核通过</a> </li>");
                 }
+
                 html.append("</ul>" +
                         "                  </div>" +
                         "                </td>" +

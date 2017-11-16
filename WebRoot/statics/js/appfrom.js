@@ -1,4 +1,5 @@
-
+var logoPicPath = null;
+var errorinfo = null;
 $(function () {
     
 
@@ -100,16 +101,14 @@ $("body").on("blur",".form-label-left #appInfo",function () {
 });
 
 //验证文件上传
-    $("#logoPicPath").change(function () {
-        var filepath = $("input[name='myFile']").val();
-        var extStart = filepath.lastIndexOf(".");
-        var ext = filepath.substring(extStart, filepath.length).toUpperCase();
-        if (ext != ".PNG" && ext != ".JPG" && ext != ".JPEG") {
-            alert("图片限于bmp,png,gif,jpeg,jpg格式");
-            $("#fileType").text("")
-            $("#fileSize").text("");
-            return false;
-        }
-    });
+    logoPicPath = $("#logoPicPath");
+    errorinfo = $("#errorinfo");
+
+    if (errorinfo.val()==null||errorinfo.val()==""){
+        logoPicPath.next().html("上传大小不能超过50KB，上传类型必须为：jpg、jpeg、png").attr("style","color: red");
+    }else {
+        logoPicPath.next().html(errorinfo.val());
+    }
+
 
 });

@@ -95,20 +95,7 @@
             </div>
         </div>
 
-        <div class="form-group"style="float: left">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">APP状态</label>
-            <div class="col-md-9 col-sm-9 col-xs-12">
-                <select name="status" class="form-control">
-                    <option value="0">--请选择--</option>
-                    <option value="1" class="option">待审核</option>
-                    <option value="2">审核通过</option>
-                    <option value="3">审核未通过</option>
-                    <option value="4">已上架</option>
-                    <option value="5">已下架</option>
 
-                </select>
-            </div>
-        </div>
 
 
 
@@ -120,10 +107,6 @@
         </div>
 
     </form>
-
-
-
-
 
 
 
