@@ -410,9 +410,6 @@
         });
 
         $("body").on("click","#send1",function () {
-            var bparam = $("#appadd").serialize();
-
-            var istrue=false;
 //            if($("#softwareName").val()==""){
 //                alert("软件名称不能为空");
 //                return false;
@@ -432,10 +429,10 @@
                 contentType:false,
                 processData:false,
                 success:function (data) {
-                    if (data.status == "上传成功") {
+                    if (data.status == "添加成功") {
+                        alert("添加成功！");
                         $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
                         showApps ();
-                        istrue=true;
                     } else {
                         alert(data.status);
                     }
