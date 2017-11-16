@@ -233,6 +233,7 @@
 <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
 <script src="${pageContext.request.contextPath }/statics/js/appfrom.js"></script>
 
+<script src="${pageContext.request.contextPath }/statics/js/appfrom.js"></script>
 
 
 <!-- Custom Theme Scripts -->
