@@ -64,7 +64,7 @@
                     </div>
                     <div class="x_content">
 
-                        <form class="form-horizontal form-label-left" id="changeApp" novalidate>
+                        <form class="form-horizontal form-label-left" id="changeApp" novalidate enctype="multipart/form-data">
 
                             <p>请填写信息
 
@@ -223,14 +223,16 @@
                             </div>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12"
-                                       for="logoLocPath">LOGO图片 <span class="required">*</span>
+                                       for="s_logoLocPath">LOGO图片 <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="logoLocPath" type="file" name="logoLocPath" required="required"
-                                           value="${appInfo.logoPicPath}"
+                                    <img src="${appInfo.logoPicPath}" id="look" style="width: 50px;height: 50px;"/>
+                                    <input id="s_logoLocPath" type="file" name="s_logoLocPath" required="required"
                                            class="optional form-control col-md-7 col-xs-12">
                                 </div>
                             </div>
+                            <input id="logoPicPath" name="logoPicPath" value="${appInfo.logoPicPath}" hidden/>
+                            <input id="logoLocPath" name="logoLocPath" value="${appInfo.logoLocPath}" hidden/>
                             <input id="updateDate" name="updateDate" value="${appInfo.updateDate}" hidden/>
                             <input id="devId" name="devId" value="${appInfo.devId}" hidden/>
                             <input id="onSaleDate" name="onSaleDate" value="${appInfo.onSaleDate}" hidden/>

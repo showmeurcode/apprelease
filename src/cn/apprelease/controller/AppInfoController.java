@@ -22,6 +22,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -211,10 +212,55 @@ public class AppInfoController {
 
     @RequestMapping(value = "/updateApp")
     @ResponseBody
-    public Object updateApp(AppInfo appInfo, HttpSession session){
+    public Object updateApp(AppInfo appInfo, HttpSession session,HttpServletRequest request,
+                            @RequestParam(value = "s_logoLocPath",required = false) MultipartFile attach){
+
+        String logoPicPath = appInfo.getLogoPicPath();
+        if (!attach.isEmpty()) {
+            String path = request.getSession().getServletContext().getRealPath("statics"+File.separator+"uploadfiles");
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile path========>"+path);
+
+            String oldFileName = attach.getOriginalFilename();//原文件名
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile oldFileName========>"+oldFileName);
+
+            String prefix = FilenameUtils.getExtension(oldFileName);//原文件名后缀
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile prefix========>"+prefix);
+
+            int filesize = 50000;
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile size========>"+attach.getSize());
+
+            if (attach.getSize() > filesize) { //上传大小不得超过50KB
+                request.setAttribute("uploadFileError","* 上传大小不得超过50KB");
+                return "{\"status\":\"over\"}";
+            } else if (prefix.equalsIgnoreCase("jpg")
+                    || prefix.equalsIgnoreCase("png")
+                    || prefix.equalsIgnoreCase("jpeg")) {
+                String fileName = System.currentTimeMillis()+RandomUtils.nextInt(1000000)+"_Personal.jpg";
+                System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>new fileName========>"+attach.getName());
+
+                File targetFile = new File(path,fileName);
+                if (!targetFile.exists()) {
+                    targetFile.mkdirs();
+                }
+                //保存
+                try {
+                    attach.transferTo(targetFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    request.setAttribute("uploadFileError","* 上传失败！");
+                    return "{\"status\":\"errorfile\"}";
+                }
+                logoPicPath = path+File.separator+fileName;
+            } else {
+                request.setAttribute("uploadFileError","* 上传图片格式不正确");
+                return "{\"status\":\"format\"}";
+            }
+        }
+
         System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>进入方法，路径正确");
         appInfo.setModifyBy(((DevUser)session.getAttribute("devUserSession")).getId());
         appInfo.setModifyDate(new Date());
+        appInfo.setLogoPicPath(logoPicPath);
         int result = 0;
         try {
             result = appInfoService.updateAppInfo(appInfo);
@@ -270,10 +316,55 @@ public class AppInfoController {
 
     @RequestMapping(value = "/CommitAndSave")
     @ResponseBody
-    public Object CommitAndSave(AppInfo appInfo,HttpSession session){
+    public Object CommitAndSave(AppInfo appInfo,HttpSession session,HttpServletRequest request,
+                                @RequestParam(value = "s_logoLocPath",required = false) MultipartFile attach){
+
+
+        String unloadfile = appInfo.getLogoPicPath();
+        if (!attach.isEmpty()) {
+            String path = request.getSession().getServletContext().getRealPath("statics" + File.separator + "uploadfiles");
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile path========>" + path);
+
+            String oldFileName = attach.getOriginalFilename();//原文件名
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile oldFileName========>" + oldFileName);
+
+            String prefix = FilenameUtils.getExtension(oldFileName);//原文件名后缀
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile prefix========>" + prefix);
+
+            int filesize = 50000;
+            System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>uploadFile size========>" + attach.getSize());
+
+            if (attach.getSize() > filesize) { //上传大小不得超过50KB
+                request.setAttribute("uploadFileError", "* 上传大小不得超过50KB");
+                return "{\"status\":\"over\"}";
+            } else if (prefix.equalsIgnoreCase("jpg")
+                    || prefix.equalsIgnoreCase("png")
+                    || prefix.equalsIgnoreCase("jpeg")) {
+                String fileName = System.currentTimeMillis() + RandomUtils.nextInt(1000000) + "_Personal.jpg";
+                System.out.print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>new fileName========>" + attach.getName());
+
+                File targetFile = new File(path, fileName);
+                if (!targetFile.exists()) {
+                    targetFile.mkdirs();
+                }
+                //保存
+                try {
+                    attach.transferTo(targetFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    request.setAttribute("uploadFileError", "* 上传失败！");
+                    return "{\"status\":\"errorfile\"}";
+                }
+                unloadfile = path + File.separator + fileName;
+            } else {
+                request.setAttribute("uploadFileError", "* 上传图片格式不正确");
+                return "{\"status\":\"format\"}";
+            }
+        }
 
         appInfo.setModifyBy(((DevUser)session.getAttribute("devUserSession")).getId());
         appInfo.setModifyDate(new Date());
+        appInfo.setLogoPicPath(unloadfile);
         appInfo.setStatus(1);
         int result = 0;
         try {
