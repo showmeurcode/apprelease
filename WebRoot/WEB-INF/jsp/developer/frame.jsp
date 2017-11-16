@@ -357,50 +357,47 @@
         });
 
         //        ====================================尹晓晨新增app版本信息==================================================================
-        $("body").on("click", ".addAppVersion",function () {
-            var  appId= $(this).attr("id");
-            $("#Content").load("/apprelease/appVersion/addAppVersion?appId="+appId+"  #Content>*");
+        var  appIdforlistversion;
+        $("body").on("click", ".addAppVersion",function showversionlist() {
+              appIdforlistversion= $(this).attr("id");
+            $("#Content").load("/apprelease/appVersion/addAppVersion?appId="+appIdforlistversion+"  #Content>*");
         });
 
         $("body").on("click", "#addversionbutton",function () {
             //验证开始（输入框在前台验证，文件上传在后端验证）
             var istrue=false;
-           /* if($("body #versionaddform #versionNo").val()==""){
+           if($("body #versionaddform #versionNo").val()==""){
                 alert("版本号不能为空"); return false;
             }
-            if($("body #versionaddform #versionSize").val()==""){
-                alert("版本大小不能为空"); return false;
+            var yz1=/^[0-9]+([.]{1}[0-9]+){0,1}$/;
+            if($("body #versionaddform #versionSize").val()==""||!yz1.test($("body #versionaddform #versionSize").val())){
+                alert("版本大小不能为空且必须是数字"); return false;
             }
             if($("body #versionaddform #versionInfo").val().trim()==""||null){
                 alert("内容简介不能为空"); return false;
-            }*/
-           var data= $("body #versionaddform").serialize();
-            alert(data);
+            }
+           var data= new FormData($( "body #versionaddform" )[0]);
             $.ajax({
-                type:"GET",
-                url:rootpath+"/appInfo/putonandoff",
+                type:"POST",
+                url:rootpath+"/appVersion/addAppVersionsave.json",
                 data:data,
                 dataType:"json",
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
                 success:function (data) {
-                    $this.html(data.option);//修改上架或下架选项
-                    $this.attr("class",data.className);//修改类名
-                    $this.parents("tr").find(".btn-success").html(data.statusName);//修改状态
-
+                    if(data.errorInfo=="上传成功"){
+                        istrue=true;
+                    }else{
+                    alert(data.errorInfo);
+                    }
                 }
 
-
-            })
-
-
-
-
-            istrue=true;
+            });
             if(istrue==true){
-                alert("上传成功");
-                params="";// 全局变量归0
-                //执行列出app列表页面
-                $("#Content").load("/apprelease/appCategory/showlevelmethod2  #Content>*");
-                showApps ();//显示所有app列表(后台拼接html法)
+                alert(" 增加版本信息成功！ ");
+                $("#Content").load("/apprelease/appVersion/addAppVersion?appId="+appIdforlistversion+"  #Content>*");
             }
         });
 

@@ -127,11 +127,13 @@
                     </div>
                     <div class="x_content">
 
-                        <form  id="versionaddform" onkeydown="if(event.keyCode==13)return false;" class="form-horizontal form-label-left" novalidate>
+                        <form  method="post" id="versionaddform" onkeydown="if(event.keyCode==13)return false;" class="form-horizontal form-label-left"  enctype="multipart/form-data">
 
                             <p>请填写信息
                             </p>
                             <span class="section"> </span>
+                            <input type="hidden" name="appId" value="${appInfo.id}">
+                            <input type="hidden" name="createBy" value="${sessionScope.devUserSession.id}">
                             <%--版本号--%>
                             <div class="item form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="versionNo">版本号*
@@ -191,7 +193,9 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-3">
                                     <a  id="addversionbutton" class="btn btn-success">保存</a>
+                                    <button type="button" class="btn btn-primary">返回</button>
                                 </div>
+
                             </div>
                         </form>
                     </div>
