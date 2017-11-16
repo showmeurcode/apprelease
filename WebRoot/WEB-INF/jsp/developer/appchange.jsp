@@ -64,7 +64,7 @@
                     </div>
                     <div class="x_content">
 
-                        <form class="form-horizontal form-label-left" id="changeApp" novalidate enctype="multipart/form-data">
+                        <form class="form-horizontal form-label-left" id="changeApp" enctype="multipart/form-data" method="post">
 
                             <p>请填写信息
 
