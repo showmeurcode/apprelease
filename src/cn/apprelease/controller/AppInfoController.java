@@ -34,6 +34,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/appInfo")
 public class AppInfoController {
+
     @Resource
     AppInfoService appInfoService;
     @Resource
@@ -580,7 +581,8 @@ public class AppInfoController {
                 //开始拼接按钮
                 html.append("<td class='xxx'>" +
                         "                  <div class='btn-group'>" +
-                        "                    <button type='button' class='btn btn-info dropdown-toggle' data-toggle='dropdown'>" +
+                        "                    <button type='button' class='btn btn-info dropdown-toggle' appinfoid='${appInfo.id }' status='${appInfo.status }'" +
+                        "                        data-toggle='dropdown'>" +
                         "                      审核" +
                         "                      <span class='caret'></span>" +
                         "                    </button>" +
@@ -608,5 +610,30 @@ public class AppInfoController {
         return  html.toString();
 
 
+    }
+
+    @RequestMapping("/tojudge")
+    @ResponseBody
+    public String checkSave(@RequestParam("appId") String appId,@RequestParam("tojudge") String tojudge){
+        AppInfo  appInfo=null;
+        int  result=0;
+        try {
+
+            appInfo = appInfoService.findAppinfoByid(Integer.parseInt(appId));
+
+            if(tojudge.equals("yes")){
+                appInfo.setStatus(2);
+            }else {
+                appInfo.setStatus(3);
+            }
+            result= appInfoService.updateAppInfo(appInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if(result>0) {
+            return "审核操作成功！";
+        }
+        return "审核失败！";
     }
 }

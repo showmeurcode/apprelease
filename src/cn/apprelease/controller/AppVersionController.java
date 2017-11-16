@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author yinxiaochen
@@ -127,22 +126,21 @@ public class AppVersionController {
     public String ToexamineAPPVersion(String appId,Model model){
 
         AppInfo appinfo =null;
-        List<AppVersion> appVersionList=null;
+        AppVersion latestAppVersion=null;
 
 
         try {
             appinfo=appInfoService.findAppinfoByid(Integer.parseInt(appId));//根据appId找到APP信息
-            appVersionList = appVersionService.findAppVersionsByappId(Integer.parseInt(appId));//根据appId找到版本信息
+            latestAppVersion=appVersionService.findAppVersionByid(appinfo.getVersionId());
 
         } catch (Exception e) {
             e.printStackTrace();
 
         }
         model.addAttribute("appInfo", appinfo);
-        model.addAttribute("appVersionList", appVersionList);
-
-            int no=appinfo.getVersionId();
-
+        model.addAttribute("latestAppVersion", latestAppVersion);
+        System.out.println("是否为空");
+        System.out.println(latestAppVersion==null);
         return "backend/toexamineapp";
 
     }

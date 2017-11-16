@@ -34,6 +34,13 @@
 		WHERE `id`=#{id}
 	</update>
 
+	<update id="updateSatus">
+
+		  UPDATE app_info set status=#{status} where id = #{id}
+
+
+	</update>
+
 	<!--——————————————————————————————————查 ———————————————————————————————————————————————— -->
 
 	<!-- 根据分类信息查找分类 -->
@@ -62,6 +69,7 @@
 	<select id="findAppinfoByid" resultType="AppInfo">
 		SELECT  *FROM  app_info WHERE  id=#{id}
 	</select>
+
 
 
 	<!-- ————————————————————————————————cache配置————————————————————————————  -->
