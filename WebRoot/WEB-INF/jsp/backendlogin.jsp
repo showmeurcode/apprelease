@@ -51,12 +51,12 @@
                         ${error}
                     </div>
                     <div>
-                        <input type="text" name="userCode" value="${backenduser.userCode}" class="form-control" id="userCode" placeholder="用户名" required="" />
+                        <input type="text" name="userCode" value="${backenduser.userCode}" class="form-control"  placeholder="用户名" required="required" />
                     </div>
                             <font color="#c00fff">*</font>
                             <div id="userCodeDiv" style="display: inline; color:red"></div>
                     <div>
-                        <input type="password" name="userPassword" value="${backenduser.userPassword}" id="userPassword" class="form-control" placeholder="密码" required="" />
+                        <input type="password" name="userPassword" value="${backenduser.userPassword}"  class="form-control" placeholder="密码" required="required" />
                     </div>
                             <font color="#c00fff">*</font>
                             <div id="userPasswordDiv" style="display: inline; color:red"></div>
@@ -86,30 +86,30 @@
     </div>
 </div>
 
-<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript">
-    $(function () {
+<%--<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.7.2.min.js"></script>--%>
+<%--<script type="text/javascript">--%>
+    <%--$(function () {--%>
 
-        $("#userCode").blur(function(){
+        <%--$("#userCode").blur(function(){--%>
 
-            var userCode = $(this).val();
+            <%--var userCode = $(this).val();--%>
 
-            if (userCode == null || userCode == "") {
-                $("#userCodeDiv").html("用户名不能为空！");
-            }
+            <%--if (userCode == null || userCode == "") {--%>
+                <%--$("#userCodeDiv").html("用户名不能为空！");--%>
+            <%--}--%>
 
-        })
+        <%--})--%>
 
-        $("#userPassword").blur(function () {
-            var userPassword = $(this).val()
-            if(userPassword == null || userPassword == ""){
-                $("#userPasswordDiv").html("密码不能为空！")
-            }
-        })
+        <%--$("#userPassword").blur(function () {--%>
+            <%--var userPassword = $(this).val()--%>
+            <%--if(userPassword == null || userPassword == ""){--%>
+                <%--$("#userPasswordDiv").html("密码不能为空！")--%>
+            <%--}--%>
+        <%--})--%>
 
 
-    })
-</script>
+    <%--})--%>
+<%--</script>--%>
 
 </body>
 </html>

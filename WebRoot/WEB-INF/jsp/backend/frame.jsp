@@ -371,6 +371,7 @@
           showToexamineAPPS ();//显示所有app列表(后台拼接html法)
       });
 
+      //审核APP
       $("body").on("click",".tojudge",function(){
           var  appId= $(this).attr("appId");
           var  tojudge=$(this).attr("tojudge");
@@ -389,20 +390,9 @@
 
             })
 
-
-
-
-
-
       })
 
-
-
-
-
   })
-
-
 
   </script>
   </body>

@@ -121,7 +121,7 @@ public class AppVersionController {
 
     //—————————————————————————————————————————孔祥忠———————————————————————————————————————————————————
 
-    @RequestMapping("/ToexamineAPPVersion")
+    @RequestMapping("/ToexamineAPPVersion")//查看并审核APP
 
     public String ToexamineAPPVersion(String appId,Model model){
 
@@ -139,8 +139,7 @@ public class AppVersionController {
         }
         model.addAttribute("appInfo", appinfo);
         model.addAttribute("latestAppVersion", latestAppVersion);
-        System.out.println("是否为空");
-        System.out.println(latestAppVersion==null);
+
         return "backend/toexamineapp";
 
     }

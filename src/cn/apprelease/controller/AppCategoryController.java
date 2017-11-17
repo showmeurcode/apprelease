@@ -80,12 +80,12 @@ public class AppCategoryController {
         }
         return  html.toString();
     }
-
+//=============================================================孔==========================================================================
     @RequestMapping("/showlevelmethod2backend")
     public String showAllCategoryLevel1method2backend(Model model){//后台显示所有的一级分类
         List<AppCategory> appCategory1List=null;
         try {
-            appCategory1List = appCategoryService.findAppCategorysBylevel(1);
+            appCategory1List = appCategoryService.findAppCategorysBylevel(1);//查找某个等级的分类列表
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -13,7 +13,6 @@ import org.apache.commons.lang.math.RandomUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -543,7 +542,7 @@ public class AppInfoController {
 
     }
 
-    @RequestMapping("/tojudge")
+    @RequestMapping("/tojudge")//审核
     @ResponseBody
     public String checkSave(@RequestParam("appId") String appId,@RequestParam("tojudge") String tojudge){
         AppInfo  appInfo=null;
@@ -553,9 +552,9 @@ public class AppInfoController {
             appInfo = appInfoService.findAppinfoByid(Integer.parseInt(appId));
 
             if(tojudge.equals("yes")){
-                appInfo.setStatus(2);
+                appInfo.setStatus(2);//审核通过
             }else {
-                appInfo.setStatus(3);
+                appInfo.setStatus(3);//审核不通过
             }
             result= appInfoService.updateAppInfo(appInfo);
         } catch (Exception e) {
