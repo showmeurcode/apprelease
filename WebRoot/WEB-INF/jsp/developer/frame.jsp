@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>APP开发者管理! | </title>
+    <title>APP开发者管理| </title>
 
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath }/statics/css/bootstrap.min.css" rel="stylesheet">
@@ -34,6 +34,7 @@
 
     <!-- Custom Theme Style -->
     <link href="${pageContext.request.contextPath }/statics/css/custom.min.css" rel="stylesheet">
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 </head>
@@ -56,7 +57,9 @@
                     </div>
                     <div class="profile_info">
                         <span>欢迎,</span>
+
                         <h2>${sessionScope.devUserSession.devName}</h2>
+
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -71,7 +74,7 @@
                             <li><a><i class="fa fa-home"></i>APP应用管理<span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="javascript:;" id="showAllApps">个人APP维护</a></li>
-                                    <li><a href="###" id="addNewApp">上传新APP</a></li>
+                                    <li><a href="###" id="addNewApp">增加APP基础信息</a></li>
                                 </ul>
                             </li>
                             <li><a><i class="fa fa-edit"></i> 个人账户管理<span class="fa fa-chevron-down"></span></a>
@@ -116,7 +119,7 @@
                     <a data-toggle="tooltip" data-placement="top" title="Lock">
                         <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                     </a>
-                    <a data-toggle="tooltip" data-placement="top" title="Logout">
+                    <a data-toggle="tooltip"  data-placement="top" title="Logout" href="${pageContext.request.contextPath }/devuser/loginout">
                         <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                     </a>
                 </div>
@@ -148,7 +151,7 @@
                                     </a>
                                 </li>
                                 <li><a href="javascript:;">Help</a></li>
-                                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i>登出</a></li>
                             </ul>
                         </li>
 
@@ -228,6 +231,10 @@
 <script src="../vendors/jszip/dist/jszip.min.js"></script>
 <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+<script src="${pageContext.request.contextPath }/statics/js/appfrom.js"></script>
+
+<script src="${pageContext.request.contextPath }/statics/js/appfrom.js"></script>
+
 
 <!-- Custom Theme Scripts -->
 <script src="../build/js/custom.min.js"></script>
@@ -349,38 +356,232 @@
             });
         });
 
+        //        ====================================尹晓晨新增app版本信息==================================================================
+        var  appIdforlistversion;
+        $("body").on("click", ".addAppVersion",function showversionlist() {
+              appIdforlistversion= $(this).attr("id");
+            $("#Content").load("/apprelease/appVersion/addAppVersion?appId="+appIdforlistversion+"  #Content>*");
+        });
 
+        $("body").on("click", "#addversionbutton",function () {
+            //验证开始（输入框在前台验证，文件上传在后端验证）
+            var istrue=false;
+           if($("body #versionaddform #versionNo").val()==""){
+                alert("版本号不能为空"); return false;
+            }
+            var yz1=/^[0-9]+([.]{1}[0-9]+){0,1}$/;
+            if($("body #versionaddform #versionSize").val()==""||!yz1.test($("body #versionaddform #versionSize").val())){
+                alert("版本大小不能为空且必须是数字"); return false;
+            }
+            if($("body #versionaddform #versionInfo").val().trim()==""||null){
+                alert("内容简介不能为空"); return false;
+            }
+           var data= new FormData($( "body #versionaddform" )[0]);
+            $.ajax({
+                type:"POST",
+                url:rootpath+"/appVersion/addAppVersionsave.json",
+                data:data,
+                dataType:"json",
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success:function (data) {
+                    if(data.errorInfo=="上传成功"){
+                        istrue=true;
+                    }else{
+                    alert(data.errorInfo);
+                    }
+                }
+
+            });
+            if(istrue==true){
+                alert(" 增加版本信息成功！ ");
+                $("#Content").load("/apprelease/appVersion/addAppVersion?appId="+appIdforlistversion+"  #Content>*");
+            }
+        });
 
 
 
 //        ==========================================================张玮钰==================================================================
 
+        $("#addNewApp").click(function () {
+            $("#Content").load("${pageContext.request.contextPath}/appInfo/add  #Content>*");
+        });
 
+        $("body").on("click","#send1",function () {
+//            if($("#softwareName").val()==""){
+//                alert("软件名称不能为空");
+//                return false;
+//            }
+//            if($("#APKName").val()==""){
+//                alert("APK名称不能为空");
+//                return false;
+//            }
+            var data=new FormData($("body #appaddform")[0]);
+            $.ajax({
+                type:"POST",
+                url:rootpath+"/appInfo/addsave.json",
+                data:data,
+                dataType:"json",
+                async:false,
+                cache:false,
+                contentType:false,
+                processData:false,
+                success:function (data) {
+                    if (data.status == "添加成功") {
+                        alert("添加成功！");
+                        $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
+                        showApps ();
+                    } else {
+                        alert(data.status);
+                    }
+                },
+                error:function (data) {
+                    alert("添加大失败");
+                }
+            });
 
+        });
 
-
-
-
-//        ==============================================================李高珊==============================================================
-
-        $("#changeApp").click(function () {
-
-            $("#Content").load("${pageContext.request.contextPath}/statics/templet/appchage.jsp  #Content>*");
-
-            var appid = this.attr("appid");
-
-            $.getJSON("/appInfo/change","id="+appid);
+        $("body").on("click",".deleteApp",function () {
+            if (confirm("确定要删除此APP（其下所有版本信息也会被删除）？")) {
+                var id=$(this).attr("id");
+                $.ajax({
+                    type:"POST",
+                    url:rootpath+"/appInfo/delApp",
+                    data:"id="+id,
+                    dataType:"json",
+                    success:function (data) {
+                        $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
+                        showApps ();
+                        if(data.status=="success"){
+                            alert("删除成功！")
+                        }else {
+                            alert("删除失败！")
+                        }
+                    },
+                    error:function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("XMLHttpRequest.status："+XMLHttpRequest.status);
+                        alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
+                        alert("textStatus："+textStatus);
+//                readystate: 4  status: 400 textStatus: error
+                    }
+                })
+            } else {}
 
         });
 
 
+//        ==============================================================李高珊==============================================================
 
+        //加载更新的页面
+        $("body").on("click",".changeApp",function () {
+            var status = $(this).parents("tr").find(".btn-xs").html();
+            var appId=$(this).attr("id");
+
+
+            if (status == "审核通过" || status == "已上架" || status == "已下架") {
+                alert("该APP应用的状态为：【"+status+"】，不能修改！")
+            } else {
+                $("#Content").load("${pageContext.request.contextPath}/appInfo/changeApp?id="+appId+"  #Content>*");
+            }
+
+
+
+
+        });
+
+
+        //一级分类改变关联的二级分类
+        $("body").on("change","#categoryLevel1",function () {
+            var categoryLevel1 = $(this).val();
+            $.ajax({
+                type:"POST",
+                url:rootpath+"/appCategory/getlevelByparent",
+                data:"parentId="+categoryLevel1,
+                dataType:"html",
+                success:function (data) {
+                    $("#categoryLevel2").html(data);
+                }
+            });
+        });
+
+        //二级分类改变关联的三级分类
+        $("body").on("change","#categoryLevel2",function () {
+            var categoryLevel2 = $(this).val();
+            $.ajax({
+                type:"POST",
+                url:rootpath+"/appCategory/getlevelByparent",
+                data:"parentId="+categoryLevel2,
+                dataType:"html",
+                success:function (data) {
+                    $("#categoryLevel3").html(data);
+                }
+            });
+        });
+
+        //点击保存进行数据更改
+        $("body").on("click","#send,#CommitAndSave",function () {
+
+//           var bparams = $("#changeApp").serialize();
+//           alert(bparams);
+            var bparams= new FormData($( "body #changeApp" )[0]);
+            $.ajax({
+
+                type:"POST",
+                url:rootpath+"/appInfo/updateApp.json",
+                data:bparams,
+                dataType:"json",
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success:function (data) {
+                    if (data.status == "success") {
+                        alert("修改成功");
+                        $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
+                        showApps ();
+                    } else {
+                        alert(data.status);
+                    }
+                    
+                },
+//                XMLHttpRequest：XMLHttpRequest.readyState: 状态码的意思
+//            0 － （未初始化）还没有调用send()方法
+//            1 － （载入）已调用send()方法，正在发送请求
+//            2 － （载入完成）send()方法执行完成，已经接收到全部响应内容
+//            3 － （交互）正在解析响应内容
+//            4 － （完成）响应内容解析完成，可以在客户端调用了
+//                XMLHttpRequest：XMLHttpRequest.status:
+//            textStatus：错误原因
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("XMLHttpRequest.status："+XMLHttpRequest.status);
+                alert("XMLHttpRequest.readyState："+XMLHttpRequest.readyState);
+                alert("textStatus："+textStatus);
+//                readystate: 4  status: 400 textStatus: error
+                }
+
+            });
+        });
+
+        //点击返回操作
+        $("body").on("click",".btn-primary",function () {
+            $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2  #Content>*");
+            showApps ();
+        });
+
+        //点击查看
+        $("body").on("click",".viewApp",function () {
+            var appId=$(this).attr("id");
+            $("#Content").load("${pageContext.request.contextPath}/appInfo/viewApp?id="+appId+"  #Content>*");
+        });
 
 
 
     })
 
 </script>
-
+<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/appfrom.js"></script>
 </body>
 </html>

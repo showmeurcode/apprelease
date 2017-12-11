@@ -1,9 +1,7 @@
 package cn.apprelease.dao.app_info;
 
-import cn.apprelease.pojo.AppCategory;
 import cn.apprelease.pojo.AppInfo;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -44,5 +42,10 @@ public interface AppInfoMapper {
 
 
     int findAppinfoCounts() throws Exception;
+
+
+    AppInfo findAppinfoByid(@Param("id")Integer id) throws Exception;
+
+    AppInfo updateSatus(@Param(value="status")Integer status,@Param(value="id")Integer id)throws Exception;
 
 }

@@ -66,4 +66,32 @@ public class AppCategoryController {
         return  sonappCategoryList;
     }
 
+//    ===================================================李高珊============================================================================
+
+    @RequestMapping("/getlevelByparent")
+    @ResponseBody
+    public Object getCategoryListToHTML(@RequestParam("parentId")String parentId){
+
+        List<AppCategory> sonappCategoryList= showSonLevel(parentId);
+
+        StringBuffer html = new StringBuffer("");
+        for (AppCategory appCategory:sonappCategoryList) {
+            html.append(" <option value='"+appCategory.getId()+"'>"+appCategory.getCategoryName()+"</option> ");
+        }
+        return  html.toString();
+    }
+//=============================================================孔==========================================================================
+    @RequestMapping("/showlevelmethod2backend")
+    public String showAllCategoryLevel1method2backend(Model model){//后台显示所有的一级分类
+        List<AppCategory> appCategory1List=null;
+        try {
+            appCategory1List = appCategoryService.findAppCategorysBylevel(1);//查找某个等级的分类列表
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        model.addAttribute("appCategory1List",appCategory1List);
+
+        return  "backend/backendapplist";
+    }
+
 }

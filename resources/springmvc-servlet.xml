@@ -14,28 +14,26 @@
 
 	<!--配置扫描controller组件把加@controller注解的注册为controller-->
 	<context:component-scan base-package="cn.apprelease.controller"/>
-	<!--配置<mvc:annotation-driven>添加对注解支持（同时包括两个消息转换器处理中文和时间显示错误）-->
+	<!--配置<mvc:annotation-driven>添加对注解支持（同时包括两个消息转换器：处理中文和时间显示错误）-->
 	<mvc:annotation-driven>
-
-
-                <mvc:message-converters>
-                    <bean class="org.springframework.http.converter.StringHttpMessageConverter">
-                        <property name="supportedMediaTypes">
-                            <list>
-                                <value>application/json;charset=UTF-8</value>
-                            </list>
-                        </property>
-                    </bean>
-                    <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
-                        <property name="supportedMediaTypes">
-                            <list>
-                                <value>text/html;charset=UTF-8</value>
-                                <value>application/json</value>
-                            </list>
-                        </property>
-                        <property name="features">
-                            <list>
-                                <!--   Date的日期转换器-->
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+						<value>application/json</value>
+					</list>
+				</property>
+				<property name="features">
+					<list>
+						<!--   Date的日期转换器-->
 						<value>WriteDateUseDateFormat</value>
 					</list>
 				</property>
@@ -71,7 +69,7 @@
 	<!-- 配置拦截器interceptors的路径和作用位置-->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/user/**" />
+			<mvc:mapping path="/xxxxx/**" />
 			<bean class="cn.apprelease.interceptor.SysInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
@@ -87,7 +85,7 @@
 	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
 		<property name="exceptionMappings">
 			<props>
-				<prop key="java.lang.Exception">exceptionerror</prop><!--有异常即跳转至exceptionerror视图，可自定义异常信息，及多个异常-->
+				<prop key="java.lang.Exception">404</prop><!--有异常即跳转至error视图，可自定义异常信息，及多个异常-->
 			</props>
 		</property>
 	</bean>

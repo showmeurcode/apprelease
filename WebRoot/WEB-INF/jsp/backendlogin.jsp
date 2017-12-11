@@ -44,16 +44,25 @@
     <div class="login_wrapper">
         <div class="animate form login_form">
             <section class="login_content">
-                <form  action="backenduser/login">
+                <form  action="${pageContext.request.contextPath }/backenduser/Blogin" method="post">
                     <h1>管理员登录</h1>
-                    <div>
-                        <input type="text" class="form-control" placeholder="用户名" required="" />
+                    <font color="#c00fff">*</font>
+                    <div style="display: inline; color:red">
+                        ${error}
                     </div>
                     <div>
-                        <input type="password" class="form-control" placeholder="密码" required="" />
+                        <input type="text" name="userCode" value="${backenduser.userCode}" class="form-control"  placeholder="用户名" required="required" />
                     </div>
+                            <font color="#c00fff">*</font>
+                            <div id="userCodeDiv" style="display: inline; color:red"></div>
                     <div>
-                        <a class="btn btn-default submit" href="index.html">登录</a>
+                        <input type="password" name="userPassword" value="${backenduser.userPassword}"  class="form-control" placeholder="密码" required="required" />
+                    </div>
+                            <font color="#c00fff">*</font>
+                            <div id="userPasswordDiv" style="display: inline; color:red"></div>
+                    <div>
+                        <input type="submit" value="登录">
+                        <input type="reset" value="重置"/>
                         <a class="reset_pass" href="#">忘记密码?</a>
                     </div>
 
@@ -76,6 +85,32 @@
 
     </div>
 </div>
+
+<%--<script type="text/javascript" src="${pageContext.request.contextPath }/statics/js/jquery-1.7.2.min.js"></script>--%>
+<%--<script type="text/javascript">--%>
+    <%--$(function () {--%>
+
+        <%--$("#userCode").blur(function(){--%>
+
+            <%--var userCode = $(this).val();--%>
+
+            <%--if (userCode == null || userCode == "") {--%>
+                <%--$("#userCodeDiv").html("用户名不能为空！");--%>
+            <%--}--%>
+
+        <%--})--%>
+
+        <%--$("#userPassword").blur(function () {--%>
+            <%--var userPassword = $(this).val()--%>
+            <%--if(userPassword == null || userPassword == ""){--%>
+                <%--$("#userPasswordDiv").html("密码不能为空！")--%>
+            <%--}--%>
+        <%--})--%>
+
+
+    <%--})--%>
+<%--</script>--%>
+
 </body>
 </html>
 

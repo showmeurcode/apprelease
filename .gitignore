@@ -8,3 +8,7 @@
 out
 gen
 classes
+.class
+.project
+.classpath
+

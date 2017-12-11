@@ -1,5 +1,7 @@
 package cn.apprelease.pojo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -17,6 +19,7 @@ public class AppVersion {
     private int createdBy;//创建者（来源于dev_user开发者信息表的用户id）
     private Date creationDate;//创建时间
     private int modifyBy;//更新者（来源于dev_user开发者信息表的用户id）
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date modifyDate;//最新更新时间
     private String apkLocPath;//apk文件的服务器存储路径
     private String apkFileName;//上传的apk文件名称

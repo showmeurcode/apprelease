@@ -21,8 +21,21 @@
     <!-- NProgress -->
     <link href="${pageContext.request.contextPath }/statics/css/nprogress.css" rel="stylesheet">
 
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <!-- Datatables -->
+    <link href="${pageContext.request.contextPath }/statics/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath }/statics/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+    <link href="../vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+
+
     <!-- Custom Theme Style -->
     <link href="${pageContext.request.contextPath }/statics/css/custom.min.css" rel="stylesheet">
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   </head>
 
   <body class="nav-md">
@@ -43,7 +56,7 @@
               </div>
               <div class="profile_info">
                 <span>欢迎,</span>
-                <h2>某某某</h2>
+                <h2>${sessionScope.backendUserSession.userName}</h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -57,8 +70,8 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-home"></i>APP管理<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="###">APP审核</a></li>
-                      <li><a href="###">广告推广</a></li>
+                      <li><a href="javaScrinpt:;" id="showAllToexamineAPPS">APP审核</a></li>
+                      <li><a href="javaScrinpt:;" id="advertisement">广告推广</a></li>
 
                     </ul>
                   </li>
@@ -101,7 +114,7 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout">
+              <a data-toggle="tooltip" data-placement="top" title="登出" href="${pageContext.request.contextPath }/backenduser/Bloginout">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -132,7 +145,7 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="Blogin.html"><i class="fa fa-sign-out pull-right"></i>登出</a></li>
                   </ul>
                 </li>
 
@@ -208,13 +221,11 @@
 
         <!-- page content -->
         <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>欢迎你：系统管理员 <small>xxxxxxxxxx</small>，请在左侧选择操作</h3>
+
+              <div class="title_left" id="Content" role="main">
+                <h3>欢迎你：系统管理员 <small>${sessionScope.backendUserSession.userName}</small>，请在左侧选择操作</h3>
               </div>
-            </div>
-          </div>
+
         </div>
         <!-- /page content -->
 
@@ -225,6 +236,7 @@
           </div>
           <div class="clearfix"></div>
         </footer>
+
         <!-- /footer content -->
       </div>
     </div>
@@ -237,8 +249,151 @@
     <script src="${pageContext.request.contextPath }/statics/js/fastclick.js"></script>
     <!-- NProgress -->
     <script src="${pageContext.request.contextPath }/statics/js/nprogress.js"></script>
-    
+
+
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="${pageContext.request.contextPath }/statics/js/custom.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="${pageContext.request.contextPath }/statics/js/jquery.dataTables.js"></script>
+    <script src="${pageContext.request.contextPath }/statics/js/jquery.pjax.js"></script>
+    <script src="${pageContext.request.contextPath }/statics/js/dataTables.bootstrap.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="../vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="../vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="../vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="../vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="../vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="../vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="../vendors/datatables.net-scroller/js/datatables.scroller.min.js"></script>
+    <script src="../vendors/jszip/dist/jszip.min.js"></script>
+    <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+
+    
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+    <input type="hidden" id="rootpath" value="${pageContext.request.contextPath}">
+  <script type="text/javascript">
+
+  $(function () {
+
+      <!--=========================================================审核APP列表信息展示  孔祥忠=======================================================-->
+
+      var rootpath=$("#rootpath").val();//获取根路径
+
+      var params="";//声明关联查询条件的全局变量
+      var table;
+     function showToexamineAPPS() {
+         var data="status="+1;
+         if(params!=""){
+             data+="&"+params;
+         }
+         $.ajax({
+             type:"GET",
+             url:rootpath+"/appInfo/showAllToexamineAPPS", //注意此处斜杠不能少，否则无法显示APP信息
+             data:data,   //注意此处不需要加引号("")
+             dataType :"html",
+             success : function (data) {
+
+                 $("#appdetails").html(data)
+
+                 table=$('#listTable').DataTable({
+                     "bLengthChange": false, //是否显示修改显示数据数量的菜单
+                     "iDisplayLength": 6,//设置每页默认显示多少数据
+                     searching : false, //去掉搜索框
+                     language: {
+                         "sProcessing": "处理中...",
+                         "sLengthMenu": "显示 _MENU_ 项结果",
+                         "sZeroRecords": "没有匹配结果",
+                         "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                         "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                         "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                         "sInfoPostFix": "",
+                         "sSearch": "搜索:",
+                         "sUrl": "",
+                         "sEmptyTable": "表中数据为空",
+                         "sLoadingRecords": "载入中...",
+                         "sInfoThousands": ",",
+                         "oPaginate": {
+                             "sFirst": "首页",
+                             "sPrevious": "上页",
+                             "sNext": "下页",
+                             "sLast": "末页"
+                         },
+                         "oAria": {
+                             "sSortAscending": ": 以升序排列此列",
+                             "sSortDescending": ": 以降序排列此列"
+                         }
+                     }
+                 });
+
+             }
+
+         })
+          
+      }
+
+      $("#showAllToexamineAPPS").click(function () {
+          params="";// 全局变量归0
+          $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2backend  #Content>*");
+          showToexamineAPPS ();//显示所有app列表(后台拼接html法)
+      });
+
+      // 查询按钮点击时，赋予全局变量param新的值（关联查询条件），紧接着进行查询获取数据
+      $("body").on("click", "#querysubmit",function () {
+          params=$("#queryform").serialize();   //serialize() 方法通过序列化表单值，创建 URL 编码文本字符串。
+          table.destroy();
+          showToexamineAPPS ();
+      });
+
+      //单击 查看并审核APP 时传递appId到APPVersionController里做相应查询，然后根据新版本id判断是否可以审核该APP
+
+      $("body").on("click",".ToexamineAPP",function () {
+          var rootpath=$("#rootpath").val();
+          var  appId= $(this).attr("id");
+          //在这里即判断 有没有最新版本信息（通过按钮前面的那一列有没html值，若没有即弹出提示并returnfalse）.
+          if($(this).parents(".xxx").prev().html().trim()==""){
+              alert("该APP应用没有上传最新版本,不能进行审核操作！");
+             return false;
+          }
+          $("#Content").load("${pageContext.request.contextPath}/appVersion/ToexamineAPPVersion?appId="+appId+"  #Content>*")
+
+      })
+
+      $("body").on("click",".btn-primary",function () {
+          $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2backend  #Content>*");
+          showToexamineAPPS ();//显示所有app列表(后台拼接html法)
+      });
+
+      //审核APP
+      $("body").on("click",".tojudge",function(){
+          var  appId= $(this).attr("appId");
+          var  tojudge=$(this).attr("tojudge");
+            $.ajax({
+                type:"GET",
+                url:rootpath+"/appInfo/tojudge.html", //注意此处斜杠不能少，否则无法显示APP信息
+                data:"appId="+appId +"&tojudge="+tojudge,   //注意此处不需要加引号("")
+                dataType :"html",
+                success:function (data) {
+                    alert(data);
+                    $("#Content").load("${pageContext.request.contextPath}/appCategory/showlevelmethod2backend  #Content>*");
+                    showToexamineAPPS ();//显示所有app列表(后台拼接html法)
+
+
+                }
+
+            })
+
+      })
+
+  })
+
+  </script>
   </body>
 </html>
