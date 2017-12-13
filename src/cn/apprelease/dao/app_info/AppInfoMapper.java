@@ -13,7 +13,7 @@ public interface AppInfoMapper {
 
 
     /**
-     * 添加app信息测试
+     * 添加app信息测试哈哈哈
      * @param appInfo
      * @return
      */
