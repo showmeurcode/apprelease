@@ -1,4 +1,4 @@
-package cn.apprelease.dao.app_info;
+﻿package cn.apprelease.dao.app_info;
 
 import cn.apprelease.pojo.AppInfo;
 import org.apache.ibatis.annotations.Param;
@@ -13,7 +13,7 @@ public interface AppInfoMapper {
 
 
     /**
-     * 添加app信息
+     * 添加app信息测试
      * @param appInfo
      * @return
      */
