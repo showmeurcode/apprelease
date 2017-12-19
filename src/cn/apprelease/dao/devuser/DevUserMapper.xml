@@ -41,7 +41,7 @@
 
     </update>
     <!--——————————————————————————————————查 ———————————————————————————————————————————————— -->
-    <select id="findUserByname" parameterType="DevUser">
+    <select id="findUserByname" resultType="DevUser">
 
         SELECT * FROM  dev_user WHERE devName=#{devName};
 
