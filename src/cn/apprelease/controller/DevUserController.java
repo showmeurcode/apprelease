@@ -31,8 +31,6 @@ public class DevUserController {
         if(devUser1 != null){
             //放入session
             session.setAttribute("devUserSession", devUser1);
-
-
             return "developer/frame";
         }else{
             request.setAttribute("error","用户名或密码不正确！");
