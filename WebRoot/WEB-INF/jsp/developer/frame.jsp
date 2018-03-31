@@ -58,7 +58,7 @@
                     <div class="profile_info">
                         <span>欢迎,</span>
 
-                        <h2>${sessionScope.devUserSession.devName}</h2>
+                        <h</h2>
 
                     </div>
                 </div>
